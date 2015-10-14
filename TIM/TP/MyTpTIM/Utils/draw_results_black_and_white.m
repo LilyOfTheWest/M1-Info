@@ -1,0 +1,38 @@
+function draw_results_black_and_white(pic,pic0,h,h0,title_fig)
+%function draw_results_black_and_white(pic,pic0,h,h0,title_fig)
+%
+%
+
+
+%affichage des résultats
+% _ histogrammes
+figure
+subplot(1,2,1);
+plot([0:255],h0);
+grid on
+axis([0,255,0,max(h0)]);
+xlabel('Niveau de gris')
+ylabel('Effectif')
+subplot(1,2,2);
+plot([0:255],h);
+grid on
+axis([0,255,0,max(h0)]);
+title([title_fig ' : Après'])
+xlabel('Niveau de gris')
+ylabel('Effectif')
+% _ images
+figure
+
+colormap(gray(256));
+subplot(1,2,1);
+title(title_fig)
+image(pic0);
+axis equal
+axis off
+title([title_fig ' : Avant'])
+subplot(1,2,2);
+image(pic);
+axis equal
+axis off
+title([title_fig ' : Après'])
+
