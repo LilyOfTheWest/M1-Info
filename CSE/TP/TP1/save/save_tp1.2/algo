@@ -1,0 +1,7 @@
+si a droite il y a un espace occupé alors
+	pour tous les espaces occupés suivants:
+		occupe->adresse -= libre->taille
+	aller au dernier libre
+	dernier_libre->adresse -= libre->taille
+	dernier_libre->taille += libre->taille
+	detruire libre

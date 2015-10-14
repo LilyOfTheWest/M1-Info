@@ -1,0 +1,85 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{url}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage[french]{algorithm2e}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{listings}
+\frenchbsetup{StandardLists=true}
+\lstset{language=Java}
+\geometry{hmargin=2.5cm, vmargin=2.5cm}
+
+\title{Base de Données : Compte-rendu du TP2\\Application "Zoo"}
+\author{Line \bsc{POUVARET}, Mickaël \bsc{TURNEL}}
+\date{2015-2016}
+
+\begin{document}
+\maketitle
+
+\section*{5 -	Transactions \& JDBC}
+\subsection*{Etablissement de la connexion}
+	\begin{lstlisting}
+// Enregistrement du driver Oracle
+System.out.print("Loading Oracle driver... "); 
+DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+try {
+	Class.forName("oracle.jdbc.OracleDriver").newInstance();
+} catch (InstantiationException ex) {
+	Logger.getLogger(Banque.class.getName()).log(Level.SEVERE, null, ex);
+} catch (IllegalAccessException ex) {
+	Logger.getLogger(Banque.class.getName()).log(Level.SEVERE, null, ex);
+} catch (ClassNotFoundException ex) {
+	Logger.getLogger(Banque.class.getName()).log(Level.SEVERE, null, ex);
+}
+System.out.println("loaded");
+  	    
+// Etablissement de la connection
+System.out.print("Connecting to the database... "); 
+Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
+            
+System.out.println("connected");
+	\end{lstlisting}
+
+\subsection*{Question 1}
+\begin{enumerate}[label=\arabic*)]
+	\item Afficher la liste des animaux
+	\begin{lstlisting}
+private static void listeAnimaux() throws SQLException {
+	// A COMPLETER
+}
+	\end{lstlisting}
+
+	\item Déplacer un animal de cage
+	\item Ajouter une maladie à un animal
+\end{enumerate}
+
+\section*{6 - Gestion des contraintes}
+\subsection*{Question 2}
+\begin{enumerate}[label=\arabic*)]
+	\item Le calcul du nombre de maladies pour chaque animal doit être automatisé en fonction de l’ajout
+ou de la suppression des maladies.
+	\item Des animaux ne peuvent pas être placés dans une cage dont la fonction est incompatible avec
+ces animaux. On prendra en compte le fait que des animaux peuvent être ajoutés, mais aussi
+déplacés d’une cage.
+	\item Des animaux ne peuvent pas être placés dans une cage non gardée. On prendra en compte le
+fait que des animaux peuvent être ajoutés, mais aussi déplacés d’une cage.
+	\item Des animaux de type différent ne peuvent pas cohabiter dans une même cage. On prendra en
+compte le fait que des animaux peuvent être ajoutés, mais aussi déplacés d’une cage.
+\end{enumerate}
+
+Jeux de tests pertinents
+
+\section*{7 - Contraintes \& JDBC}
+\subsection*{Question 3}
+
+Reprenez les fonctionnalités développées sous forme de programme Java et modifier le code pour prendre
+en compte les erreurs d’intégrités renvoyés par le SGBD via vos triggers. Il s’agit ici d’annuler
+les transactions qui violent certaines contraintes métiers.
+\end{document}

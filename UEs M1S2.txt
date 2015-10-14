@@ -1,0 +1,16 @@
+
+6 UEs aux choix parmi les suivantes (18 ECTS)
+
+Intergiciel et base de données (GINF42B4) (3 ECTS)
+	Planification automatique et Techniques d'Intelligence Artificielle (GINF42B5) (3 ECTS)
+	Introduction à la modélisation et à la vérification des systèmes numériques (GINF42B6) (3 ECTS)
+Synthèse d'images (GINF42B7) (3 ECTS)
+Algorithmique répartie (GINF42B8) (3 ECTS)
+Animation et Interaction 3D (GINF42B9) (3 ECTS)
+	Calculabilité (GINF42C2) (3 ECTS)
+Ergonomie des Interfaces Homme-Machine (GINF42C3) (3 ECTS)
+	Recherche Opérationnelle (GINF42C4) (3 ECTS)
+Techniques d’adaptation et de génie logiciel (GINF42C5) (3 ECTS)
+	Géométrie Numérique (GINF42C6) (3 ECTS)
+	Introduction à l'administration des réseaux (GINF42C7) (3 ECTS)
+	Introduction à la Cryptologie (2) (GINF42I2) (3 ECTS)
