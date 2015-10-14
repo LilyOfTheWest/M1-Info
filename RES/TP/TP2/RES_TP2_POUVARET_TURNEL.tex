@@ -16,7 +16,7 @@
 \lstset{language=SQL}
 \geometry{hmargin=2.5cm, vmargin=2.5cm}
 
-\title{Introduction aux Réseaux\\TP2 : Etude des protocoles ARP et ICMP}
+\title{Introduction aux Réseaux TP2 : \\ Etude des protocoles ARP et ICMP}
 \author{Line \bsc{POUVARET}, Mickaël \bsc{TURNEL}}
 \date{2015-2016}
 
@@ -36,6 +36,7 @@
 	\item Entête Ethernet : ff ff ff ff ff ff 00 10 18 89 e9 7a 08 06 (14 premiers octets) ET les 18 derniers octets ; les 7 premiers octets correspondent à l'adresse de la cible, et les 7 suivants à l'adresse de la source.
 Données ARP : tous les octets entre les deux parties de l'entête Ethernet.
 	\item Dans le champ type de l'entête Ethernet II on a ARP (0x0806).
+
 	\item Les champs d'ARP :
 	\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
 		\item Hardware type correspond au type de matériel utilisé (ici Ethernet (1))
@@ -49,6 +50,9 @@ Données ARP : tous les octets entre les deux parties de l'entête Ethernet.
 		\item Target IP address correspond à l'adresse Internet du destinataire
 	\end{itemize}
 	\item Le paquet ARP se trouve dans le champ Data.
+
+\includegraphics[width=10cm]{screen2.jpg}
+
 	\item 
 
 \begin{tabular}{|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|}
@@ -86,6 +90,9 @@ Target IP address (4) \\
 	\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
 		\item On constate que A envoit en boucle des paquets de type ARP au broadcast sans avoir de réponse. (On a ensuite le message host is down en boucle)
 		\item C'est le timer de Ping qui déclenche les re-émissions. On a constaté que Ping a essayé d'envoyer 10 paquets or on voit bien que dans Wireshark, il y a 10 paquets de type ARP request. A chaque fois que Ping affiche host is down on voit apparaître dans Wireshark un paquet de type ARP request. Le temps de ré-émission est d'environ 1 seconde.
+
+\includegraphics[width=10cm]{screen3.jpg}
+
 	\end{itemize}
 	
 	\item Le ARP gratuit permet à la machine qui vient d'effectuer un ifconfig de s'envoyer à elle même son adresse MAC sur le réseau et donc lui permet de remplir sa table ARP avec sa propre adresse en vérifiant que cette adresse n'est pas déjà présente (permet d'éviter les conflits d'adresses).
@@ -94,9 +101,17 @@ Target IP address (4) \\
 	\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
 		\item Au moment de la nouvelle entrée dans la table ARP de A, on constate que A a envoyé un paquet de type ARP gratuit à lui même sur le réseau pour ajouter cette nouvelle adresse dans la table.
 
-		\item Au moment du ping de C vers B, on observe 3 paquets de type ARP envoyés sur le réseau. Le premier étant un paquet request envoyé par C au broadcast, puis un paquet reply envoyé par A à C (qui l'informe de l'adresse MAC de B) et enfin un paquet reply envoyé par B à C (qui l'informe aussi de sa propre adresse). Dans la table de A, on a les adresses de A et B (B étant en permanent published). Dans la table de B, on a les adresses de B et C (C qui doit expirer dans X secondes). Dans la table  de C, on a les mêmes entrées que dans B. A possède l'adresse de B en published, donc quand il observe un ARP request sur le réseau, il y répond et envoit un ARP reply directement à la source de l'ARP request. (et B fait de même)
+		\item Au moment du ping de C vers B, on observe 3 paquets de type ARP envoyés sur le réseau. Le premier étant un paquet request envoyé par C au broadcast, puis un paquet reply envoyé par A à C (qui l'informe de l'adresse MAC de B) et enfin un paquet reply envoyé par B à C (qui l'informe aussi de sa propre adresse). 
 
-		\item Au moment de l'ajout dans A de l'adresse IP de B avec l'adresse MAC de A, on constate que A envoit sur le réseau un paquet de type ARP gratuit request mais avec une détection d'un usage dupliqué de l'adresse IP de B. Et on voit ensuite un paquet du même type envoyé par B à A. Lors du ping de C vers B, on observe que dans Wireshark il n'y a pas de réponse trouvée pour le ping.
+Dans la table de A, on a les adresses de A et B (B étant en permanent published).
+
+Dans la table de B, on a les adresses de B et C (C qui doit expirer dans X secondes).
+
+Dans la table  de C, on a les mêmes entrées que dans B. A possède l'adresse de B en published, donc quand il observe un ARP request sur le réseau, il y répond et envoit un ARP reply directement à la source de l'ARP request. (et B fait de même)
+
+		\item Au moment de l'ajout dans A de l'adresse IP de B avec l'adresse MAC de A, on constate que A envoit sur le réseau un paquet de type ARP gratuit request mais avec une détection d'un usage dupliqué de l'adresse IP de B. 
+
+Et on voit ensuite un paquet du même type envoyé par B à A. Lors du ping de C vers B, on observe que dans Wireshark il n'y a pas de réponse trouvée pour le ping.
 		\item Une déclaration d'adresse en \textit{Publish} d'une autre machine peut être intéressant pour que la machine en question puisse servir de pont entre deux réseaux différents. La machine pourra répondre aux requêtes ARP d'une machine qui ne sera pas sur le même réseau qu'elle.
 	\end{itemize}
 
@@ -113,26 +128,32 @@ Au moment d'un ping vers l'adresse IP commune, les deux machines avec l'adresse 
 \Deb{
         \Tq{Vrai}{
             attendre(evenement)\;
-            \Si{evenement est "Question sur adresse internet" (requête interne de IP vers ARP)}{
-		envoiARP(IPbroadcast, IPtarget, IPsource, IPMACsource)\; 
+            \Si{evenement == "Question sur adresse internet" (requête interne de IP vers ARP)}{
+		envoiARP(request,IPbroadcast, IPtarget, IPsource, MACsource)\; 
 
-                     	\tcc{Envoie une requête ARP avec comme destination l'ip voulue en broadcast (à toutes les machines) et comme expéditeur son couple adresse physique/IP}\
+                     	\tcc{Envoi d'une requête ARP sur le broadcast, IPtarget est l'ip du destinataire, Ipsource l'ip de l'expéditeur et MACsource l'adresse MAC de l'expéditeur}\
                 }
-                \Si{evenement est "Expiration du timer d'effacement associé à une entrée"}{
+                \Si{evenement == "Expiration du timer d'effacement associé à une entrée"}{
                         envoiRequeteAdresseInternet()\;
                 }
-                \Si{evenement est "Réception requête (ARP Request)"}{
-                        \Si{je suis la machine demandée, ou que j'ai l'entrée demandée en publish dans ma table ARP}{
-                              Répondre avec un paquet ARP reply contenant comme expéditeur le couple adresse physique/IP présent dans ma table arp et comme destinataire le couple adresse physique/IP de l'expéditeur du paquet ARP request\;
-                              Met à jour sa propre table ARP avec les données de l'expéditeur du paquet ARP request\;
+                \Si{evenement == "Réception requête (ARP Request)"}{
+                        \Si{IPtarget == IPmachinecourante OU estPublish(IPtarget)}{
+			envoiARP(reply, IPtarget, MACtarget, IPsource, MACsource);
+
+			\tcc{IPtarget et MACtarget correspondent aux adresses IP et MAC du destinataire (la machine ayant envoyé l'ARP request)}
+			\tcc{IPsource et MACsource correspondent aux adresses IP et MAC de l'expéditeur (adresses présentes dans la table ARP de la machine actuelle)}
+
+			majTableARP(IParget, MACtarget);
+
+			\tcc{la machine actuelle met à jour sa table ARP avec les adresses IP et MAC de l'expéditeur de l'ARP request}
                         }
                     \Sinon{
-                      Ne rien faire\;
+                      rien\;
                     }
                 }
                 
-                \Si{evenement est changement de la configuration internet}{
-                    Envoi d'un paquet ARP gratuit sur le réseau\;
+                \Si{evenement == "Changement de la configuration internet"}{
+                    envoiARP(gratuit)\;
                 }
         }
 }
@@ -225,7 +246,20 @@ Sur l'interface em0, la machine connectée s'est vu attribuer une adresse IP d'o
 
 \end{itemize}
 
-\section*{2.3 }
+\section*{2.3 Etude de fragmentation des paquets IP}
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item Les champs :
+	\begin{itemize}
+		\item IDENTIFICATION : champ codé sur 16 bits, constitue l'identification utilisée pour reconstituer les fragments. (Les fragments ont tous le même numéro d'identification)
+		\item TOTAL LENGTH : champ codé sur 16 bits, correspond à la longueur du paquet (entête IP + données)
+		\item FRAGMENT OFFSET : champ codé sur 13 bits, correspond à la position du fragment (par rapport à la première trame).
+		\item Flag MF : More Fragments => si le troisième bit est à 1, indique que le fragment n'est pas le dernier
+	\end{itemize}
+	\item L'entête UDP apparaît une seule fois car il n'y a qu'un seul paquet de type UDP. Les fragments, eux, sont des données IP.
+	\item Les fragments sont envoyés dans le même ordre que celui du paquet d'origine.
+	\item L'entête UDP se trouve dans le dernier fragment.
+\end{itemize}
 
 
 
