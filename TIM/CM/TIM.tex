@@ -1,0 +1,365 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{url}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage[french]{algorithm2e}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{listings}
+\frenchbsetup{StandardLists=true}
+\geometry{hmargin=2.5cm, vmargin=2.5cm}
+
+\title{Traitement d'Images}
+\author{Line \bsc{POUVARET}}
+\date{2015-2016}
+
+
+\begin{document}
+
+\maketitle
+
+\chapter*{Traitement d'Images : Notes de cours}
+
+rendu des TP : milieu de la semaine suivante, par binôme.
+
+\section*{II – Caractéristiques de l'oeil humain}
+
+\subsection*{Caractéristique anatomique}
+
+Le signal lumineux est projeté sur l'arrière de l'oeil (rétine).
+
+Transformation de l'information lumineuse en information électrique puis envoyée au cerveau par le nerf optique.
+
+Concentration de photo récepteurs sur la fovea. 
+
+\subsection*{Caractéristique Optique}
+
+Zone périphérique : zone d'excentricité (mesurable en degrés).
+
+\subsection*{Photorécepteurs : cônes, bâtonnets}
+
+Photorécepteurs sensibles aux niveaux de gris : batonnets
+
+Ceux sensibles à la couleur : cônes.
+
+Sur la fovea, c'est une concentration de photorécepteurs cônes qui s'y trouve.
+
+De moins en moins de photorécepteurs au niveau de la zone périphérique.
+
+\section*{III – Acquisition-Echantillonnage}
+
+\subsection*{Echantillonnage spatial}
+
+En un point, sur la matrice on ne peut avoir les 3 couleurs (bleu, vert, rouge), on doit faire un maillage et choisir. Grille de Bayer (autant de bleu que de rouge et deux fois plus de vert).
+
+Structure de Bayer = la plus classique. 
+
+\subsection*{Fréquence spatiale}
+
+Même principe qu'avec le son. f=1/T
+
+t => (x, y)
+
+f => (fx, fy)
+
+t en sec, (x,y) peuvent être des numéros de pixels
+
+A partir de la résolution de l'écran, on peut connaitre le numéro du pixel avec les cm.
+
+Quelle est la fréquence maximale (exprimée en pixel-1) d'un motif périodique...?
+
+1/2 (car on alterne Noir, Blanc, Noir, Blanc et la période est donc de 2)
+
+Cycle/Degré : dépendant du champ de vision de l'observateur par rapport à l'image et distance à laquelle il se trouve de l'image.
+
+Si l'image comporte un motif périodique : tan(theta/2) = (largeur/2)/Distance
+
+Donc 3T=2D tan(theta/2)
+
+\subsection*{Résolution spatiale}
+
+dpi = dot per inch
+
+ppp = point par pouce
+
+Si on compare les trois situations, on a la même taille mais le nombre de pixels diminue quand on va vers le droite.
+
+Résolution globale en diagonale (on applique Pythagore).
+
+\subsection*{Echantillonnage spatial}
+
+A gauche, coupe d'une image sur certaines lignes. Succession blanc vers noir est graduelle.
+
+10 pixels entre chaque motif sur l'image de gauche donc fréquence = 1/10
+
+On augmente la taille du pixel fait diminuer la résolution donc on ne voit plus l'information graduelle mais on continue de voir la périodicité noir blanc noir blanc, en revanche l'échantillonnage met en évidence une régularité qui n'a rien à voir avec la période précédente.
+
+Cela donne des courbures sur la diapo suivante, ce sont des artefacts de l'échantillonnage.
+
+La résolution de l'image n'est donc plus compatible avec cette fréquence.
+
+\subsection*{Echantillonnage tonal : Quantification}
+
+exemple : min = noir, max = blanc. Ecart entre min et max = dynamique.
+
+On perd les nuances de gris plus on va diminuer le codage de l'image. 1 bit : image uniquement en noir et en blanc (pas de nuances).
+
+\section*{IV – Perception des couleurs}
+
+\subsection*{Phénomène complexe}
+
+L'objet (la pomme) absorbe des longueurs d'onde et en réfléchit d'autres.
+
+La lumière réfléchie arrive sur la rétine, ce qui donne un signal lumineux qui nous est propre et qui est interprété par le cerveau. (Rouge, orange ?)
+
+\subsection*{Synthèse additive}
+
+Au niveau d'un endroit donné, sur un écran, on a un seul photorécepteur. Rouge au max, Vert au max, Bleu au max : on synthétise du blanc.
+
+\subsection*{Luminosité Vs Luminance}
+
+Luminosité = perception que l'on va voir nous de la luminance.
+
+Luminance = quantité ingénieur qui va reproduire la quantité d'informations de l'image, sans la couleur.
+
+Teinte = rendre compte de l'information de la couleur.
+
+Saturation = information de modulation entre le chromatique et achromatique.
+
+
+\section*{V – Représentation des couleurs}
+
+\subsection*{Espace R, G, B}
+
+On ne peut pas rendre compte de notre propre perception des couleurs. 
+
+Un espace perceptif est un espace pour lequel lorsqu'on calcule la distance entre les couleurs, cette distance ne rend pas compte de notre perception.
+
+A partir d'un point en 3D, on a les trois dimensions de couleur RGB, on peut faire une rotation d'axe pour obtenir la luminance (il faut mettre l'axe de la diagonale noir blanc droit : en axe Z)
+
+=> Espaces à luminance séparée.
+
+\subsection*{Espace Y-Cb-Cr (format JPEG)}
+
+On comprime notre image couleur. On est plus sensible à la luminance qu'à la chrominance.
+
+Extraire la luminance de la couleur : faire la moyenne du rouge, du bleu et du vert.
+
+OU on applique la fonction matricielle. (avec la matrice de transformation)
+
+Plus une couleur va contenir du rouge plus Cr va être positive, plus elle va contenir du vert, plus elle va avoir une valeur négative.
+
+Une couleur jaune a un Cr de 0. Rouge : Cr max, Vert : Cr min
+
+Cb code l'opposition de couleur bleu-jaune.
+
+Cb et Cr codent des oppositions de couleur.
+
+L'image en bas à gauche est à luminance constante (si on voulait l'imprimer en nuances de gris, on aurait qu'une couleur de gris)
+
+\subsection*{Espace L- a-b (définie par la CIE)}
+
+L, a, b = fonctions à saturation.
+
+Les couleurs sont représentées dans une sphère.
+
+Le grand axe du centre donne la luminosité, les axes d'opposition de couleur sont perpendiculaires à celui-ci.
+
+Ces oppositions de couleur sont retrouvables aussi au niveau de la rétine.
+
+\subsection*{Espace TLS}
+
+Non linéarité car forte distance entre Rouge et Violet au niveau de la longueur d'onde MAIS proximité du point de vue chromatique.
+
+Plus on se rapproche du centre plus la saturation diminue. La teinte est représentable par un angle et la saturation est représentable par un rayon. On passe donc en coordonnées polaires.
+
+L'information de la luminance devrait venir vers nous.
+
+\subsection*{Représentation HSI ou TLS}
+
+Au fur et à mesure qu'on diminue la luminance, on a moins de modulations possibles pour la saturation (et inversement si on l'augmente de plus en plus) : de plus en plus de couleurs noires (et inversement de couleurs blanches).
+
+L'altitude représente la luminanance.
+
+Retouche d'image sans changer la teinte : on bouge les curseurs L et S (luminance et saturation).
+
+\subsection*{Capture par les appareils photo numériques}
+
+Rétine : non régularité des photorécepteurs.
+
+Objectif des ingénieurs : obtenir un rendu comme avec la rétine mais avec des circuits réguliers. (car impossible de reproduire la rétine en silicium).
+
+Les bandes de couleur sont la matérialisation de l'aliasing au niveau chromatique.
+
+Impression que les poteaux sont plus proches les uns des autres car image prise de côté.
+
+Interaction entre la couleur et la luminance. La structure de Bayer : on peut avoir l'information du vert, du bleu, du rouge qui va être sous échantillonnée par rapport à l'info de départ. L'information est décalée en fréquence. 
+
+Quand les fréquences spatiales augmentent, on va avoir des interactions entre la chrominance et la luminance ce qui créent les artéfacts.
+
+\subsection*{Images anaglyphes}
+
+Le fait qu'on perçoit la profondeur est dû à différents indices :
+	\begin{itemize}
+	\item indices monoculaires (même si on a qu'un oeil, on peut percevoir la profondeur) : indices de perspectives par ex.
+	\item indices binoculaires : vient du fait que lorsqu'on regarde un point, l'image va se projeter sur l'oeil gauche et droit d'où deux images différentes.
+
+Il faut donc mettre en correspondance les deux images pour reconstruire la scène et pour estimer la profondeur. 
+
+L'écart entre les deux coordonnées spatiales des deux points est un indice.
+	\end{itemize}
+
+On crée en une seule image deux images différentes. 
+
+Une vue par l'oeil gauche et l'autre par l'oeil droit. 
+
+L'image de droite sera filtrée par le filtre bleu, l'image de gauche par le filtre rouge.
+
+
+\section*{VI – Table des couleurs}
+
+Image originale : 
+
+R => $2^{8}$
+
+V => $2^{8}$
+
+B => $2^{8}$
+
+=> $2^{24}$ couleurs possibles : 16 millions de couleurs
+
+avec 16 millions de couleurs, on est moins fin au niveau de la différence chromatique.
+
+Problèmes :
+	\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item Trouver les meilleurs représentants de couleur : exemple 5000 couleurs (R,G,B) qui vont représenter au mieux les images.
+	\item Comment recoder l'image pour tenir compte de ce nouveau dictionnaire de couleurs.
+	\end{itemize}
+
+Plus on va diminuer le nombre de couleurs représentatives plus on va perdre de la couleur dans l'image.
+
+On va devoir tenir compte de la statistique de la couleur.
+
+Plus une image va être représentée, plus elle va être forte et plus elle va devoir avoir beaucoup de représentants dans le dictionnaire.
+
+A partir du dictionnaire de couleurs (LUT (K x 3))
+
+K = 5000. Les 5000 références de couleurs représentent les lignes de la table.
+
+On prend un pixel de l'image, il a une couleur RGB, on calcule la distante la plus petite avec toutes nos couleurs dans le LUT.
+
+Donc au moment du codage, on code l'index de la couleur à la place du pixel.
+
+Pour interpréter correctement l'image, on a besoin de la carte des index et du dico. 
+
+A partir d'un point dans la carte, on fait le lien entre l'index sur la carte et l'index dans le dico et cela nous donne le nouveau RGB qui sera représenté sur la nouvelle image.
+
+En RGB on a $2^{24}$*le nombre de pixels, en couleurs indexées on a K*3*$2^{8}$+nombre de pixels*K
+
+
+\section*{VII – Traitement "Point"}
+
+	\subsection*{1. Définition, exemples}
+
+(sl. 2) 
+
+Image à gauche = IN
+
+Image à droite = OUT
+
+On étale linéairement nos niveaux de gris (comme sur un élastique avec comme extrémités nmax et nmin).
+
+Fonction avec droite d'équation y=an+b (entre nmin et nmax). Il faut s'assurer pour les valeurs < nmin et valeurs supérieures à nmax qu'elles soient bien transformées respectivement en 0 et 255.
+
+Equation : la déduire en connaissant Phi(Nmax) = 255 et Phi(Nmin) = 0.
+
+	=> a = (255 -0)/(Nmax-Nmin)
+
+	=> b = n'-an = 0 – a * nmin
+
+Sur l'histogramme de l'image, on remarque qu'on a beaucoup de pixels distribués sur très peu niveaux de gris foncés (50 / 255).
+
+Sous MatLab : l'instruction hist donne un histogramme. 
+
+On lui donne en entrée la distribution des niveaux de gris, et on lui indique le nombre d'intervalles que l'on veut avoir pour décrire notre histogramme. (il va donc compter le nombre de pixels entre chaque intervalle)
+
+	\subsection*{3. Transformations affines}
+
+voir fonctions dessinées.
+
+Pour modifier le contraste, on modifie le coefficient directeur de la droite. (on modifie l'étalement)
+
+
+	\subsection*{4. Transformations affines par morceaux}
+
+a = (255-120)/(255-50) = 135/205 < 1 => compression
+
+Dès l'acquisition de l'image, on a 70 000 pixels qui sont à 25 donc en contraste il n'y aura pas de changement.
+
+	\subsection*{5. Segmentation par seuillage}
+
+voir feuille.
+
+
+	\subsection*{6. Spécification d'histogramme}
+
+Les niveaux de gris iront de 0 à 255 dans l'ensemble |R (Réels) puisque que ne est une variable continue.
+
+Uniforme : tous les niveaux de gris ont la même probabilité d'apparaître dans notre image.
+
+On connait pe(ne) et ps(ns) et on en déduit dns/dne. 
+
+On trouve donc la dérivé de la fonction de transformation et il ne reste plus qu'à intégrer cette dérivé pour retrouver la fonction de transformation.
+
+approximation pour des variables discrètes: 
+
+255 c'est nmax.
+
+l'intégrale se transforme en une somme.
+
+he(k) sont les barres de l'histogramme.
+
+che(k) correspond à la somme des k=0 à ne des he(k)
+
+L'histogramme de sortie va être le même que celui d'entrée.
+
+Plus on a des forts effectifs plus ils vont prendre de la place dans l'histogramme.
+
+	\subsection*{7. Traitement des images en couleur}
+
+Génération de fausses couleurs : pas les mêmes histogrammes R, G, B donc difficile.
+
+	\section*{VIII - Filtrage}
+	\subsection*{1. Exemples}
+
+Beaucoup de fréquences sont diminuées => informations plus globales.
+
+Réduction de bruit mais perte d'information.
+
+Filtrage passe haut : positif ou négatif selon le contraste repéré (noir vers blanc ou blanc vers noir).
+
+	\subsection*{2. Technique de Filtrage Linéaire}
+Convolution : utilisée pour ce qui compose la terre. Couches de roches, etc...
+
+Pour 1 pixel : 25 multiplications (+24 additions)
+Pour l'image : 25*n*m multiplications
+
+	\subsection*{3. Réduction de bruit}
+
+Bruit additif : on fait un filtrage linéaire.
+
+Bruit multiplicatif : filtrage linéaire avec logarithme de chaque pixel
+
+Bruit convolutif : transformé de Fourier
+
+Gaussien : différence entre chaque pixel plus marquée. Contours moins détériorés.
+
+\[G(x)= \frac{1}{\sqrt{2 \pi}\sigma}e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}}\]
+
+\end{document}
