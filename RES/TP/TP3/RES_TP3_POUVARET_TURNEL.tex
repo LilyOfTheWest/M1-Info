@@ -27,49 +27,202 @@
 \section*{2.1 Manipulation de la table de routage}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item a
-\item a
+\item Host A a pour adresse IP 192.168.1.1 sur son interface em0 => A1
+
+Routeur B a pour adresse IP 192.168.2.2 sur son interface em0 => B2, 192.168.1.2 sur son interface bge0 => B1
+
+Host C a pour adresse IP 192.168.2.1 sur son interface em0 => C2
+\item FAIRE TABLEAU ! (voir screen1)
+
+\item C2 ne peut envoyer un ping vers A1.
+
+A1 ne peut envoyer un ping vers C2.
+
+B peut envoyer un ping vers A1 et C2.
+
+C2 peut envoyer un ping vers B.
+
+A1 peut envoyer un ping vers B.
+
+Donc A1 et C2 ne peuvent communiquer entre eux.
+
+\item route add net2 B1
+
+add net net2: gateway B1
+
+FAIRE TABLEAU (voir screen2 + screen3)
+
+\item On remarque bien que quand C2 exécute pong et que A1 exécute un ping sur C2, le ping de A1 bloque car le routeur ne fait pas suivre la requête.
+
+\item Après avoir modifié le comportement du routeur, on constate que les paquets envoyés par A1 sur C2 sont bien envoyés et reçus mais C2 ne répond pas à A1.
+
+\item Cela est dû au fait que nous n'avons pas mis dans la table de routage de C2 la route vers B puis A1.
+
+Donc on fait :
+
+route add net1 B2
+
+add net net1: gateway B2
+
+Ceci résout le problème et permet un ping de A vers C (avec réponse de C vers A).
+
+\item On lance un ping de A1 vers C2 :
+	\begin{itemize}
+	\item La machine A1 envoit un paquet de type ARP request pour récupérer l'adresse MAC de B1.
+	
+B1, en recevant ce paquet, lui répond et ajoute lui même A1 dans sa table ARP.
+
+Puis, B2,  voulant transmettre les paquets ICMP du ping à C2, envoie un paquet de type ARP request pour récupérer l'adresse MAC de C2.
+
+C2 lui répond et ajoute lui même B2 dans sa table ARP.
+
+Dans la table de A on a les correspondances IP/MAC de B1 et de A1.
+
+Dans la table de B, on a les correspondances IP/MAC de A1, B1, B2 et C2.
+
+Dans la table de C, on a les correspondances IP/MAC de B2 et C2.
+
+	\item Sur Wireshark, lors d'un ping de A1 vers C2 on observe deux paquets ICMP request et deux paquets ICMP reply :
+
+A1 envoit un paquet à B1 (Adresse MAC source = A1, adresse MAC cible = B1).
+
+B2 transmet ce paquet au destinataire C2 (Adresse MAC source = B2, adresse MAC cible = C2).\\
+
+C2 répond en envoyant un paquet à B2 (Adresse MAC source = C2, adresse MAC cible = B2). 
+
+B1 transmet ce paquet à A1 (Adresse MAC source = B1, adresse MAC cible = A1).\\
+
+Les adresses Internet pour source et destinataire ne changent pas pour un paquet car ce paquet doit etre envoyé d'une certaine machine à une autre.
+
+Alors que pour Ethernet, la source et le destinataire sont forcément respectivement l'adresse de celui qui envoit le paquet et l'adresse de celui qui le reçoit.
+
+
+	\end{itemize}
+
+\item Le travail IP dans le routeur B consiste à transiter le paquet IP reçu sur un réseau vers un autre réseau (ici net1 vers net2).
+
+A1 envoie un paquet IP C2, le paquet arrive à B1. B analyse le destinataire du paquet IP et l 'envoie à l'adresse MAC correspondante.
+
+\item Il faut ajouter une route par défaut dans la table de routage d'une station si l'on veut que celle-ci puisse communiquer avec le "reste du monde".
+
+\item Sur la station A on exécute :
+
+route add default B1
+
+Sur la station C on exécute :
+
+route add default B2
+
+\item L'intérêt réside dans le fait que A et C vont envoyer les paquets dont les destinataires sont sur un autre réseau (adresses MAC inconnues).
+L'inconvénient est que B n'est pas forcément la bonne route à prendre pour ces paquets.
+
+\item A1 envoie son paquet à B mais celui-ci lui répond qu'il ne connaît pas la destination de ce paquet (l'adresse MAC).
+
+La différence avec la configuration sans défaut est que si le routeur ne connaît pas la destination d'un paquet envoyé par une station, il lui indiquera que la destination est inatteignable. Avec une configuration sans défaut, la station ne peut pas envoyer de paquet au routeur.
+
 \end{itemize}
 
 
 \section*{2.2 Observation du routage automatique}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item b
-\item a
-\end{itemize}
+\item Les tables de routage se sont correctement remplies (même contenu que manuellement). 
+Les stations A et C peuvent communiquer normalement.
+\item On constate que périodiquement, 2 paquets utilisant le protocole RIPv1 transitent (un de B1 vers le masque du réseau net1, un de B2 vers le masque du réseau net2)
 
+Dans la trame RIP de chaque paquet, on voit qu'il communique l'adresse IP du réseau net1 et net2.
+
+Les paquets RIPv1 sont émis toutes les 30 secondes automatiquement.
+
+\item Quand on déconnecte la station A lors de son check-route, au bout d'environ 8 minutes, la route vers le deuxième réseau via B1 est effacé de la table de routage.
+
+La durée du timer d'effacement de RIP est donc de 8 minutes environ pour notre réseau. (un peu plus de 490 secondes pour nous)
+
+\item Quand on reconnecte la station A, 30 secondes après, la table affiche une nouvelle entrée : celle de la route vers le deuxième réseau via B1.
+
+\item Le routeur envoie sur les stations des réseaux des paquets RIPv1 toutes les 30 secondes. 
+
+Si une station ne reçoit pas ce paquet, alors après un certain temps (le timer d'effacement de RIP), celle-ci supprime la/les routes transitant par ce routeur de sa table de routage.
+
+\item Au moment où nous avons tué le démon de routage sur B, on capture 4 paquets RIP (envoyés 16 secondes après les derniers paquets RIP envoyés).
+
+Le champ Metric est à 16 pour ceux-ci contrairement à tous les autres paquets RIP où Metric: 1.
+
+\item Au moment où nous relançons le démo de routage sur B, on capture 4 paquets RIP.
+
+Dans la trame RIP, on a un champ Adress not specified. Ce qui signifie que les machines connectées au routeur sont informées qu'il existe une route passant par B.
+
+\end{itemize}
 
 \section*{2.3 Troisième manipulation}
-
-\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item c
-\item a
-\end{itemize}
-
 
 \subsection*{2.3.1 Routage statique}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item d
-\item a
-\end{itemize}
+\item On a attribué l'adresse 192.168.3.1 (D3) pour la station D du réseau net3
 
+On a attribué l'adresse 192.168.3.2 (C3) pour la station C du réseau net3 (sur bge0).
+\item Sur la station A :
+
+route add net2 B1
+
+route add net3 B1\\
+
+Sur la station B :
+
+route add net3 C2\\
+
+Sur la station C :
+
+route add net1 B2\\
+
+Sur la station D :
+
+route add net2 C3
+
+route add net1 C3\\
+
+\item Lors d'un ping de A vers D :
+	\begin{itemize}
+		\item Ping (ICMP) Request de A1 vers B1
+		\item Ping (ICMP) Request de B2 vers C2
+		\item Ping (ICMP) Request de C3 vers D3
+		\item Ping (ICMP) Reply de D3 vers C3
+		\item Ping (ICMP) Reply de C2 vers B2
+		\item Ping (ICMP) Reply de B1 vers A1
+	\end{itemize}
+\end{itemize}
 
 \subsection*{2.3.2 Routage automatique}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item e
-\item a
+\item Les paquets émis lors du lancement des démons servent à ...
+\item Le paquet qui circule sur net2 possède les adresses IP de net1 et net2. Metric: 16
+
+Il informe donc les machines de net2 d'enlever les routages vers net1 et net2 de la table de routage.
+
+Le paquet qui circule sur net3 possède les adresses IP de net1. Metric: 16
+
+Il informe donc les machines de net3 d'enlever les routages vers net1 de la table de routage.
 \end{itemize}
 
 
 \section*{2.4 Quatrième manipulation}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item f
-\item e
-\item a
+\item On a attribué l'adresse 192.168.4.1 (D4) pour la station D du réseau net4 (sur bge0).
+
+On a attribué l'adresse 192.168.4.2 (A4) pour la station A du réseau net4 (sur bge0).
+\item La table de routage de A (voir screen5) TABLEAU
+
+Pour accéder au réseau 2, le chemin que doit emprunter un paquet envoyé par A passe par D4.
+\item Le réseau 1 n'est pas connu de C et D car il se trouve entre deux hosts, il est donc isolé.
+
+\item Pour accéder au réseau 2, le chemin que doit emprunter un paquet envoyé par A passe maintenant par B1.
+
+\item Ce chemin a été choisi car le Metric est inférieur à celui du chemin passant par D4.
+
+\item Principe de fonctionnement...
 \end{itemize}
 
 
