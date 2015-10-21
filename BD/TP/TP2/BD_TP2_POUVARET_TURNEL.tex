@@ -12,8 +12,19 @@
 \usepackage{geometry}
 \usepackage{enumitem}
 \usepackage{listings}
+\usepackage{listingsutf8}
 \frenchbsetup{StandardLists=true}
 \lstset{language=Java}
+\lstset{
+	breaklines=true, 
+	showspaces=false, 
+	keepspaces=true, 
+	numbers=left, 
+	frame=shadowbox, 
+	keywordstyle=\color{blue},
+	basicstyle=\ttfamily\small,
+	commentstyle=\color{green}
+}
 \geometry{hmargin=2.5cm, vmargin=2.5cm}
 
 \title{Base de Données : Compte-rendu du TP2\\Application "Zoo"}
@@ -26,7 +37,7 @@
 \section*{5 -	Transactions \& JDBC}
 \subsection*{Etablissement de la connexion}
 	\begin{lstlisting}
-// Enregistrement du driver Oracle
+/* Enregistrement du driver Oracle */
 System.out.print("Loading Oracle driver... "); 
 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
 try {
@@ -40,7 +51,7 @@ try {
 }
 System.out.println("loaded");
   	    
-// Etablissement de la connection
+/* Etablissement de la connexion */
 System.out.print("Connecting to the database... "); 
 Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
             
@@ -50,14 +61,166 @@ System.out.println("connected");
 \subsection*{Question 1}
 \begin{enumerate}[label=\arabic*)]
 	\item Afficher la liste des animaux
+
 	\begin{lstlisting}
+
+/* Fonction d'affichage des animaux */
 private static void listeAnimaux() throws SQLException {
-	// A COMPLETER
+           Statement st = conn.createStatement();
+
+           ResultSet rs = st.executeQuery("SELECT * FROM LesAnimaux");
+           System.out.println("Liste de tous les animaux");
+
+           afficherRes(rs);       
+          	System.out.println();
+	st.close();
 }
+
+/* Fonction d'affichage generale */
+public static void afficherRes(ResultSet rs){
+            try {
+                    ResultSetMetaData rms = rs.getMetaData();
+                    int col = rms.getColumnCount();
+
+                    System.out.print("|");
+                    for(int i=1; i <= col; i++) {
+                            String nomCol = rms.getColumnName(i);
+                            System.out.print(" " + String.format("%15s", nomCol) + " |");
+                    }
+                    System.out.println();
+
+                    while(rs.next()) {
+                            System.out.print("|");
+                            for(int i=1; i <= col; i++) {
+                                    String type = rms.getColumnClassName(i);
+                                    
+                                    if (type.equals("java.lang.String")) {
+                                            System.out.print(" " + String.format("%15s", rs.getString(i)) + " |");
+                                    } else if (type.equals("java.math.BigDecimal")) {
+                                            System.out.print(" " + String.format("%15s", String.valueOf(rs.getInt(i))) + " |");                                  
+                                    } else if (type.equals("java.sql.Date")) {
+                                            System.out.print(" " + String.format("%15s", rs.getDate(i)) + " |");
+                                    }                             
+                            }
+                            System.out.println();
+                    }
+            } catch (SQLException e) {
+                    System.out.println("ERREUR : " + e.getMessage());
+            }
+}	
 	\end{lstlisting}
 
 	\item Déplacer un animal de cage
-	\item Ajouter une maladie à un animal
+
+	\begin{lstlisting}
+/* Fonction qui deplace un animal vers une autre cage */
+private static void deplacerAnimal() throws SQLException {
+           String animal, cage;
+           System.out.println("Quel animal voulez-vous deplacer ?");
+           animal = LectureClavier.lireChaine();
+           System.out.println("Vers quelle cage voulez-vous deplacer "+animal+" ?");
+           cage = LectureClavier.lireChaine();
+           
+           Statement st = conn.createStatement();
+            
+           ResultSet rs = st.executeQuery("SELECT noCage FROM LesCages WHERE fonction='"+cage+"'");
+           if(!(rs.next()))
+                  System.out.println("Cette cage n'existe pas");
+           else{
+               int nb = st.executeUpdate("UPDATE LesAnimaux SET fonction_cage='"+cage+"', noCage="+rs.getInt(1)+" WHERE noma='"+animal+"'");         
+               System.out.println(nb + " ligne (s) modifiee (s).");            
+           }
+           System.out.println();
+           st.close();
+}	
+	\end{lstlisting}	
+
+	\item Ajouter une maladie a un animal
+
+	\begin{lstlisting}
+/* Fonction qui ajoute une maladie a un animal */
+private static void ajouterMaladie() throws SQLException {
+           String animal, maladie;
+           System.out.println("A quel animal souhaitez-vous ajouter une maladie ?");
+           animal = LectureClavier.lireChaine();
+           System.out.println("Quelle maladie souhaitez-vous ajouter ?");
+           maladie = LectureClavier.lireChaine();
+            
+           Statement st = conn.createStatement();
+
+           int nb = st.executeUpdate("INSERT INTO LesMaladies VALUES('"+animal+"', '"+maladie+"')");
+           System.out.println(nb + " ligne (s) ajoutee (s) dans LesMaladies.");
+           System.out.println();
+           st.close();
+}
+	\end{lstlisting}
+
+	\item Valider/Annuler une transaction
+
+	\begin{lstlisting}
+/* Fonction de validation d'une transaction */
+private static void commit() throws SQLException {
+           conn.commit();
+           System.out.println("Transaction validee");
+}
+				
+/* Fonction d'annulation d'une transaction */
+private static void rollback() throws SQLException {
+           conn.rollback();
+           System.out.println("Transaction annulee");
+}
+	\end{lstlisting}
+
+	\item Obtenir/Modifier le niveau d'isolation
+
+	\begin{lstlisting}
+/* Fonction permettant d'obtenir le niveau d'isolation */
+private static void getIsolation() throws SQLException {
+           int level = conn.getTransactionIsolation();
+            
+           System.out.print("Niveau d'isolation : ");
+           switch(level){
+               case Connection.TRANSACTION_READ_COMMITTED:
+                   System.out.println("READ COMMITTED");
+                   break;
+               case Connection.TRANSACTION_READ_UNCOMMITTED:
+                   System.out.println("READ UNCOMMITTED");
+                   break;
+               case Connection.TRANSACTION_REPEATABLE_READ:
+                   System.out.println("REPEATABLE READ");
+                   break;
+               case Connection.TRANSACTION_SERIALIZABLE:
+                   System.out.println("SERIALIZABLE");
+                   break;
+               default:
+                   break;
+           }
+}
+
+/* Fonction permettant de modifier le niveau d'isolation */
+private static void setIsolation() throws SQLException {
+           System.out.println("*** Choisir un niveau d'isolation : ***");
+           System.out.println("0 : READ_UNCOMMITTED");
+           System.out.println("1 : READ_COMMITTED");
+           System.out.println("2 : REPEATABLE_READ");
+           System.out.println("3 : SERIALIZABLE");
+                  
+           int level = LectureClavier.lireEntier("Entrez un entier");
+           boolean ok = true;
+            
+           switch(level){
+               case 0: level=Connection.TRANSACTION_READ_UNCOMMITTED; break;
+               case 1: level=Connection.TRANSACTION_READ_COMMITTED; break;
+               case 2: level=Connection.TRANSACTION_REPEATABLE_READ; break;
+               case 3: level=Connection.TRANSACTION_SERIALIZABLE; break;
+               default: System.out.println("Pas le bon numero");ok=false; break;
+               
+           }
+           if(ok)
+               conn.setTransactionIsolation(level);
+}
+	\end{lstlisting}	
+
 \end{enumerate}
 
 \section*{6 - Gestion des contraintes}
@@ -65,11 +228,63 @@ private static void listeAnimaux() throws SQLException {
 \begin{enumerate}[label=\arabic*)]
 	\item Le calcul du nombre de maladies pour chaque animal doit être automatisé en fonction de l’ajout
 ou de la suppression des maladies.
+
+\lstset{language=SQL}
+\begin{lstlisting}
+CREATE or REPLACE TRIGGER MaladiesTrig
+AFTER INSERT or DELETE on LesMaladies
+FOR EACH ROW
+BEGIN
+	IF INSERTING THEN UPDATE LesAnimaux SET nb_maladies = nb_maladies+1 WHERE nomA=:new.nomA;
+	ELSIF DELETING THEN UPDATE LesAnimaux SET nb_maladies = nb_maladies-1 WHERE nomA=:old.nomA;
+	END IF;
+END;
+/
+\end{lstlisting}
+
+On constate qu'à la suite de la création du déclencheur, lorsqu'on veut ajouter une maladie à un animal dans la table LesMaladies, la valeur nb\_maladies associée à cet animal dans la table LesAnimaux est bien incrémentée (et décrémentée lors de la suppression d'une maladie).
+
 	\item Des animaux ne peuvent pas être placés dans une cage dont la fonction est incompatible avec
 ces animaux. On prendra en compte le fait que des animaux peuvent être ajoutés, mais aussi
 déplacés d’une cage.
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER DeplacerCageTrig
+BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
+FOR EACH ROW
+DECLARE
+	fct VARCHAR2(20);
+BEGIN
+	SELECT fonction into fct FROM LesCages WHERE noCage = :new.noCage;
+	IF (fct != :new.fonction_cage) THEN
+		raise_application_error(-20001, 'cage incompatible');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'cage inexistante');
+END;
+/
+\end{lstlisting}
 	\item Des animaux ne peuvent pas être placés dans une cage non gardée. On prendra en compte le
 fait que des animaux peuvent être ajoutés, mais aussi déplacés d’une cage.
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER CageGardeeTrig
+BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
+FOR EACH ROW
+DECLARE
+	nb INTEGER;
+BEGIN
+	SELECT count(*) into nb FROM LesGardiens WHERE noCage = :new.noCage;
+	IF (nb = 0) THEN
+		raise_application_error(-20003, 'Cage non gardee');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'cage inexistante');
+END;
+/
+\end{lstlisting}
 	\item Des animaux de type différent ne peuvent pas cohabiter dans une même cage. On prendra en
 compte le fait que des animaux peuvent être ajoutés, mais aussi déplacés d’une cage.
 \end{enumerate}

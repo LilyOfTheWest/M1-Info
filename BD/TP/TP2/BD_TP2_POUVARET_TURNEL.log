@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  14 OCT 2015 14:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  21 OCT 2015 15:03
 entering extended mode
-**"C:/Users/Lily/Desktop/Dossier Line/M1 Info/BD/TP/TP2/BD_TP2_POUVARET_TURNEL.
+**"C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/TP/TP2/BD_TP2_POUVARET_TURNEL.
 tex"
 
-("C:/Users/Lily/Desktop/Dossier Line/M1 Info/BD/TP/TP2/BD_TP2_POUVARET_TURNEL.t
+("C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/TP/TP2/BD_TP2_POUVARET_TURNEL.t
 ex"
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 68 languages loaded.
@@ -517,25 +517,48 @@ File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
 Package: listings 2014/09/06 1.5e (Carsten Heinz)
 
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\listingsutf8.sty"
+Package: listingsutf8 2011/11/10 v1.2 Allow UTF-8 in listings input (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\stringenc.sty"
+Package: stringenc 2011/12/02 v1.10 Convert strings between diff. encodings (HO
+)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdfescape.sty"
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+)))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 (BD_TP2_POUVARET_TURNEL.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Info: Redefining \degres on input line 23.
-LaTeX Info: Redefining \dots on input line 23.
-LaTeX Info: Redefining \up on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Info: Redefining \degres on input line 34.
+LaTeX Info: Redefining \dots on input line 34.
+LaTeX Info: Redefining \up on input line 34.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -586,38 +609,46 @@ LaTeX Info: Redefining \up on input line 23.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count127
-LaTeX Font Info:    Try loading font information for U+msa on input line 24.
+LaTeX Font Info:    Try loading font information for U+msa on input line 35.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 24.
+LaTeX Font Info:    Try loading font information for U+msb on input line 35.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 39.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ) [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] (BD_TP2_POUVARET_TURN
-EL.aux) ) 
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+) [4] [5]
+(BD_TP2_POUVARET_TURNEL.aux) ) 
 Here is how much of TeX's memory you used:
- 7527 strings out of 493698
- 99700 string characters out of 3144416
- 231123 words of memory out of 3000000
- 10756 multiletter control sequences out of 15000+200000
- 15036 words of font info for 41 fonts, out of 3000000 for 9000
+ 8096 strings out of 493698
+ 108444 string characters out of 3144416
+ 719648 words of memory out of 3000000
+ 11304 multiletter control sequences out of 15000+200000
+ 14965 words of font info for 42 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 28i,6n,40p,294b,1140s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1000.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1200.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1440.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/cm-super/sfcc1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/cm-super/sfrm1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-sup
-er/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfti10
-00.pfb>
-Output written on BD_TP2_POUVARET_TURNEL.pdf (2 pages, 129826 bytes).
+ 29i,6n,40p,379b,1770s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-s
+uper/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/s
+fbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1440.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc1200.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/cm-super/sftt0900.pfb>
+Output written on BD_TP2_POUVARET_TURNEL.pdf (5 pages, 163091 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
+ 51 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

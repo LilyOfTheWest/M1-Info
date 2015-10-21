@@ -3,7 +3,7 @@ drop table LesAnimaux ;
 drop table LesResponsables ;
 drop table LesGardiens ;
 drop table LesSpecialites;
-drop table LesEMployes ;
+drop table LesEmployes ;
 drop table LesCages ;
 drop table LesHistoiresAff ;
 

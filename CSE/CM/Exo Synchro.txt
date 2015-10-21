@@ -1,0 +1,74 @@
+/* But de l'exercice :
+ *
+ * Implémenter les sémaphores avec des mutex + conditions
+ *
+ */
+ 
+/* Première Version */
+
+typedef struct{
+	mutex_t m;
+	cond_t c;
+	int val;
+} sem_t;
+
+void sem_init(sem_t *s, int val){
+	mutex_init(&(s->m));
+	cond_init(&(s->c));
+	s->val = val;
+}
+
+// Si y a pas de jeton, on attend
+// Si y en a un, on le consomme
+// Threads en attente : on essaie d'en réveiller un 
+// mais il peut se faire voler un jeton
+void P(sem_t *s){
+	mutex_lock(&(s->m));
+	while(s->val == 0){ // PAS DE IF ! => WHILE
+		cond_wait(&(s->c), &(s->m); // on doit être dans la section critique
+	}
+	s->val--;
+	mutex_unlock(&(s->m));
+}
+
+void V(sem_t *s){
+	mutex_lock(&(s->m));
+	s->val++;
+	cond_signal(&(s->c));
+	mutex_unlock(&(s->m));
+}
+
+/*******************/
+
+/*Deuxième Version */
+
+typedef struct{
+	mutex_t m;
+	cond_t c;
+	int val;
+} sem_t;
+
+void sem_init(sem_t *s, int val){
+	mutex_init(&(s->m));
+	cond_init(&(s->c));
+	s->val = val;
+}
+
+void P(sem_t *s){
+	mutex_lock(&(s->m));
+	s->val--;
+	/*le nombre en négatif = nb de personnes qui attendent */
+	if(s->val < 0){ // Pas de WHILE ICI !!! => on consomme avant le test.
+		cond_wait(&(s->c), &(s->m));
+	}
+	mutex_unlock(&(s->m));
+}
+
+void V(sem_t *s){
+	mutex_lock(&(s->m));
+	s->val++;
+	if(s->val <= 0){ // le if est une optimisation mais pas obligation
+		cond_signal(&(s->c));
+	}
+	mutex_unlock(&(s->m));
+}

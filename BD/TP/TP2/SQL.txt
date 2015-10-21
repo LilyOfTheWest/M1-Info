@@ -1,0 +1,57 @@
+CREATE or REPLACE TRIGGER MaladiesTrig
+AFTER INSERT or DELETE on LesMaladies
+FOR EACH ROW
+BEGIN
+	IF INSERTING THEN UPDATE LesAnimaux SET nb_maladies = nb_maladies+1 WHERE nomA=:new.nomA;
+	ELSIF DELETING THEN UPDATE LesAnimaux SET nb_maladies = nb_maladies-1 WHERE nomA=:old.nomA;
+	END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER DeplacerCageTrig
+BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
+FOR EACH ROW
+DECLARE
+	fct VARCHAR2(20);
+BEGIN
+	SELECT fonction into fct FROM LesCages WHERE noCage = :new.noCage;
+	IF (fct != :new.fonction_cage) THEN
+		raise_application_error(-20001, 'cage incompatible');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'cage inexistante');
+END;
+/
+
+CREATE OR REPLACE TRIGGER CageGardeeTrig
+BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
+FOR EACH ROW
+DECLARE
+	nb INTEGER;
+BEGIN
+	SELECT count(*) into nb FROM LesGardiens WHERE noCage = :new.noCage;
+	IF (nb = 0) THEN
+		raise_application_error(-20003, 'Cage non gardée');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'cage inexistante');
+END;
+/
+
+CREATE OR REPLACE TRIGGER CohabiterCageTrig
+BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
+FOR EACH ROW
+DECLARE
+	nb INTEGER;
+BEGIN
+	SELECT count(*) into nb FROM LesGardiens WHERE noCage = :new.noCage;
+	IF (nb = 0) THEN
+		raise_application_error(-20003, 'Cage non gardée');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'cage inexistante');
+END;
+/
