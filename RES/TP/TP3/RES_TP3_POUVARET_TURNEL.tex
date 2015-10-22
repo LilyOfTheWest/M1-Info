@@ -229,12 +229,161 @@ Pour accéder au réseau 2, le chemin que doit emprunter un paquet envoyé par A
 \section*{2.5 Cinquième manipulation}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item g
-\item e
-\item a
+\item Nous avons configuré nos interfaces comme suit:\\
+
+A1 : 192.168.1.1\\
+
+A2 : 192.168.2.1\\
+
+B2 : 192.168.2.2\\
+
+B3 : 192.168.3.1\\
+
+C3 : 192.168.3.2\\
+
+D3 : 192.168.3.3\\
+
+D1 : 192.168.1.2\\
+
+\item Lorsqu'on exécute la commande traceroute C3 (à partir de A), on obtient le chemin passant par B2 (Routeur) et arrivant à C3.
+
+Le ping de A vers C a bien été effectué.
+
+Pourquoi la route ?
+
+\item Après déconnexion de A du réseau net2, on relance un ping de A vers C qui, pendant quelques minutes, affiche en boucle "No route to host".
+
+Puis, il arrive à effectuer son ping de nouveau en empruntant un nouveau chemin qui passe par D1. 
+
+On l'observe bien dans la table de routage $\rightarrow$ Destination: 192.168.3.0, Gateway: D1
+
+Le ping ne fonctionnait pas tant que le timer d'effacement de RIP n'avait pas expiré. Au moment où celui ci a expiré, la station A a du retrouver un autre chemin qui ne passait plus par net2 mais par net1.\\
 \end{itemize}
 
+\begin{enumerate}
+\item 
+	\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item Les paquets RIP émis par des routeurs contiennent les adresses des réseaux auquel il ont accès + leur Metric (la distance à laquelle ils sont de ces réseau)
+	\item Le paquet RIP envoyé sur une interface du routeur ne sera pas le même sur une autre interface du routeur puisqu'il contiendra les réseaux auquel l'interface a accès.
+	\item RIP mémorise la route la plus courte. Si celle-ci n'existe plus, les timers d'effacement de RIP vont faire qu'il va chercher une nouvelle route (avec le Metric le plus petit).
+	\item Un routeur calcule la partie réseau de l'adresse des réseaux auquels il appartient grâce aux masques de réseaux associés aux adresses IP des réseaux.
+	\item Les paquets RIP ne contiennent pas les masques de réseaux associés aux adresses qu'il transportent. Les paquets contiennent uniquement les adresses IP des réseaux (Par exemple 192.168.1.0 pour net1, 192.168.2.0 pour net2, etc..).
+	\item RIP calcule les masques de réseaux grâce au système de classes et les place dans la table de routage.
+	\item Le traitement d'une ligne contenue dans un paquet RIP ne sera pas le même quelle que soit l'adresse du routeur émetteur du paquet RIP car ce ne sont pas forcément les même Metric et pas non plus les mêmes adresses IP.
+	\item RIP va simplement mettre à jour le Metric de la route déjà connue (qui a un coût supérieur à celui précédemment annoncé). Si la route a disparu, elle aura donc un Metric de 16 et RIP mettra à jour ce Metric dans les paquets avant de l'enlever de la table de routage.
+	\item A la réception d'un paquet RIP Request, les routeurs vont envoyer un paquet RIP Response contenant les informations de leur table de routage. L'émetteur du RIP Request va donc pouvoir mettre à jour sa propre table de routage et informer les autres adresses de son réseau de ces changements.
+	\item Lorsque le démon est arrêté sur une machine, RIP envoit 4 paquets RIP avec un Metric de 16 à toutes les adresses du réseau sur lequel le démon était lancé.\\
+\end{itemize}
 
+\item
+
+\underline{Algorithme Protocole RIP (non routeur)}
+
+\begin{algorithm}[H]
+\Tq{vrai}{
+	attendre (evenement);
+
+	\Si {évènement == "réception d'un paquet RIP Response"}{
+		\Pour{chaque adresse contenue dans le paquet RIP}{
+			\Si{La route (Adresse, Routeur) est déjà présente dans la table de routage}{
+				\tcc{On met à jour éventuellement notre table de routage (le champ Use par exemple)}
+				maj(tableRoutage);
+
+				\tcc{On réinitialise le timer d'effacement de RIP}
+				reset(timerRIP);
+			}
+			\Si{L'adresse est déjà dans la table de routage}{
+				\Si{new.Metric < old.Metric}{
+					\tcc{Si le Metric (new.Metric) est inférieur à celui connu (old.Metric):
+					on met à jour la table de routage avec le routeur qui a new.Metric}
+					maj(tableRoutage);
+				}
+				\Si{new.Metric == 16}{
+					\tcc{Le Metric 16 signifie que la route a disparu}
+					wait(timerRIP);
+
+					\tcc{L'entrée est supprimée de la table de routage après expiration du timer d'effacement de RIP}
+					enleverTableRoutage(adresse, routeur);
+				}
+			}
+			\Sinon{
+				\Si{new.Metric != 16}{
+					\tcc{L'adresse n'est pas dans la table de routage}
+					ajouterTableRoutage(adresse, routeur);
+					init(timerRIP);
+				}
+			}
+		}
+	}
+	\Si {évènement == "réception d'un paquet RIP request"}{
+		envoiRIPResponse(tableDeRoutage);
+	}
+	\Si {évènement == expiration du timer associé à une entrée dans la table de routage}{
+		new.Metric = 16;
+	}
+	\Si{évènement == expiration du timer d'émission de paquet RIP}{
+		envoiRIPBroadcast(tableDeRoutage);
+	}
+	\Si{évènement == "Démarrage routeur"}{
+		envoiRIPRequest();
+	}
+	\Si{évènement == "Arrêt routeur"}{
+		\tcc{Tous les Metric des réseaux dans le paquet RIP Response seront à 16}
+		all.Metric = 16;
+
+		envoiRIPResponse(tableDeRoutage);
+	}
+}
+\end{algorithm}
+
+\underline{Algorithme Protocole RIP (routeur)}
+
+\begin{algorithm}[H]
+\Tq{vrai}{
+	attendre (evenement);
+
+	\Si {évènement == "réception d'un paquet RIP Response"}{
+		\Pour{chaque adresse contenue dans le paquet RIP}{
+			\Si{La route (Adresse, Routeur) est déjà présente dans la table de routage}{
+				\tcc{On met à jour éventuellement notre table de routage (le champ Use par exemple)}
+				maj(tableRoutage);
+
+				\tcc{On réinitialise le timer d'effacement de RIP}
+				reset(timerRIP);
+			}
+			\Si{L'adresse est déjà dans la table de routage}{
+				\Si{new.Metric < old.Metric}{
+					\tcc{Si le Metric (new.Metric) est inférieur à celui connu (old.Metric):
+					on met à jour la table de routage avec le routeur qui a new.Metric}
+					maj(tableRoutage);
+				}
+				\Si{new.Metric == 16}{
+					\tcc{Le Metric 16 signifie que la route a disparu}
+					wait(timerRIP);
+
+					\tcc{L'entrée est supprimée de la table de routage après expiration du timer d'effacement de RIP}
+					enleverTableRoutage(adresse, routeur);
+				}
+			}
+			\Sinon{
+				\Si{new.Metric != 16}{
+					\tcc{L'adresse n'est pas dans la table de routage}
+					ajouterTableRoutage(adresse, routeur);
+					init(timerRIP);
+				}
+			}
+		}
+	}
+	\Si {évènement == "réception d'un paquet RIP request"}{
+		envoiRIPResponse(tableDeRoutage);
+	}
+	\Si {évènement == expiration du timer associé à une entrée dans la table de routage}{
+		new.Metric = 16;
+	}
+}
+\end{algorithm}
+
+\end{enumerate}
 \section*{3 Pour ceux qui veulent aller un peu plus loin}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}

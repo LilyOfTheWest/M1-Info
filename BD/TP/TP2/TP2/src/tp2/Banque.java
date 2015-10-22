@@ -21,7 +21,9 @@ public class Banque {
 		System.out.println("3 : Ajouter une maladie");
                 System.out.println("4 : Valider la transaction");
                 System.out.println("5 : Annuler la transaction");
-	}
+                System.out.println("6 : Modifier le niveau d'isolation");
+                System.out.println("7 : Obtenir le niveau d'isolation");
+        }
 
 	private static void listeAnimaux() throws SQLException {
             Statement st = conn.createStatement();
@@ -198,17 +200,25 @@ public class Banque {
             conn.setAutoCommit(false);
 
   	    while(!exit) {
-  	    	menu();
-  	    	action = LectureClavier.lireEntier("votre choix ?");
-  	    	switch(action) {
-  	    		case 0 : exit = true; break;
-  	    		case 1 : listeAnimaux(); break;
-  	    		case 2 : deplacerAnimal(); break;
-  	    		case 3 : ajouterMaladie(); break;
-                        case 4 : commit(); break;
-                        case 5 : rollback(); break;
-  	    		default : System.out.println("=> choix incorrect"); menu();
-  	    	}
+                try{
+                    menu();
+                    action = LectureClavier.lireEntier("votre choix ?");
+                    switch(action) {
+                            case 0 : exit = true; break;
+                            case 1 : listeAnimaux(); break;
+                            case 2 : deplacerAnimal(); break;
+                            case 3 : ajouterMaladie(); break;
+                            case 4 : commit(); break;
+                            case 5 : rollback(); break;
+                            case 6 : setIsolation(); break;
+                            case 7 : getIsolation(); break;
+                            default : System.out.println("=> choix incorrect"); menu();
+                    }
+                }
+                catch(SQLException e){
+                    System.out.println(e.getMessage());
+                    System.out.println("Vous pouvez annuler votre transaction si vous le désirer");
+                }
   	    } 	    
 
   	    // Liberation des ressources et fermeture de la connexion...

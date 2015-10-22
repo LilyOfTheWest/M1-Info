@@ -41,17 +41,21 @@ END;
 /
 
 CREATE OR REPLACE TRIGGER CohabiterCageTrig
-BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
-FOR EACH ROW
+AFTER INSERT OR UPDATE OF noCage on LesAnimaux
 DECLARE
 	nb INTEGER;
 BEGIN
-	SELECT count(*) into nb FROM LesGardiens WHERE noCage = :new.noCage;
-	IF (nb = 0) THEN
-		raise_application_error(-20003, 'Cage non gardée');
+	SELECT count(*) into nb FROM(
+		SELECT noCage, count(DISTINCT type_an)
+		FROM LesAnimaux
+		GROUP BY noCage
+		HAVING COUNT (distinct type_an) > 1
+	);
+	IF (nb > 0) THEN
+		raise_application_error(-20003, 'Des animaux de type différents ne peuvent cohabiter');
 	END IF;
 EXCEPTION 
 	WHEN NO_DATA_FOUND THEN
-		raise_application_error(-20002, 'cage inexistante');
+		raise_application_error(-20002, 'Cage inexistante');
 END;
 /

@@ -54,8 +54,12 @@ System.out.println("loaded");
 /* Etablissement de la connexion */
 System.out.print("Connecting to the database... "); 
 Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
-            
+
 System.out.println("connected");
+
+// Desactivation de l'autocommit
+System.out.println("Autocommit disabled");
+conn.setAutoCommit(false);
 	\end{lstlisting}
 
 \subsection*{Question 1}
@@ -242,8 +246,6 @@ END;
 /
 \end{lstlisting}
 
-On constate qu'à la suite de la création du déclencheur, lorsqu'on veut ajouter une maladie à un animal dans la table LesMaladies, la valeur nb\_maladies associée à cet animal dans la table LesAnimaux est bien incrémentée (et décrémentée lors de la suppression d'une maladie).
-
 	\item Des animaux ne peuvent pas être placés dans une cage dont la fonction est incompatible avec
 ces animaux. On prendra en compte le fait que des animaux peuvent être ajoutés, mais aussi
 déplacés d’une cage.
@@ -287,14 +289,166 @@ END;
 \end{lstlisting}
 	\item Des animaux de type différent ne peuvent pas cohabiter dans une même cage. On prendra en
 compte le fait que des animaux peuvent être ajoutés, mais aussi déplacés d’une cage.
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER CohabiterCageTrig
+AFTER INSERT OR UPDATE OF noCage on LesAnimaux
+DECLARE
+	nb INTEGER;
+BEGIN
+	SELECT count(*) into nb FROM(
+		SELECT noCage, count(DISTINCT type_an)
+		FROM LesAnimaux
+		GROUP BY noCage
+		HAVING COUNT (distinct type_an) > 1
+	);
+	IF (nb > 0) THEN
+		raise_application_error(-20003, 'Des animaux de type differents ne peuvent cohabiter');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'Cage inexistante');
+END;
+/
+\end{lstlisting}
+
 \end{enumerate}
 
-Jeux de tests pertinents
+\subsection*{Jeux de tests pertinents}
+\subsubsection*{Tests du premier trigger}
+\lstset{frame=none}
+\begin{lstlisting}
+SQL> SELECT * FROM LesAnimaux WHERE nomA='Charly';
+\end{lstlisting}
+\begin{tabular}{|cccccccc|}
+NOMA & SEXE & TYPE\_AN & FONCTION\_CAGE  & PAYS & ANNAIS & NOCAGE & NB\_MALADIES \\
+\hline
+Charly & male & lion & fauve & Kenya & 2010 & 11 & 3 \\
+\end{tabular}
+
+\begin{lstlisting}
+SQL> INSERT INTO LesMaladies VALUES('Charly', 'conjonctivite');
+1 row created.
+
+SQL> SELECT * FROM LesAnimaux WHERE nomA='Charly';
+\end{lstlisting}
+\begin{tabular}{|cccccccc|}
+NOMA & SEXE & TYPE\_AN & FONCTION\_CAGE  & PAYS & ANNAIS & NOCAGE & NB\_MALADIES \\
+\hline
+Charly & male & lion & fauve & Kenya & 2010 & 11 & 4 \\
+\end{tabular}\\
+
+On constate qu'à la suite de la création du déclencheur, lorsqu'on veut ajouter une maladie à un animal dans la table LesMaladies, la valeur nb\_maladies associée à cet animal dans la table LesAnimaux est bien incrémentée (et décrémentée lors de la suppression d'une maladie).\\
+
+\subsubsection*{Tests du deuxième trigger}
+\begin{lstlisting}
+SQL> UPDATE LesAnimaux SET noCage=1 WHERE nomA='Charly';
+UPDATE LesAnimaux SET noCage=1 WHERE nomA='Charly'
+       *
+ERROR at line 1:
+ORA-20001: cage incompatible
+ORA-06512: at "POUVAREL.DEPLACERCAGETRIG", line 6
+ORA-04088: error during execution of trigger 'POUVAREL.DEPLACERCAGETRIG'
+\end{lstlisting}
+
+Lorsqu'on souhaite déplacer Charly (qui est dans une cage pour fauves) dans la fosse, on constate bien le déclenchement du trigger DeplacerCageTrig.
+
+On ne peut déplacer Charly que vers une cage 'fauve'.\\
+
+\subsubsection*{Tests du troisième trigger}
+\begin{lstlisting}
+SQL> SELECT * FROM LesGardiens;
+\end{lstlisting}
+\begin{tabular}{|cc|}
+noCage & nomE \\
+\hline
+11 & Lachaize \\
+12 & Spinnard \\
+12 & Labbe \\
+11 & Spinnard \\
+11 & Labbe \\
+1 & Lachaize \\
+3 & Lachaize \\
+12 & Lachaize \\
+\end{tabular}\\
+
+\begin{lstlisting}
+SQL> INSERT INTO LesAnimaux VALUES('Polochon', 'male', 'poisson', 'aquarium', 'France', 2014, 2, 0);
+
+INSERT INTO LesAnimaux VALUES('Polochon', 'male', 'poisson', 'aquarium', 'France', 2014, 2, 0)
+            *
+ERROR at line 1:
+ORA-20003: Cage non gardee
+ORA-06512: at "POUVAREL.CAGEGARDEETRIG", line 6
+ORA-04088: error during execution of trigger 'POUVAREL.CAGEGARDEETRIG'
+\end{lstlisting}
+
+Ici, on a vérifié si la cage 2 (aquarium) était gardée ou non. On trouve bien que le nombre de gardiens qui la gardent est égale à 0.
+
+Donc, quand on veut insérer un nouvel animal dans la table LesAnimaux qui a ce numéro de cage, on déclenche le trigger CageGardeeTrig qui annonce une erreur.\\
+
+\subsubsection*{Tests du quatrième trigger}
+\begin{lstlisting}
+SQL> SELECT * FROM LesAnimaux;
+\end{lstlisting}
+\begin{tabular}{|cccccccc|}
+NOMA & SEXE & TYPE\_AN & FONCTION\_CAGE  & PAYS & ANNAIS & NOCAGE & NB\_MALADIES \\
+\hline
+Charly       &  male         &  lion         &  fauve       &   Kenya     &     2010         &  11         &    3             \\ 
+Arthur        & male        &   ours          & fosse         & France      &   2000  &         1         &     0              \\
+Chloe         & femelle  &      pie          &  petits oiseaux & France       &  2011     &      3        &      1             \\ 
+Milou         & male    &       leopard     &   fauve       &   France      &   2013    &       11       &      1              \\
+Tintin        & male  &         leopard   &     fauve    &      France      &   2013      &     11       &      0              \\
+Charlotte    &  femelle     &   lion   &        fauve       &   Kenya      &    2012       &    12  &           0 \\
+\end{tabular}
+
+\begin{lstlisting}
+SQL> UPDATE LesAnimaux SET noCage=12 WHERE nomA='Milou';
+UPDATE LesAnimaux SET noCage=12 WHERE nomA='Milou'
+       *
+ERROR at line 1:
+ORA-20003: Des animaux de type differents ne peuvent cohabiter
+ORA-06512: at "POUVAREL.COHABITERCAGETRIG", line 11
+ORA-04088: error during execution of trigger 'POUVAREL.COHABITERCAGETRIG'
+\end{lstlisting}
+
+On a voulu déplacer Milou de cage (qui est un fauve MAIS un leopard) vers la cage de Charly (qui est un fauve MAIS un lion). 
+
+Notre requête déclenche bien le trigger CohabiterCageTrig annonçant une erreur avec comme message "Des animaux de type différents ne peuvent cohabiter".\\
+
+Pour chaque les trois derniers triggers, si la modification ou l'insertion d'un animal avec un noCage qui n'existe pas dans la table LesCages, alors les triggers déclencheront une erreur avec comme message "Cage inexistante".\\
+
+
 
 \section*{7 - Contraintes \& JDBC}
 \subsection*{Question 3}
 
-Reprenez les fonctionnalités développées sous forme de programme Java et modifier le code pour prendre
-en compte les erreurs d’intégrités renvoyés par le SGBD via vos triggers. Il s’agit ici d’annuler
-les transactions qui violent certaines contraintes métiers.
+Pour permettre à notre programme Java de détecter et gérer les erreurs d'intégrités renvoyés par le SGBD via nos triggers, il suffit juste d'entourer le corps de la boucle while(!exit), là où on va exécuter la fonction demandée par l'utilisateur, par des try et catch.
+
+Nous n'annulons pas d'office les transactions qui violent les contraintes mais nous proposons à l'utilisateur d'annuler sa transaction via le menu.
+
+\lstset{language=Java, frame=shadowbox}
+
+\begin{lstlisting}
+try{
+	menu();
+	action = LectureClavier.lireEntier("votre choix ?");
+	switch(action) {
+	case 0 : exit = true; break;
+	case 1 : listeAnimaux(); break;
+	case 2 : deplacerAnimal(); break;
+	case 3 : ajouterMaladie(); break;
+	case 4 : commit(); break;
+	case 5 : rollback(); break;
+	case 6 : setIsolation(); break;
+	case 7 : getIsolation(); break;
+	default : System.out.println("=> choix incorrect"); menu();
+	}
+}
+catch(SQLException e){
+	System.out.println(e.getMessage());
+	System.out.println("Vous pouvez annuler votre transaction si vous le desirer");
+}
+\end{lstlisting}
+
+
 \end{document}

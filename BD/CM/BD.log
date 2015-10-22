@@ -1,10 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  22 OCT 2015 21:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  22 OCT 2015 08:27
 entering extended mode
-**"C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/TP/TP2/BD_TP2_POUVARET_TURNEL.
-tex"
-
-("C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/TP/TP2/BD_TP2_POUVARET_TURNEL.t
-ex"
+**"C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/CM/BD.tex"
+("C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/CM/BD.tex"
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 68 languages loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -312,6 +309,41 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count92
 ))
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\lmodern.sty"
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks17
@@ -386,6 +418,10 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
+("C:\Program Files\MiKTeX 2.9\tex\latex\jknappen\mathrsfs.sty"
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -542,23 +578,27 @@ Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
 )))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2014/09/06 1.5e listings language file
+) (BD.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 36.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-(BD_TP2_POUVARET_TURNEL.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Info: Redefining \degres on input line 34.
-LaTeX Info: Redefining \dots on input line 34.
-LaTeX Info: Redefining \up on input line 34.
+LaTeX Info: Redefining \degres on input line 36.
+LaTeX Info: Redefining \dots on input line 36.
+LaTeX Info: Redefining \up on input line 36.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -609,96 +649,210 @@ LaTeX Info: Redefining \up on input line 34.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count127
-LaTeX Font Info:    Try loading font information for U+msa on input line 35.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 37.
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 37.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 37.
+
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 37.
+
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 37.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 37.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 37.
+LaTeX Font Info:    Try loading font information for U+msa on input line 37.
+
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 35.
+LaTeX Font Info:    Try loading font information for U+msb on input line 37.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 39.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 37.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
-File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [1
+("C:\Program Files\MiKTeX 2.9\tex\latex\jknappen\ursfs.fd"
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 42.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 42.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 42.
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
-("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
-File: lstlang1.sty 2014/09/06 1.5e listings language file
-) [4] [5]
-Overfull \hbox (12.76271pt too wide) in paragraph at lines 322--327
-[] 
+Underfull \hbox (badness 10000) in paragraph at lines 72--72
+[]\T1/lmr/m/n/10 Balayage
  []
 
 
-Overfull \hbox (12.76271pt too wide) in paragraph at lines 334--339
-[] 
+Underfull \hbox (badness 6380) in paragraph at lines 72--72
+\T1/lmr/m/n/10 "se-lect *
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--339
-
+Overfull \hbox (1.37648pt too wide) in paragraph at lines 72--72
+[]\T1/lmr/m/n/10 Recherche
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 340--341
-
+Underfull \hbox (badness 10000) in paragraph at lines 72--72
+\T1/lmr/m/n/10 sur éga-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 355--356
-
+Underfull \hbox (badness 10000) in paragraph at lines 72--72
+\T1/lmr/m/n/10 lité
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--373
-
- []
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 387--388
-
+Underfull \hbox (badness 3240) in paragraph at lines 72--72
+[]\T1/lmr/m/n/10 Plage de
  []
 
 
-Overfull \hbox (27.67574pt too wide) in paragraph at lines 393--403
-[] 
+Underfull \hbox (badness 3449) in paragraph at lines 72--72
+\T1/lmr/m/n/10 va-leur X
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 416--417
-
+Overfull \hbox (1.7656pt too wide) in paragraph at lines 74--74
+[]\T1/lmr/m/n/10 Sequentiel| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 418--419
-
+Underfull \hbox (badness 1769) in paragraph at lines 78--78
+[]\T1/lmr/m/n/10 Index ou
  []
 
-[7] [8] (BD_TP2_POUVARET_TURNEL.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--78
+[]$[][]$
+ []
+
+
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--78
+\T1/lmr/m/n/10 (Card(R))| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--78
+[]$[][]$
+ []
+
+
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--78
+\T1/lmr/m/n/10 (Card(R))
+ []
+
+
+Underfull \hbox (badness 1092) in paragraph at lines 78--78
+\T1/lmr/m/n/10 + nb de
+ []
+
+
+Underfull \hbox (badness 2452) in paragraph at lines 78--78
+\T1/lmr/m/n/10 pages où
+ []
+
+
+Underfull \hbox (badness 2941) in paragraph at lines 78--78
+\T1/lmr/m/n/10 ri-fiant la
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--78
+[]\T1/lmr/m/n/10 Insertion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--78
+\T1/lmr/m/n/10 dans le
+ []
+
+
+Underfull \hbox (badness 7558) in paragraph at lines 78--78
+$\OML/lmm/m/it/10 B[]$ $[][]$
+ []
+
+
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--78
+\T1/lmr/m/n/10 (Card(R))| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+[]\T1/lmr/m/n/10 Insertion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+\T1/lmr/m/n/10 dans le
+ []
+
+
+Underfull \hbox (badness 7558) in paragraph at lines 78--79
+$\OML/lmm/m/it/10 B[]$ $[][]$
+ []
+
+
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--79
+\T1/lmr/m/n/10 (Card(R))| 
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 86.
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 86.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 224.
+ [3] [4] (BD.aux) ) 
 Here is how much of TeX's memory you used:
- 8144 strings out of 493698
- 108979 string characters out of 3144416
- 705648 words of memory out of 3000000
- 11349 multiletter control sequences out of 15000+200000
- 17440 words of font info for 51 fonts, out of 3000000 for 9000
+ 7614 strings out of 493698
+ 104777 string characters out of 3144416
+ 225777 words of memory out of 3000000
+ 10787 multiletter control sequences out of 15000+200000
+ 61917 words of font info for 67 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 29i,6n,40p,381b,1812s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dv
-ips/cm-super/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm
--super/sfbx1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sf
-bx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx1440.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc1200.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/cm-super/sfrm1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/cm-super/sftt0900.pfb>
-Output written on BD_TP2_POUVARET_TURNEL.pdf (8 pages, 194436 bytes).
+ 29i,15n,40p,296b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C
+:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTe
+X 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/d
+vips/lm/lm-mathsy.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx10
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/lm/lmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/lm/lmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri10
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on BD.pdf (4 pages, 214634 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
+ 71 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

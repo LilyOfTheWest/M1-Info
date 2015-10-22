@@ -1,0 +1,250 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{url}
+\usepackage{color}
+\usepackage{lmodern}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage[french]{algorithm2e}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\frenchbsetup{StandardLists=true}
+\lstset{language=Java}
+\lstset{
+	breaklines=true, 
+	showspaces=false, 
+	keepspaces=true, 
+	numbers=left, 
+	frame=shadowbox, 
+	keywordstyle=\color{blue},
+	basicstyle=\ttfamily\small,
+	commentstyle=\color{green}
+}
+\geometry{hmargin=2.5cm, vmargin=2.5cm}
+
+\title{Base de Données}
+\author{Line \bsc{POUVARET}}
+\date{2015-2016}
+
+\begin{document}
+\maketitle
+
+\section*{Bilan sur "les performances"}
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item Card(R) = 
+	\begin{itemize}
+		\item nb de tuples de la relation
+		\item Soit e le nb de tuuples de R par page
+	\end{itemize}
+	
+	\[NP(R) = \lceil\frac{Card(R)}{e}\rceil\]
+	\item Card(I) = 
+	\begin{itemize}
+		\item nb valeur $\neq$ de l'attribut indexé
+		\item Soit d le nb de tuples de I par page (d $\gg$ e)
+
+	\[NP(I) = \lceil\frac{Card(I)}{d}\rceil\]
+	\end{itemize}
+\end{itemize}
+
+\subsection*{Exemple}
+Card(R) = 21
+
+e = 5
+
+NP(R) = 5
+
+\subsection*{Remarque}
+Card(I) = Card(R)
+
+si l'attribut indexé est clé de R.
+
+\begin{tabular}{|p{1,5cm}|p{1,5cm}|p{1,5cm}|p{1,5cm}|p{1,5cm}|p{1,5cm}|}
+\hline
+                  & Balayage "select * from R" & Recherche sur égalité "X=..." & Plage de valeur X > '...' & Insertion & delete \\
+\hline
+Sequentiel & NP(R) & $\frac{NP(R)}{2}$ en moyenne & NP(R) & Cst & NP(R) \\
+\hline
+Hashé & NP(R) & 1 & NP(R) & Cst & NP(R) \\
+\hline
+Index ou B-arbre & NP(R) & $\log_d$ (Card(R)) & $\log_d$ (Card(R)) + nb de pages où il y a des tuples vérifiant la propriété & Insertion dans le $B^{+}$ $\log_d$ (Card(R)) &  Insertion dans le $B^{+}$ $\log_d$ (Card(R)) \\
+\hline
+\end{tabular}
+
+$\rightarrow$ Organisation $\phi$ des données est un paramètre important
+
+$\rightarrow$ Indexation : 
+\begin{itemize}
+	\item rapidité d'accès
+	\item mise à jour coûteuse
+\end{itemize}
+
+$\rightarrow$ Grouper les mises à jour (en présence d'index) pour éviter de perturber les lectures.
+
+$\rightarrow$ Compromis lectures/mises à jour.
+
+\section*{Implantation des opérateurs d'accès aux données}
+
+$\rightarrow$ Opérations algébriques
+
+$\rightarrow$ Opérateurs de tri (Order by/Group by)
+
+$\rightarrow$ Agrégation (max, sum, count, min)
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item \underline{Selection} : $\sigma_{F}$(R)
+
+clause "where" du SQL
+
+Soit par accès séquentiel
+
+Soit par un index
+
+	\item \underline{Projection} : $\Pi_{y}$(R)
+
+clause "select" de SQL
+
+
+
+$\rightarrow$ Elimination des "doublons"
+	\begin{itemize}
+		\item $\theta$($n^{2}$) méthode naïve
+		\item Utilisation d'une fonction de hashage $\rightarrow$ $\theta$(n)
+	\end{itemize}
+
+	\item \underline{Jointure naturelle} : R $\bowtie$ S = S $\bowtie$ R
+		
+	\begin{itemize}
+		\item Pour une série de n jointures, on a (n-1)! séquence de jointures possibles
+		\item Comment choisir la bonne séquence ?
+	\end{itemize} 
+\end{itemize}
+
+$\rightarrow$ Influence de stockage
+
+$\rightarrow$ Influence des algos
+
+\subsection*{Algo boucles imbriquées :}  
+R $\bowtie$ S             
+
+(R.a = S.a)
+
+\begin{algorithm}
+
+T $\leftarrow$ $\varnothing$
+\Pour{r $\in$ R}{
+	\Pour{s $\in$ S}{
+		\Si {r.a = s.a }{
+			ajoute(r,s) à T;
+		}
+	}
+}
+\end{algorithm}
+
+\subsection*{Remarque}
+\begin{itemize} 
+	\item Le résultat est dans l'ordre de la relation externe
+	\item Coût nb de comp $\theta$($n^{2}$)
+
+$\rightarrow$ Coût en E/S
+
+Considérons une mémoire pouvant contenir b+2 pages de R
+
+Coût en nb d'E/S
+
+\[NP(R) + \lceil\frac{NP(R)}{b}\rceil * NP(S)\]
+
+\subsection*{Remarque}
+
+La jointure par boucles imbriquées n'est pas "symétrique".
+
+$\rightarrow$ l'ordre du résultat
+$\rightarrow$ Coût E/S
+
+\subsection*{\underline{Algo Tri-Fusion}}
+
+Procéder en 2 étapes :
+
+\begin{enumerate}
+	\item Trier R et S sur les attributs de jointure
+	\item Fusion des tables triées (évaluation de la condition de jointure)
+\end{enumerate}
+\end{itemize}
+	
+\subsection*{Tri externe de R :}
+NP(R) * $\log_b$(NP(R))
+
+où b est le nb de pages de R en mémoire.
+
+Pour la jointure Tri fusion :
+\begin{itemize}
+	\item Tri de R: NP(R) * $\log_b$(NP(R))
+	\item Tri de S : NP(S) * $\log_b$(NP(S))
+	\item Fusion : NP(R) + NP(S)
+\end{itemize}
+
+\subsection*{\underline{Jointure par Hash Code}}
+
+($\theta$ condition soit une "égalité")
+
+R $\bowtie$ S    
+
+(R.a = S.a)
+
+\begin{algorithm}
+\Pour{chaque tuple r $\in$ R}{
+	ajouter r à Table(h(r));
+}
+
+\Pour{chaque tuple s $\in$ S}{
+	$E_{r}$ $\leftarrow$ Table(h(s));
+
+	\Pour{chaque r $\in$ $E_{r}$}{
+		Ajouter (r, s) à T;
+	}
+}
+\end{algorithm}
+
+Si les 2 tables sont déjà hashé :
+
+NP(R) + NP(S)
+
+S oui mais pas R
+
+NP(R) + Card(S)
+
+\section*{Estimation des coûts des $\neq$ chemins d'accès}
+
+\begin{itemize}
+	\item balayage séquentiel
+	\item dichotomique (si triée)
+	\item index
+\end{itemize}
+
+Pour une même requête, pour les différentes options d'évaluation (différents plans d'exécution), on estime un coût et on choisit l'option qui a le coût le plus faible.
+
+En général, le coût est fonction de :
+\begin{itemize}
+	\item Coût en E/S 
+
+$\rightarrow$ 1
+	\item Coût CPU
+
+ $\rightarrow$ $\frac{1}{100}$
+	\item Coût de "com" si la BD est répartie 
+
+$\rightarrow$ Coût CPU < Coût Com < Coût E/S
+\end{itemize}
+
+$\rightarrow$ Evaluer les cardinalités (nb de tuples) des relations initiales et intermédiaires
+
+$\rightarrow$ On utilise des estimations basées sur des informations (statistique) que le SGBD maintient dans son catalogue.
+\end{document}
