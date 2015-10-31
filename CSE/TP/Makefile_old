@@ -1,0 +1,39 @@
+# Dossiers dans le quel le make va chercher les fichiers
+
+SRC_DIR = SRC
+INC_DIR = INC
+OBJ_DIR = OBJ
+
+# Options de compilation 
+CC = gcc
+CFLAGS = -W -Wall -pedantic -ansi -g
+LDFLAGS = 
+
+# Source, Objet, Exécutable
+# Pour SRC, on prend tous les fichiers .c du fichier SRC
+# Pour NOM, basename permet de récupérer que le nom sans l'extension
+# subst permet de substituer les fichiers de SRC pour les mettre dans OBJ
+# addsuffix permet d'ajouter le suffix .o au nom de fichier transférer
+# EXEC est le nom de l'exécutable
+SRC = $(foreach dir, $(SRC_DIR), $(wildcard $(dir)/*.c))
+NOM = $(basename $(subst ${SRC_DIR}, ${OBJ_DIR}, ${SRC}))
+OBJ = $(addsuffix .o, $(NOM))
+EXEC = exo1 exo2
+
+all : $(EXEC)
+
+# Création de l'exécutable
+$(EXEC) : $(OBJ)
+	$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS)
+
+# Création des .o à partir des .c
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c 
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+
+# Nettoyage
+clean :
+	@rm -f $(OBJ)
+	@find . -name \*~ -exec rm \-fv {} \;
+
+mrproper : clean
+	@rm -f $(EXEC)

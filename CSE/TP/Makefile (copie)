@@ -1,0 +1,23 @@
+# Options de compilation 
+CC = gcc
+CFLAGS = -W -Wall -pedantic -ansi -D_XOPEN_SOURCE
+LDFLAGS = 
+
+# Sources des programmes
+SRC = $(wildcard *.c)
+OBJS = $(SRC:.c=.o)
+BINS = exo1 exo2 exo3 exo4
+
+all: $(BINS)
+
+%: %.o
+	$(CC) $(CFLAGS) -o %@ %^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+clean:
+		rm -f *.o
+
+mrproper: clean
+		@rm $(BINS)

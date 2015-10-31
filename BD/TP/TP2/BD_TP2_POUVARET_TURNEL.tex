@@ -67,7 +67,6 @@ conn.setAutoCommit(false);
 	\item Afficher la liste des animaux
 
 	\begin{lstlisting}
-
 /* Fonction d'affichage des animaux */
 private static void listeAnimaux() throws SQLException {
            Statement st = conn.createStatement();
@@ -82,36 +81,39 @@ private static void listeAnimaux() throws SQLException {
 
 /* Fonction d'affichage generale */
 public static void afficherRes(ResultSet rs){
-            try {
-                    ResultSetMetaData rms = rs.getMetaData();
-                    int col = rms.getColumnCount();
-
-                    System.out.print("|");
-                    for(int i=1; i <= col; i++) {
-                            String nomCol = rms.getColumnName(i);
-                            System.out.print(" " + String.format("%15s", nomCol) + " |");
-                    }
-                    System.out.println();
-
-                    while(rs.next()) {
-                            System.out.print("|");
-                            for(int i=1; i <= col; i++) {
-                                    String type = rms.getColumnClassName(i);
-                                    
-                                    if (type.equals("java.lang.String")) {
-                                            System.out.print(" " + String.format("%15s", rs.getString(i)) + " |");
-                                    } else if (type.equals("java.math.BigDecimal")) {
-                                            System.out.print(" " + String.format("%15s", String.valueOf(rs.getInt(i))) + " |");                                  
-                                    } else if (type.equals("java.sql.Date")) {
-                                            System.out.print(" " + String.format("%15s", rs.getDate(i)) + " |");
-                                    }                             
-                            }
-                            System.out.println();
-                    }
-            } catch (SQLException e) {
-                    System.out.println("ERREUR : " + e.getMessage());
-            }
-}	
+	try {
+		ResultSetMetaData rms = rs.getMetaData();
+		int col = rms.getColumnCount();
+		
+		for(int i=1; i <= col; i++) {
+			String nomCol = rms.getColumnName(i);
+	                     System.out.print(String.format("%-15s", nomCol));
+	           }
+		System.out.println();
+	                    
+		for(int i=1; i <= col; i++) {
+			System.out.print("--------------");
+		}
+		System.out.println();
+	
+		while(rs.next()) {
+			for(int i=1; i <= col; i++) {
+				String type = rms.getColumnClassName(i);
+	                                    
+				if (type.equals("java.lang.String")) {
+					System.out.print(String.format("%-15s", rs.getString(i)));
+				} else if (type.equals("java.math.BigDecimal")) {
+					System.out.print(String.format("%-15s", String.valueOf(rs.getInt(i))));                                  
+				} else if (type.equals("java.sql.Date")) {
+					System.out.print(String.format("%-15s", rs.getDate(i)));
+				}                             
+			}
+			System.out.println();
+		}
+	} catch (SQLException e) {
+		System.out.println("ERREUR : " + e.getMessage());
+	}
+}
 	\end{lstlisting}
 
 	\item Déplacer un animal de cage
@@ -119,23 +121,18 @@ public static void afficherRes(ResultSet rs){
 	\begin{lstlisting}
 /* Fonction qui deplace un animal vers une autre cage */
 private static void deplacerAnimal() throws SQLException {
-           String animal, cage;
-           System.out.println("Quel animal voulez-vous deplacer ?");
-           animal = LectureClavier.lireChaine();
-           System.out.println("Vers quelle cage voulez-vous deplacer "+animal+" ?");
-           cage = LectureClavier.lireChaine();
-           
-           Statement st = conn.createStatement();
+	 String animal;
+            int cage;
+            System.out.println("Quel animal voulez-vous deplacer ?");
+            animal = LectureClavier.lireChaine();
+            cage = LectureClavier.lireEntier("Vers quel numero de cage voulez-vous deplacer "+animal+" ?");
             
-           ResultSet rs = st.executeQuery("SELECT noCage FROM LesCages WHERE fonction='"+cage+"'");
-           if(!(rs.next()))
-                  System.out.println("Cette cage n'existe pas");
-           else{
-               int nb = st.executeUpdate("UPDATE LesAnimaux SET fonction_cage='"+cage+"', noCage="+rs.getInt(1)+" WHERE noma='"+animal+"'");         
-               System.out.println(nb + " ligne (s) modifiee (s).");            
-           }
-           System.out.println();
-           st.close();
+            Statement st = conn.createStatement();
+            
+            int nb = st.executeUpdate("UPDATE LesAnimaux SET noCage="+cage+" WHERE noma='"+animal+"'");         
+            System.out.println(nb + " ligne (s) modifiee (s).");      
+            
+            st.close();
 }	
 	\end{lstlisting}	
 
@@ -248,7 +245,7 @@ END;
 
 	\item Des animaux ne peuvent pas être placés dans une cage dont la fonction est incompatible avec
 ces animaux. On prendra en compte le fait que des animaux peuvent être ajoutés, mais aussi
-déplacés d’une cage.
+déplacés d’une cage.\\
 
 \begin{lstlisting}
 CREATE OR REPLACE TRIGGER DeplacerCageTrig

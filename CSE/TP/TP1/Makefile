@@ -1,28 +1,31 @@
-all: tp1
+all: exo1 exo2 exo3 exo4
 
-tp1: main.o allocation.o firstfit.o lirecar.o fonction_generale.o nextfit.o bestfit.o
-	gcc -o tp1 main.o allocation.o firstfit.o lirecar.o fonction_generale.o nextfit.o bestfit.o -g
+exo1: exo1.o
+		gcc -o exo1 exo1.o
 
-allocation.o: allocation.c allocation.h
-	gcc -o allocation.o -c allocation.c -W -Wall -g 
+exo1.o: exo1.c
+		gcc -o exo1.o -c exo1.c -W -Wall -ansi -pedantic
 
-fonction_generale.o: fonction_generale.c fonction_generale.h
-	gcc -o fonction_generale.o -c fonction_generale.c -W -Wall -g 
-    
-nextfit.o: nextfit.c nextfit.h allocation.h fonction_generale.h
-	gcc -o nextfit.o -c nextfit.c -W -Wall -g 
+exo2: exo2.o
+		gcc -o exo2 exo2.o
 
-bestfit.o: bestfit.c bestfit.h allocation.h fonction_generale.h
-	gcc -o bestfit.o -c bestfit.c -W -Wall -g 
-    
-firstfit.o: firstfit.c firstfit.h allocation.h fonction_generale.h
-	gcc -o firstfit.o -c firstfit.c -W -Wall -g
+exo2.o: exo2.c
+		gcc -o exo2.o -c exo2.c -W -Wall -ansi -pedantic
 
-main.o: main.c firstfit.h nextfit.h bestfit.h allocation.h fonction_generale.h
-	gcc -o main.o -c main.c -W -Wall -g
+exo3: exo3.o
+		gcc -o exo3 exo3.o
+
+exo3.o: exo3.c
+		gcc -o exo3.o -c exo3.c -W -Wall -ansi -pedantic
+
+exo4: exo4.o
+		gcc -o exo4 exo4.o
+
+exo4.o: exo4.c
+		gcc -o exo4.o -c exo4.c -W -Wall -ansi -pedantic -D_XOPEN_SOURCE
 
 clean:
-	rm -rfv allocation.o firstfit.o main.o fonction_generale.o nextfit.o bestfit.o
+		rm -f *.o
 
 mrproper: clean
-	rm -rfv tp1
+		rm exo1 exo2 exo3 exo4

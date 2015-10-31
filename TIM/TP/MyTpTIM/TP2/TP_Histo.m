@@ -19,11 +19,12 @@ dir_ima='..\Image_jpg';
 
 %chargement de l'image
 
-%name_picture = 'lake.jpg';
+name_picture = 'lake.jpg';
 %name_picture = 'see.jpg'
 %name_picture = 'city.jpg';
 %name_picture = 'house.jpg';
-name_picture = 'venise.jpg';
+%name_picture = 'venise.jpg';
+%name_picture= 'foret01008.jpg';
 
 pic = imread([dir_ima '\' name_picture]);
 
@@ -102,7 +103,9 @@ pic_RGB_linearized = uint8(zeros(size(pic)));
 %
 %
 % </TO DO>
-
+[pic_RGB_linearized,h_r,h_r0] = histo_etalement(pic(:,:,1),factor_max,factor_min);
+[pic_RGB_linearized,h_g,h_g0] = histo_etalement(pic(:,:,2),factor_max,factor_min);
+[pic_RGB_linearized,h_b,h_b0] = histo_etalement(pic(:,:,3),factor_max,factor_min);
 
 %affichage des résultats
 title_fig=('Etalement en R, G, B');
@@ -133,7 +136,9 @@ pic_RGB_equalized = uint8(zeros(size(pic)));
 %
 %
 % </TO DO>
-
+[pic_RGB_equalized,h_r,h_r0] = histo_egalisation(pic(:,:,1));
+[pic_RGB_equalized,h_g,h_g0] = histo_egalisation(pic(:,:,2));
+[pic_RGB_equalized,h_b,h_b0] = histo_egalisation(pic(:,:,3));
 
 
 %affichage des résultats
@@ -160,7 +165,11 @@ pause
 % 3. conversion inverse YCbCr->RGB dans la variable pic_Lum_linearized (voir fonction convert_YCrCb_to_rgb)
 %
 %</TO DO>
-
+pic_Lum_linearized = uint8(zeros(size(pic)));
+pic_Lum_linearized=convert_rgb_to_YCbCr(pic);
+[pic_Lum_linearized_Y,h,h0] = histo_etalement(pic_Lum_linearized(:,:,1),factor_max,factor_min);
+pic_Lum_linearized(:,:,1) = double(pic_Lum_linearized_Y)./255;
+pic_Lum_linearized = convert_YCbCr_to_rgb(pic_Lum_linearized);
 %affichage des résultats
 h_r = imhist(pic_Lum_linearized(:,:,1),256); 
 h_g = imhist(pic_Lum_linearized(:,:,2),256); 
@@ -168,7 +177,6 @@ h_b = imhist(pic_Lum_linearized(:,:,3),256);
 
 title_fig=('Etalement en luminance');
 draw_results_color(pic_Lum_linearized,pic,[h_r,h_g,h_b],[h_r0,h_g0,h_b0], title_fig);
-
 
 %étalement
 fprintf('[5]. Etalement d histogramme couleur, changement de base ... Pause\n');
@@ -189,7 +197,11 @@ pause
 % 3. conversion inverse YCbCr->RGB dans la variable pic_Lum_equalized (voir fonction convert_YCbCr_to_rgb)
 %
 %</TO DO>
-
+pic_Lum_equalized = uint8(zeros(size(pic)));
+pic_Lum_equalized = convert_rgb_to_YCbCr(pic);
+[pic_Lum_equalized_Y,h,h0] = histo_egalisation(pic_Lum_equalized(:,:,1));
+pic_Lum_equalized(:,:,1) = double(pic_Lum_equalized_Y)./255;
+pic_Lum_equalized = convert_YCbCr_to_rgb(pic_Lum_equalized);
 %affichage des résultats
 h_r = imhist(pic_Lum_equalized(:,:,1), 256); 
 h_g = imhist(pic_Lum_equalized(:,:,2), 256); 
