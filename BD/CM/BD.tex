@@ -9,6 +9,7 @@
 \usepackage{verbatim}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{mathrsfs}
+\usepackage{multirow}
 \usepackage{graphicx}
 \usepackage[french]{algorithm2e}
 \usepackage{geometry}
@@ -246,5 +247,219 @@ $\rightarrow$ Coût CPU < Coût Com < Coût E/S
 
 $\rightarrow$ Evaluer les cardinalités (nb de tuples) des relations initiales et intermédiaires
 
-$\rightarrow$ On utilise des estimations basées sur des informations (statistique) que le SGBD maintient dans son catalogue.
+$\rightarrow$ On utilise des estimations basées sur des informations (statistique) que le SGBD maintient dans son catalogue.\\
+
+CA = $\underbrace{\sigma*NbP}_{E/S}+\underbrace{\mu*NbT}_{calcul}+\underbrace{\nu*NbM}_{comm}$\\
+
+Info "stat" que le SGBD maintient dans un "catalogue".\\
+
+\subsection*{\underline{Informations statistiques}}
+
+$\rightarrow$ Pour chaque relation R :
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item Card(R) : la cardinalité de R est le nombre de tuples de la relation.
+	\item NP(R) : le nombre de pages nécessaires pour contenir R
+	\item FacP(R) = le facteur de mise en "blocs" de R. Le nb de tuples de R dans une page.
+\end{itemize}
+
+NP(R) = $\lceil$ $\frac{Card(R)}{FacP(R)}$$\rceil$
+
+$\rightarrow$ Pour chaque attribut A de la relation R :
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item $Card_{R}$(A) = la cardinalité de A dans R. Le nombre de valeurs distinctes qui apparaissent pour A dans la relation R.
+	\item $Min_{R}$(A), $Max_{R}$(A) $\rightarrow$ les valeurs Min et Max pour l'attribut A dans la relation R.
+\end{itemize}
+
+$\rightarrow$ Pour chaque index I 
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item NP(I) : le nombre de pages de l'index
+	\item Prof(I) : le nombre de niveaux de I
+\end{itemize}
+
+\subsection*{\underline{Estimation des cardinalités}}
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item Sélection $\sigma_{F}$(R)
+
+On note SF(F) le facteur de sélectivité de F : 
+
+Card($\sigma_{F}$(R)) = SF(F) * Card(R)
+
+SF(F) $\leq$ 1 et Card($\sigma_{F}$(R)) $\leq$  Card(R)
+
+Pour un attribut A, on suppose que les valeurs de A sont équi-probables dans R et qu'il y a au moins une valeur qui satisfait la condition.
+
+
+\begin{tabular}{|p{2cm}|p{4cm}|p{4cm}|}
+\hline
+F & SF(F) & Card($\sigma_{F}$(R)) \\
+\hline
+\multirow{2}{3cm}{A=x} & $\frac{1}{Card_{R}(A)}$ & 1 \\
+\cline{2-3}
+& $\frac{1}{Card_{R}(A)}$ & $\frac{1}{Card_{R}(A)} * Card(R)$ \\
+\hline
+A > c & $\frac{Max_{R}(A)-C}{Max_{R}(A)-Min_{R}(A)}$ & SF(F) * Card(R) \\
+\hline
+A < c & $\frac{c - Min_{R}(A)}{Max_{R}(A) - Min{R}(A)}$ & -- \\
+\hline
+$c_{1}$ < A $c_{2}$ & $\frac{c_{1} - c_{2}}{Max_{R}(A) - Min_{R}(A)}$ & -- \\
+\hline 
+$F_{1} \wedge F_{2}$ & $SF(F_{1}) * SF(F_{2})$ & -- \\
+\hline
+$F_{1} \vee F_{2}$ & $SF(F_{1}) + SF(F_{2}) - SF(F_{1}) * SF(F_{2})$ & -- \\
+\hline
+$\neg F$ & 1-SF(F) & -- \\
+\hline
+$A_{1} = A_{2}$ & $\frac{1}{Max(Card(A_{1}), Card(A_{2}))}$ & -- \\
+\hline
+\end{tabular}
+
+	\item \underline{Produit cartésien}
+
+R x S
+
+Card(R x S) = Card(R) * Card(S)
+
+	\item \underline{Jointure}
+
+T = R $\bowtie$ S               $A_{1} = A_{2}$
+
+où $A_{1} \in Att(R)$
+
+$A_{2} \in Att(S)$
+
+On a Card(T) $\leq$ Card(R) * Card(S)
+
+	\begin{itemize}
+		\item Si la condition de jointure porte sur une clé de l'une des relations (par exemple R) alors on a :
+
+Card(T) $\leq$ Card(S)
+
+(1 tuple de S peut joindre au max 1 tuple de R)
+
+		\item Dans le cas général, la cardinalité de la jointure est la cardinalité du produit cartésien suivi d'une sélection
+
+$Card(T) = \frac{1}{Max(Card(A_{1}), Card(A_{2}))} * Card(R)$
+
+	\end{itemize}
+
+	\item \underline{Union ensembliste}
+
+T = R $\cup$ S 
+
+Card(T) $\neq$ Card(R) + Card(S)
+
+Max(Card(R), Card(S)) $\leq$ Card(T) $\leq$ Card(R) + Card(S)
+
+	\item \underline{Intersection}
+
+T = R $\cap$ S
+
+0 $\leq$ Card(T) $\leq$ Min(Card(R), Card(S))
+
+	\item \underline{Différence}
+
+T = R - S
+
+0 $\leq$ Card(T) $\leq$ Card(R)
+
+\end{itemize}
+
+\subsection*{\underline{Estimation des coûts}}
+
+On se limite au coût d'accès (nb de pages)
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item  Sélection $\sigma_{F}(R)$
+
+$\rightarrow$ Recherche linéaire : NP(R)  (Full scan)\\
+
+\underline{Remarque :} Si F est du type A = x où A est une clé alors : $\frac{NR(R)}{2}$ coût moyen\\
+
+$\rightarrow$ Si F est de type (A = x) où A est une clé de hachage CA = 1 (Coût d'accès)
+
+$\rightarrow$ Egalité avec Index multiniveau
+
+(A = x)
+
+Prof(I) + 1 (Si A est une clé de R)
+
+Prof(I) + SF(F) * Card(R)\\
+
+$\rightarrow$ Inégalité avec Index :
+
+Prof(I) + $\frac{NP(R)}{2}$ (en moyenne, si F porte sur la clé)
+
+Prof(I) + SF(F) * Card(R)\\
+
+\underline{Exemple :}\\
+
+Card(R) = 3000
+
+FacP(R) = 30
+
+$\rightarrow$ NP(R) = 100\\
+
+I est un index sur A $\in$ Att(R)
+
+Prof(I) = 2
+
+$Card_{R}(A) = 500$
+
+$Min_{R}(A) = 10 000$
+
+$Max_{R}(A) = 50 000$\\
+
+R' = $\sigma_{A=20000}(R)$
+
+Card(R') = $\underbrace{SF(A=20000)}_{\frac{1}{500}} *\underbrace{Card(R)}_{3000}$ = 6
+
+\begin{itemize}
+	\item Recherche linéaire : Ca = NP(R) = 100
+	\item Index : CA = Prof(I) + SF(F) * Card(R) = 2 + 6 = 8
+\end{itemize}
+
+R" : $\sigma_{A > 20000}(R)$
+
+Card(R") = SF(F) * Card(R)
+
+Card(R") = $\frac{Max_{R}(A) - 20000}{Max_{R}(A)-Min_{R}(A)} * Card(R)$
+
+Card(R") = $\frac{50000-20000}{50000-10000}*3000$
+
+Card(R") = 2250
+
+\begin{itemize}
+	\item Recherche linéaire : CA = NP(R) = 100
+	\item Index : CA = Prof(I) + SF(F) * Card(R) = 2 + 2250 
+
+CA = 2252
+\end{itemize}
+
+\end{itemize}
+
+\section*{\underline{SGBD} (Oracle)}
+
+2 modes d'optimisation : 
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item orienté règles (RULE)
+	\item orienté coût : Paramètre OPTIMIZER\_MODE (CHOOSE)
+
+DBMS\_STATS (PL/SQL)
+
+L'administrateur choisit à quelle fréquence les statistiques doivent être calculées.
+\end{itemize}
+
+$\rightarrow$ EXPLAIN\_PLAN : permet de connaître le plan d'exécution d'une requête 
+
+$\rightarrow$ "hints" : 
+
+\lstset{language=SQL, frame=none, numbers=none}
+\begin{lstlisting}
+SELECT /* + Index(genreIndex) */ nom, prenom
+FROM Etudiant
+WHERE genre='M';
+\end{lstlisting}
+
 \end{document}

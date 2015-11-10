@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  22 OCT 2015 08:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  4 NOV 2015 15:07
 entering extended mode
 **"C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/CM/BD.tex"
 ("C:/Users/Lily/Desktop/Dossier Line/M1-Info/BD/CM/BD.tex"
@@ -280,7 +280,11 @@ Package babel Info: Making ? an active character on input line 374.
 \labelwidthFB=\skip47
 \leftmarginFB=\skip48
 \parindentFFN=\dimen105
-))
+
+*************************************
+* Local config file french.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\generic\e-french\french.cfg")))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty")
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
@@ -422,6 +426,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup6
 )
+("C:\Program Files\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
+\bigstrutjot=\dimen115
+)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -436,8 +443,8 @@ File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 )
-\Gin@req@height=\dimen115
-\Gin@req@width=\dimen116
+\Gin@req@height=\dimen116
+\Gin@req@width=\dimen117
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\algorithm2e\algorithm2e.sty"
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
@@ -467,12 +474,12 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \skiplength=\skip57
 \algomargin=\skip58
 \skipalgocfslide=\skip59
-\algowidth=\dimen117
-\inoutsize=\dimen118
-\inoutindent=\dimen119
-\interspacetitleruled=\dimen120
-\interspacealgoruled=\dimen121
-\interspacetitleboxruled=\dimen122
+\algowidth=\dimen118
+\inoutsize=\dimen119
+\inoutindent=\dimen120
+\interspacetitleruled=\dimen121
+\interspacealgoruled=\dimen122
+\interspacetitleboxruled=\dimen123
 \algocf@inoutbox=\box28
 \algocf@inputbox=\box29
 \AlCapSkip=\skip60
@@ -509,21 +516,21 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@cnth=\count109
 \Gm@cntv=\count110
 \c@Gm@tempcnt=\count111
-\Gm@bindingoffset=\dimen123
-\Gm@wd@mp=\dimen124
-\Gm@odd@mp=\dimen125
-\Gm@even@mp=\dimen126
-\Gm@layoutwidth=\dimen127
-\Gm@layoutheight=\dimen128
-\Gm@layouthoffset=\dimen129
-\Gm@layoutvoffset=\dimen130
+\Gm@bindingoffset=\dimen124
+\Gm@wd@mp=\dimen125
+\Gm@odd@mp=\dimen126
+\Gm@even@mp=\dimen127
+\Gm@layoutwidth=\dimen128
+\Gm@layoutheight=\dimen129
+\Gm@layouthoffset=\dimen130
+\Gm@layoutvoffset=\dimen131
 \Gm@dimlist=\toks24
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty"
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip68
-\enit@outerparindent=\dimen131
+\enit@outerparindent=\dimen132
 \enit@toks=\toks25
 \enit@inbox=\box36
 \enitdp@description=\count112
@@ -533,14 +540,14 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \lst@gtempboxa=\box37
 \lst@token=\toks26
 \lst@length=\count114
-\lst@currlwidth=\dimen132
+\lst@currlwidth=\dimen133
 \lst@column=\count115
 \lst@pos=\count116
-\lst@lostspace=\dimen133
-\lst@width=\dimen134
+\lst@lostspace=\dimen134
+\lst@width=\dimen135
 \lst@newlines=\count117
 \lst@lineno=\count118
-\lst@maxwidth=\dimen135
+\lst@maxwidth=\dimen136
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
@@ -579,37 +586,37 @@ Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 ) (BD.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 37.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \degres on input line 36.
-LaTeX Info: Redefining \dots on input line 36.
-LaTeX Info: Redefining \up on input line 36.
+LaTeX Info: Redefining \degres on input line 37.
+LaTeX Info: Redefining \dots on input line 37.
+LaTeX Info: Redefining \up on input line 37.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count121
-\scratchdimen=\dimen136
+\scratchdimen=\dimen137
 \scratchbox=\box39
 \nofMPsegments=\count122
 \nofMParguments=\count123
 \everyMPshowfont=\toks27
 \MPscratchCnt=\count124
-\MPscratchDim=\dimen137
+\MPscratchDim=\dimen138
 \MPnumerator=\count125
 \makeMPintoPDFobject=\count126
 \everyMPtoPDFconversion=\toks28
@@ -649,210 +656,285 @@ LaTeX Info: Redefining \up on input line 36.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count127
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 38.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 37.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 38.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 37.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 38.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 37.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 38.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 37.
+(Font)              <12> on input line 38.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 37.
+(Font)              <8> on input line 38.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 37.
-LaTeX Font Info:    Try loading font information for U+msa on input line 37.
+(Font)              <6> on input line 38.
+LaTeX Font Info:    Try loading font information for U+msa on input line 38.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 37.
+LaTeX Font Info:    Try loading font information for U+msb on input line 38.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 37.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 38.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 42.
+(Font)              <10> on input line 43.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 42.
+(Font)              <7> on input line 43.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 42.
+(Font)              <5> on input line 43.
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--72
+Underfull \hbox (badness 10000) in paragraph at lines 73--73
 []\T1/lmr/m/n/10 Balayage
  []
 
 
-Underfull \hbox (badness 6380) in paragraph at lines 72--72
+Underfull \hbox (badness 6380) in paragraph at lines 73--73
 \T1/lmr/m/n/10 "se-lect *
  []
 
 
-Overfull \hbox (1.37648pt too wide) in paragraph at lines 72--72
+Overfull \hbox (1.37648pt too wide) in paragraph at lines 73--73
 []\T1/lmr/m/n/10 Recherche
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--72
+Underfull \hbox (badness 10000) in paragraph at lines 73--73
 \T1/lmr/m/n/10 sur éga-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--72
+Underfull \hbox (badness 10000) in paragraph at lines 73--73
 \T1/lmr/m/n/10 lité
  []
 
 
-Underfull \hbox (badness 3240) in paragraph at lines 72--72
+Underfull \hbox (badness 3240) in paragraph at lines 73--73
 []\T1/lmr/m/n/10 Plage de
  []
 
 
-Underfull \hbox (badness 3449) in paragraph at lines 72--72
+Underfull \hbox (badness 3449) in paragraph at lines 73--73
 \T1/lmr/m/n/10 va-leur X
  []
 
 
-Overfull \hbox (1.7656pt too wide) in paragraph at lines 74--74
+Overfull \hbox (1.7656pt too wide) in paragraph at lines 75--75
 []\T1/lmr/m/n/10 Sequentiel| 
  []
 
 
-Underfull \hbox (badness 1769) in paragraph at lines 78--78
+Underfull \hbox (badness 1769) in paragraph at lines 79--79
 []\T1/lmr/m/n/10 Index ou
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--78
+Underfull \hbox (badness 10000) in paragraph at lines 79--79
 []$[][]$
  []
 
 
-Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--78
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 79--79
 \T1/lmr/m/n/10 (Card(R))| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--78
+Underfull \hbox (badness 10000) in paragraph at lines 79--79
 []$[][]$
  []
 
 
-Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--78
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 79--79
 \T1/lmr/m/n/10 (Card(R))
  []
 
 
-Underfull \hbox (badness 1092) in paragraph at lines 78--78
+Underfull \hbox (badness 1092) in paragraph at lines 79--79
 \T1/lmr/m/n/10 + nb de
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 78--78
+Underfull \hbox (badness 2452) in paragraph at lines 79--79
 \T1/lmr/m/n/10 pages où
  []
 
 
-Underfull \hbox (badness 2941) in paragraph at lines 78--78
+Underfull \hbox (badness 2941) in paragraph at lines 79--79
 \T1/lmr/m/n/10 ri-fiant la
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--78
+Underfull \hbox (badness 10000) in paragraph at lines 79--79
 []\T1/lmr/m/n/10 Insertion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--78
+Underfull \hbox (badness 10000) in paragraph at lines 79--79
 \T1/lmr/m/n/10 dans le
  []
 
 
-Underfull \hbox (badness 7558) in paragraph at lines 78--78
+Underfull \hbox (badness 7558) in paragraph at lines 79--79
 $\OML/lmm/m/it/10 B[]$ $[][]$
  []
 
 
-Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--78
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 79--79
 \T1/lmr/m/n/10 (Card(R))| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 []\T1/lmr/m/n/10 Insertion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 \T1/lmr/m/n/10 dans le
  []
 
 
-Underfull \hbox (badness 7558) in paragraph at lines 78--79
+Underfull \hbox (badness 7558) in paragraph at lines 79--80
 $\OML/lmm/m/it/10 B[]$ $[][]$
  []
 
 
-Overfull \hbox (1.93207pt too wide) in paragraph at lines 78--79
+Overfull \hbox (1.93207pt too wide) in paragraph at lines 79--80
 \T1/lmr/m/n/10 (Card(R))| 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 86.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 87.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 86.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 87.
  [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 224.
- [3] [4] (BD.aux) ) 
+(Font)              <14.4> on input line 225.
+ [3]
+Underfull \hbox (badness 10000) in paragraph at lines 250--251
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--253
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 254--255
+
+ []
+
+[4]
+Overfull \hbox (28.45276pt too wide) in paragraph at lines 298--298
+[][]| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 310--310
+[]$\OML/lmm/m/it/10 SF\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 F[]\OT1/lmr/m/n/10 ) + 
+\OML/lmm/m/it/10 SF\OT1/lmr/m/n/10 (\OML/lmm/m/it/10 F[]\OT1/lmr/m/n/10 ) \OMS/
+lmsy/m/n/10  $
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 376--377
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--389
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 394--395
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 396--397
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 402--403
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 412--413
+
+ []
+
+[6] ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+)
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 459.
+
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [7] (BD.aux) ) 
 Here is how much of TeX's memory you used:
- 7614 strings out of 493698
- 104777 string characters out of 3144416
- 225777 words of memory out of 3000000
- 10787 multiletter control sequences out of 15000+200000
- 61917 words of font info for 67 fonts, out of 3000000 for 9000
+ 8164 strings out of 493698
+ 110549 string characters out of 3144416
+ 229009 words of memory out of 3000000
+ 11323 multiletter control sequences out of 15000+200000
+ 62555 words of font info for 69 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 29i,15n,40p,296b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C
-:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTe
-X 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/d
-vips/lm/lm-mathsy.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx10
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/lm/lmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/lm/lmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri10
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on BD.pdf (4 pages, 214634 bytes).
+ 29i,15n,40p,296b,1306s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/P
+rogram Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX 2
+.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvip
+s/lm/lm-mathit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathex.en
+c}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/lm/lmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+lm/lmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi10.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi5.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/lm/lmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/lm/lmr5.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/lm/lmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/l
+mri10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy7.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/lm/lmtt9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/amsfonts/symbols/msbm10.pfb>
+Output written on BD.pdf (7 pages, 286041 bytes).
 PDF statistics:
- 71 PDF objects out of 1000 (max. 8388607)
+ 103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
