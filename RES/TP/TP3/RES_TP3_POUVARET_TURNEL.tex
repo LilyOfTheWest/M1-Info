@@ -27,12 +27,30 @@
 \section*{2.1 Manipulation de la table de routage}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item Host A a pour adresse IP 192.168.1.1 sur son interface em0 => A1
+\item Host A a pour adresse IP 192.168.1.1 sur son interface em0 $\rightarrow$ A1
 
-Routeur B a pour adresse IP 192.168.2.2 sur son interface em0 => B2, 192.168.1.2 sur son interface bge0 => B1
+Routeur B a pour adresse IP 192.168.2.2 sur son interface em0 $\rightarrow$ B2, 192.168.1.2 sur son interface bge0 $\rightarrow$ B1
 
-Host C a pour adresse IP 192.168.2.1 sur son interface em0 => C2
-\item FAIRE TABLEAU ! (voir screen1)
+Host C a pour adresse IP 192.168.2.1 sur son interface em0 $\rightarrow$ C2
+\item Contenu de la table de routage (avec netstat -rn -f inet)
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{2cm}|p{2cm}|}
+\hline
+Destination & Gateway & Flags & Refs & Use & Netif & Expire\\
+\hline
+127.0.0.1 & link\#7 & UH & 0 & 0 & lo0 & \\ 
+\hline
+192.168.1.0/24 & link\#1 & U & 0 & 0 & bge0 & \\ 
+\hline
+192.168.1.2 & link\#1 & UHS & 0 & 0 & lo0 & \\ 
+\hline
+192.168.2.0/24 & link\#2 & U & 0 & 0 & em0 & \\ 
+\hline
+192.168.2.2 & link\#2 & UHS & 0 & 0 & lo0 & \\ 
+\hline
+\end{tabular}
+
+On constate qu'on ne voit pas les adresses de destination des machines A et C (quand on consulte la table de routage de B) puisque le chemin n'a pas encore été établi entre A et B et entre B et C.
 
 \item C2 ne peut envoyer un ping vers A1.
 
@@ -50,7 +68,23 @@ Donc A1 et C2 ne peuvent communiquer entre eux.
 
 add net net2: gateway B1
 
-FAIRE TABLEAU (voir screen2 + screen3)
+Contenu de la table de routage de A (avec netstat -r -f inet) :
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{2cm}|p{2cm}|}
+\hline
+Destination & Gateway & Flags & Refs & Use & Netif & Expire\\
+\hline
+localhost & link\#7 & UH & 0 & 2 & lo0 & \\ 
+\hline
+192.168.1.0 & link\#2 & U & 0 & 6 & em0 & \\ 
+\hline
+A1 & link\#2 & UHS & 0 & 2 & lo0 & \\ 
+\hline
+192.168.2.0 & B1 & UGS & 0 & 0 & em0 & \\ 
+\hline
+\end{tabular}
+
+On voit bien que la dernière ligne correspond à la route pour atteindre le réseau 2 via B1.
 
 \item On remarque bien que quand C2 exécute pong et que A1 exécute un ping sur C2, le ping de A1 bloque car le routeur ne fait pas suivre la requête.
 
@@ -111,7 +145,7 @@ route add default B1
 
 Sur la station C on exécute :
 
-route add default B2
+route add default B2\\
 
 \item L'intérêt réside dans le fait que A et C vont envoyer les paquets dont les destinataires sont sur un autre réseau (adresses MAC inconnues).
 L'inconvénient est que B n'est pas forcément la bonne route à prendre pour ces paquets.
@@ -162,21 +196,68 @@ Dans la trame RIP, on a un champ Adress not specified. Ce qui signifie que les m
 \item On a attribué l'adresse 192.168.3.1 (D3) pour la station D du réseau net3
 
 On a attribué l'adresse 192.168.3.2 (C3) pour la station C du réseau net3 (sur bge0).
-\item Sur la station A :
+
+\item Contenu des tables de routages (on ne donne que les routes qui permettent à ces machines de communiquer entre elles) :\\
+
+Machine A :
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{2cm}|p{2cm}|}
+\hline
+Destination & Gateway & Flags & Refs & Use & Netif & Expire\\
+\hline
+192.168.2.0 & B1 & UGS & 0 & 0 & em0 & \\ 
+\hline
+192.168.3.0 & B1 & UGS & 0 & 0 & em0 & \\ 
+\hline
+\end{tabular}
+
+Machine B : 
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{2cm}|p{2cm}|}
+\hline
+Destination & Gateway & Flags & Refs & Use & Netif & Expire\\
+\hline
+192.168.3.0 & C2 & UGS & 0 & 0 & em0 & \\ 
+\hline
+\end{tabular}
+
+Machine C :
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{2cm}|p{2cm}|}
+\hline
+Destination & Gateway & Flags & Refs & Use & Netif & Expire\\
+\hline
+192.168.1.0 & B2 & UGS & 0 & 0 & em0 & \\ 
+\hline
+\end{tabular}
+
+Machine D :
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{2cm}|p{2cm}|}
+\hline
+Destination & Gateway & Flags & Refs & Use & Netif & Expire\\
+\hline
+192.168.1.0 & C3 & UGS & 0 & 0 & em0 & \\ 
+\hline
+192.168.2.0 & C3 & UGS & 0 & 0 & em0 & \\ 
+\hline
+\end{tabular}
+
+\item \underline{Sur la station A} :
 
 route add net2 B1
 
 route add net3 B1\\
 
-Sur la station B :
+\underline{Sur la station B} :
 
 route add net3 C2\\
 
-Sur la station C :
+\underline{Sur la station C} :
 
 route add net1 B2\\
 
-Sur la station D :
+\underline{Sur la station D} :
 
 route add net2 C3
 
@@ -196,7 +277,24 @@ route add net1 C3\\
 \subsection*{2.3.2 Routage automatique}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item Les paquets émis lors du lancement des démons servent à ...
+\item Les paquets émis lors du lancement des démons sont des paquet RIP request et les routeurs les envoient sur les réseaux qu'ils connaissent.
+
+Si les routeurs reçoivent un RIP request, ils envoient à leur tour un RIP response à l'envoyeur contenant la table de routage du routeur (ainsi que la distance entre le routeur et le réseau).
+
+\item Si C envoie un RIP request concernant les réseaux 2 et 3 en premier, il recevra un RIP response de B qui est connecté au réseau 2 (qui lui indique qu'il est un routeur entre 1 et 2).
+
+Comme C est également un routeur entre 2 et 3, si B envoie un RIP request concernant ces réseaux, C lui enverra un RIP response.
+
+Si D envoit un RIP request à C, celui ci enverra un RIP response qui lui indique que C servira de passerelle vers 1 et 2 (1 étant le réseau avec la Metric la plus grande = 2).
+
+On remarque que les routeurs continuent d'envoyer des RIP response aux machines des réseaux pour que celles-ci mettent à jour leur table de routage.
+
+\item Les paquets RIP envoyés par B à C ne contiennent pas le réseau net3 afin de ne pas modifier le contenu de la table de routage de C concernant le réseau 3.
+
+C'est à C de mettre à jour sa propre table de routage concernant ce réseau puisque si D était déconnecté, elle l'enlèverait naturellement de sa table de routage.
+
+Or, si B contenait les informations sur le réseau 3, elle obligerait C à mettre à jour sa table comme quoi C possède une route vers D, ce qui n'est pas possible.
+
 \item Le paquet qui circule sur net2 possède les adresses IP de net1 et net2. Metric: 16
 
 Il informe donc les machines de net2 d'enlever les routages vers net1 et net2 de la table de routage.
@@ -213,16 +311,39 @@ Il informe donc les machines de net3 d'enlever les routages vers net1 de la tabl
 \item On a attribué l'adresse 192.168.4.1 (D4) pour la station D du réseau net4 (sur bge0).
 
 On a attribué l'adresse 192.168.4.2 (A4) pour la station A du réseau net4 (sur bge0).
-\item La table de routage de A (voir screen5) TABLEAU
+\item Contenu de la table de routage de A :
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{2cm}|p{2cm}|}
+\hline
+Destination & Gateway & Flags & Refs & Use & Netif & Expire\\
+\hline
+127.0.0.1 & link\#7 & UH & 0 & 2 & lo0 & \\ 
+\hline
+192.168.1.0/24 & link\#2 & U & 0 & 6 & em0 & \\ 
+\hline
+A1 & link\#2 & UHS & 0 & 2 & lo0 & \\ 
+\hline
+192.168.2.0/23 & D4 & UG & 0 & 0 & bge0 & \\ 
+\hline
+192.168.4.0/24 & link\#1 & U & 0 & 0 & bge0 & \\ 
+\hline
+A4 & link\#1 & UHS & 0 & 0 & lo0 & \\ 
+\hline
+\end{tabular}
 
 Pour accéder au réseau 2, le chemin que doit emprunter un paquet envoyé par A passe par D4.
+
+En effet, il n'y a pas de routeur direct entre le réseau 1 et 2 donc pour accéder au réseau 2, il est nécessaire aux paquets envoyés par A de transiter par le routeur D puis le routeur C.
+
 \item Le réseau 1 n'est pas connu de C et D car il se trouve entre deux hosts, il est donc isolé.
 
 \item Pour accéder au réseau 2, le chemin que doit emprunter un paquet envoyé par A passe maintenant par B1.
 
 \item Ce chemin a été choisi car le Metric est inférieur à celui du chemin passant par D4.
 
-\item Principe de fonctionnement...
+\item Dans le cas où une machine connait plusieurs routes pour accéder à un même réseau (via les routeurs connectés à ce réseau), le chemin choisi sera défini en fonction de la Metric (distance) de ces réseaux par rapport à la machine.
+
+Le chemin choisi aura la Metric la plus petite possible. 
 \end{itemize}
 
 
@@ -249,7 +370,7 @@ D1 : 192.168.1.2\\
 
 Le ping de A vers C a bien été effectué.
 
-Pourquoi la route ?
+Ce chemin a été choisi de façon aléatoire, en général, c'est le routeur qui a envoyé le premier paquet RIP qui est choisi.
 
 \item Après déconnexion de A du réseau net2, on relance un ping de A vers C qui, pendant quelques minutes, affiche en boucle "No route to host".
 
@@ -275,6 +396,7 @@ Le ping ne fonctionnait pas tant que le timer d'effacement de RIP n'avait pas ex
 	\item Lorsque le démon est arrêté sur une machine, RIP envoit 4 paquets RIP avec un Metric de 16 à toutes les adresses du réseau sur lequel le démon était lancé.\\
 \end{itemize}
 
+\vspace{7cm}
 \item
 
 \underline{Algorithme Protocole RIP (non routeur)}
@@ -335,6 +457,7 @@ Le ping ne fonctionnait pas tant que le timer d'effacement de RIP n'avait pas ex
 	}
 }
 \end{algorithm}
+\vspace{2cm}
 
 \underline{Algorithme Protocole RIP (routeur)}
 
@@ -387,9 +510,16 @@ Le ping ne fonctionnait pas tant que le timer d'effacement de RIP n'avait pas ex
 \section*{3 Pour ceux qui veulent aller un peu plus loin}
 
 \begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
-\item h
-\item e
-\item a
+	\item Différences majeures entre les paquets RIP v1 et RIP v2 :
+	\begin{itemize}
+		\item La destination est différente (ce n'est plus en broadcast mais multicast) : seules les machines concernées reçoivent le paquet RIP
+		\item Nouveau champ Route Tag (distinction entre routes établies par RIP et celles établies par d'autres protocoles)
+		\item Nouveau champ Netmask pour le réseau
+		\item Nouveau champ Next Hop (prochaine machine qui recevra les paquets)
+	\end{itemize}
+	\item Conclusion : 
+
+La version 2 de RIP permet d'avoir plus d'informations et semble plus sécurisé. 
 \end{itemize}
 
 

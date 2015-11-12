@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1287642990 source:c:\users\line\desktop\dossier line\m1-info\cse\tp\tp5\tri-1.0\algo_threads.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<pthread.h>
+	"algo_principal.h"
+	"appels_sequentiels.h"
+
+1287642990 c:\users\line\desktop\dossier line\m1-info\cse\tp\tp5\tri-1.0\algo_principal.h
+
+1287643514 c:\users\line\desktop\dossier line\m1-info\cse\tp\tp5\tri-1.0\appels_sequentiels.h
+
+1287642990 source:c:\users\line\desktop\dossier line\m1-info\cse\tp\tp5\tri-1.0\creer_vecteur.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<time.h>
+	<getopt.h>
+

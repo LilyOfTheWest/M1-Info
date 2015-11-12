@@ -1,0 +1,37 @@
+Question 1:
+	Il est judicieux de placer les appels à gettimeofday juste avant et après l'exécution de l'algorithme de tri.
+	En particulier, il est nécessaire d'inclure la création de threads et la synchronisation finale dans la mesure du temps
+	car il nous faut savoir combien de temps met le programme à créer ses threads et à les synchroniser.
+
+Question 2:
+	Oui l'ordonnanceur a une influence sur le programme car gettimeofday nous permet de mesurer un temps absolu alors que l'ordonnanceur
+	a peut être donné la main à un autre programme pendant la mesure du temps.
+
+Question 3:
+	Oui le nombre de threads influe sur le temps reporté par getrusage puisque cette fonction calcule le cumul du temps passé par chaque thread
+	du programme. Donc, plus on créera de threads, et plus le temps reporté par getrusage sera grand.
+	Si on crée plus de threads que de nombre de processeurs (ou coeurs) alors les threads ne seront pas tous exécuté en parallèle mais cela 
+	n'influence pas plus ou moins sur le temps reporté par getrusage. En revanche, cela influe énormément sur le temps écoulé depuis le début
+	du lancement du programme.
+
+Question 4:
+	Puisque l'algorithme s'éxécute de façon parallèle grâce aux threads, le temps correspondant au cumul de l'ensemble des threads du processus 
+	obtenu avec getrusage sera forcément supérieur au temps obtenu avec gettimeofday (sauf si l'on exécute un seul thread uniquement, dans ce cas,
+	le temps obtenu avec getrusage est légèrement inférieur à celui obtenu avec gettimeofday).
+
+Question 5:
+	Temps d'exécution de la meilleure version séquentielle : 740 µs
+	Temps d'exécution de la meilleure version parallèle (4 threads) : 605 µs
+	Accélération : 740/605 = 1,223
+	Efficacité : 1.223 / 4 = 0.306
+
+	Influences sur l'accélération et l'efficacité d'un programme parallèle :
+	- algorithmes utilisés => influe sur l'accélération et l'efficacité car cela va dépendre de la complexité de l'algorithme, des accès mémoires,
+		opérations arithmétiques, etc...L'accélération va diminuer plus l'algorithme sera complexe et utilisera des instructions coûteuses en temps.
+		Donc l'efficacité va diminuer aussi.
+	- nombre de threads utilisés => influe sur l'accélération et l'efficacité car un programme parallèle qui utilise un nombre de threads inférieur à
+		celui d'un autre programme parallèle sera plus long. Par contre utiliser un nombre de thread supérieur au nombre de coeurs du processeur
+		donnera lieu à un temps d'exécution plus long.
+	- bibliothèque de threads utilisée => ? sûrement car principes de fonctionnement différents...
+	- système d'exploitation => 
+		
