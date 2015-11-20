@@ -1,0 +1,26 @@
+DEBUT
+	Si 0 cartes sur le tapis :
+		random? carte la moins forte ? la plus forte ?;
+	Sinon : Si 1 carte sur le tapis :
+		Si on a 1 carte de la même famille :
+			Si on a 1 carte plus forte (minimum des plus fortes):
+				Jouer cette carte;
+			Sinon : Jouer la plus faible;
+		Sinon : Jouer la plus faible des cartes (quelque soit la famille)
+	Sinon : Si plus d'1 carte sur le tapis :
+		carte_win <= Déterminer la carte gagnante pour l'instant
+		Si carte_win est la 1ère carte :
+			Si on a 1 carte de la famille de la carte_win ET plus forte :
+				Jouer cette carte;
+			Sinon : Jouer la carte la plus faible de la famille
+		Sinon : Si on a 1 carte de la famille de la carte_win ET plus forte :
+				Jouer cette carte;
+		Sinon : Si on a 1 carte de la même famille que la 1ère carte :
+			Jouer cette carte;
+		Sinon : Jouer la plus faible des cartes (quelque soit la famille)
+FIN
+
+Pour algo plus compliqué : 
+garder un tableau de boolean avec toutes les cartes du paquet
+au fur et à mesure qu'elles ont été jouées mettre les valeurs à true
+à chaque fois que l'IA veut jouer elle choisira en fonction des cartes qui ont été déjà jouées

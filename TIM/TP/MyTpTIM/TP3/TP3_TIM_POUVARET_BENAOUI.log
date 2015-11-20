@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  13 NOV 2015 13:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  13 NOV 2015 16:21
 entering extended mode
 **"C:/Users/Lily/Desktop/Dossier Line/M1-Info/TIM/TP/MyTpTIM/TP3/TP3_TIM_POUVAR
-ET_DERUE.tex"
+ET_BENAOUI.tex"
 
 ("C:/Users/Lily/Desktop/Dossier Line/M1-Info/TIM/TP/MyTpTIM/TP3/TP3_TIM_POUVARE
-T_DERUE.tex"
+T_BENAOUI.tex"
 LaTeX2e <2014/05/01>
 Babel <3.9l> and hyphenation patterns for 68 languages loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -722,7 +722,7 @@ Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
-(TP3_TIM_POUVARET_DERUE.aux)
+(TP3_TIM_POUVARET_BENAOUI.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
 LaTeX Font Info:    ... okay on input line 37.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
@@ -966,34 +966,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 212--213
  []
 
 [8 <./filtre_gauss_3.jpg> <./filtre_gauss_5.jpg> <./filtre_gauss_7.jpg>]
-[9] (TP3_TIM_POUVARET_DERUE.aux) ) 
+[9] (TP3_TIM_POUVARET_BENAOUI.aux) ) 
 Here is how much of TeX's memory you used:
  9987 strings out of 493698
- 139468 string characters out of 3144416
+ 139488 string characters out of 3144416
  357749 words of memory out of 3000000
  13147 multiletter control sequences out of 15000+200000
  21597 words of font info for 58 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 36i,7n,42p,322b,1795s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/
-cm-super/cm-super-t1.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/
-cm-super-ts1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-mi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/cm-super/sfbi1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/cm-super/sfbx1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-sup
-er/sfbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx17
-28.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc1000.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc1200.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/cm-super/sfti1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/cm-super/sftt0900.pfb>
-Output written on TP3_TIM_POUVARET_DERUE.pdf (9 pages, 661585 bytes).
+ 36i,7n,42p,324b,1795s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvip
+s/cm-super/cm-super-t1.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-supe
+r/cm-super-ts1.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/cm-super/sfbi1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/cm-super/sfbx1000.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-s
+uper/sfbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx
+1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc1000.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc1200.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/cm-super/sfti1728.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/cm-super/sftt0900.pfb>
+Output written on TP3_TIM_POUVARET_BENAOUI.pdf (9 pages, 661500 bytes).
 PDF statistics:
  118 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
