@@ -362,4 +362,71 @@ Gaussien : différence entre chaque pixel plus marquée. Contours moins détéri
 
 \[G(x)= \frac{1}{\sqrt{2 \pi}\sigma}e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}}\]
 
+	\section*{IX- Detection de contours}
+	\subsection*{1. Généralités}
+	
+A partir de la dérivée première, pour détecter un zéro, il faut repérer un maximum local (avant c'est plus petit et après c'est plus petit).
+	
+En pratique, la dérivée seconde est moins utilisée car elle détecte tous les passages à zéro. (bruit)\\
+
+Filtre Laplacien : en commun avec le réhaussement et la détection de contours.
+
+Filtrage récursif : filtrage de Canny Deriche. 
+
+Ces filtres ont un calcul de seuillage (faculté d'adaptation).
+
+
+
+	\subsection*{2. Principe général}
+
+Gradient $\rightarrow$ On fait un lissage sur l'image, puis on dérive en x et en y $\rightarrow$ 2 valeurs = 1 vecteur.
+) et l'orientation (tan $\theta$)\\
+
+Laplacien $\rightarrow$ calcul de gradients pour détecter les points candidats.
+
+	\subsection*{3. Dérivées premières et secondes}
+	
+A partir d'une image, on va obtenir une image de la norme et une image de l'orientation.\\
+
+Gradient en x :
+
+out(x, y) = in(x+1, y)-in(x-1, y)        On ne tient pas compte de la valeur y.
+
+Plus simple : prendre un noyau de convolution $\rightarrow$
+$
+\begin{bmatrix}
+1 & 0 & -1\\
+\end{bmatrix}
+$
+
+Sur la bonne orientation $\theta$ du contour, on détecte les maxima locaux.\\
+
+Quand on dérive en x, on lisse en y et inversement.
+	\subsection*{4. Opérateurs Numériques}
+	
+Quand on compose le gradient en $x^{2}$ et le gradient en $y^{2}$, on retrouve tous nos contours.
+
+Sur les images des gradients, on voit l'information du passage du sombre au clair et inversement (car les gradients peuvent prendre des valeurs négatives).\\
+
+On perd cette information dans l'image norme.\\
+
+Le filtre $K_{0}$ va détecter des contours verticaux, qui passe du sombre au clair.
+
+Le filtre $K_{1}$ va détecter des obliques.
+
+	\subsection*{5. Points de contour}
+	
+Imaginons un point M dans l'image. Est-ce un maximum local ?
+
+Dans la carte de norme, on va regarder l'orientation qu'il y a en le point M (30 $\deg$).
+
+Valeur de la norme en M on la trouve dans la carte. On prend son orientation.
+
+Pour calculer la position de M2 = position de M + le décalage (cos theta * la distance entre M et M2)
+
+Si la valeur de M est plus grande que la valeur en M1 et la valeur en M2.
+
+M1 et M2 sont obtenables par interpolation (pour trouver le point le plus proche de M1 et M2.	
+
+
 \end{document}
