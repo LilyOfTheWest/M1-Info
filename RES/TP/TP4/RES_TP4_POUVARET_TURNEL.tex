@@ -87,12 +87,20 @@ Lorsque l'on envoit 5 paquets de taille 9000 (donc 45000 de taille totale), on c
 \begin{enumerate}[resume]
 	\item \textbf{Fonctionnement du protocole UDP} :
 
-A COMPLETER.
+Lorsqu'on reçoit un paquet UDP, on ignore le message si la taille du message est plus grande que la taille du buffer en réception.\\
+
+Si ce n'est pas le cas, on reçoit correctement le message.\\
+
+Si la taille de lecture du message est inférieure à la taille du message, on lit uniquement le nombre d'octets de la taille demandée et ce qui reste du message est ignoré.\\
+
+Si ce n'est pas le cas, on lit le message en entier.\\
+
+Si le port de destination est inatteignable, la machine qui devait recevoir le paquet renvoit un paquet ICMP vers la machine émettrice lui indiquant que le port n'est pas atteignable.
 \end{enumerate}
 	
 \section*{2.2 Le protocole TCP}
 
-\subsection*{Etablissement d'une connexion}
+\subsection*{2.2.1 \underline{Etablissement d'une connexion}}
 
 \begin{itemize}
 	\item Numéro de port de la socket "passive" créée sur M1 : 30350
@@ -133,11 +141,14 @@ Le numéro d'acquittement permet d'envoyer un accusé de réception à la machin
 Options utilisées : 
 
 \begin{itemize}
-	\item Maximum segment size: permet de définir la taille maximale des fragments
-	\item No-Operation: A COMPLETER
-	\item Window scale: permet de définir l'échelle de la fenêtre
-	\item TCP Sack Permitted Option: booléen qui permet d'autoriser TCP Sack
-	\item Timestamps: A COMPLETER
+	\item Maximum segment size: permet de définir la taille maximale des fragments que le récepteur devrait utiliser
+	\item No-Operation: utilisé pour faire un padding sur la liste d'options
+	\item Window scale: envoyée uniquement dans les segments avec SYN, élargit la définition de la fenêtre TCP sur 32 bits et utilise un facteur pour mettre à l'échelle pour le champ Window de 16 bit de l'en-tête TCP.
+	\item TCP Sack Permitted Option: booléen qui permet d'autoriser TCP Sack, uniquement envoyée dans les segments avec SYN
+	\item Timestamps: fait que les options Echo request et Echo reply soient obsolètes
+	\item Echo request: information que le récepteur du paquet TCP peut renvoyer dans un TCP echo reely
+	\item Echo reply: information qui était reçue dans un TCP Echo précédent.
+	\item Il en existe d'autres que l'on n'a pas observés.
 \end{itemize}
 
 	\item Au moment de la primitive des sockets "accept" on reste en attente d'une connexion TCP pour permettre à deux machines de communiquer.
@@ -148,7 +159,7 @@ Le fait d'effectuer accept avant ou après connect nous permet quoiqu'il arrive 
 
 Ce qui signifie que chaque connexion est différenciée. (une socket par connexion pour la machine émettrice)
 
-	\item On constate que les états de connexion peuvent etre 
+	\item On constate que les états de connexion peuvent être :
 
 	\begin{itemize}
 		\item ESTABLISHED (connexion établie)
@@ -164,7 +175,7 @@ Ce qui signifie que chaque connexion est différenciée. (une socket par connexi
 Sur Wireshark on constate que le deuxième paquet de M1 vers M2 comporte le flag RST (Reset) et ACK.
 
 \end{enumerate}
-\subsection*{Etude du séquencement et la récupération d'erreur}
+\subsection*{2.2.2 \underline{Etude du séquencement et la récupération d'erreur}}
 
 \begin{enumerate}[resume]
 	\item Lors d'un envoi de paquet TCP avec une très grande taille de données, on constate sur Wireshark, que le paquet TCP est en fait fragmenté en plusieurs paquets chaînés par les numéros de séquence (la taille des fragments peut être modifiée via l'option Maximum segment size).
@@ -254,7 +265,7 @@ Taille du Buffer d'Emission (octets) & Debit Applicatif (ms)\\
 
 \end{enumerate}
 
-\subsection*{2.2.3 Controle de flux}
+\subsection*{2.2.3 \underline{Controle de flux}}
 
 \begin{enumerate}[resume]
 
@@ -270,13 +281,52 @@ Cela débloque donc l'émetteur qui peut renvoyer.
 
 	\item En faisant des reads de peu d'octets, on libère progressivement le buffer ce qui fait qu'on permet de débloquer petit à petit l'emetteur qui renvoit au fur et à mesure.
 
-	\item Quand le buffer de réception a été complètement libéré, l'émetteur se retrouve "débloqué".
+	\item Quand le buffer de réception a été complètement libéré, l'émetteur se retrouve "débloqué".	
 
-	\item Principe du controle de flux de TCP : A COMPLETER.
+	\item Lorsque le nombre de paquets TCP est trop grand pour le récepteur (par rapport à son buffer en réception), celui-ci en informe l'envoyeur via des paquets TCP avec le flag ACK et Window size value = 0\\
+
+Le récepteur doit faire un read suffisant pour débloquer l'émetteur et libérer le buffer.
+
 \end{enumerate}
 
-\subsection*{Libération d'une connexion}
+\subsection*{2.2.4 \underline{Libération d'une connexion}}
 
+\begin{enumerate}[resume]
+	\item Lors de la fermeture de la connexion de chaque côté, dès qu'une machine demande une fin de connexion, elle envoie un paquet TCP avec le flag FIN\\
+	
+La machine recevant la demande de fin de connexion répond avec un paquet TCP avec ACK indiquant que la demande de fin de connexion a bien été prise en compte.\\
+
+Le flag FIN sert donc à spécifier que la machine émettrice demande une fermeture de connexion (quand il est égal à 1).
+	
+	\item La machine demandant la fin de la connexion envoie un paquet TCP avec un ACK_number A et FIN égal à 1.\\
+	
+La machine qui reçoit la demande de fin de connexion, envoie donc un paquet TCP avec ACK de valeur A.
+
+	\item Après avoir fermé d'un seul côté, si on veut de nouveau écrire, on doit spécifier un id de connexion. Or, ayant fermé la connexion, on ne possède plus d'id associé à cette connexion.\\
+	
+De l'autre côté, si on essaie d'écrire, le récepteur (qui a fermé sa connexion) renvoit un paquet avec RST.\\
+
+Si on refait de nouveau un write, on obtient un "broken pipe" puisque le paquet RST a induit une fermeture de la connexion de ce même côté.
+
+	\item 
+	\begin{itemize}
+		\item Lorsqu'on shutdown out sur une machine, si on essaie d'envoyer des données depuis l'autre machine, on ne pourra pas car l'envoi de données est fermé de ce côté.
+		
+Si on essaie de recevoir des données, on pourra encore.\\
+
+Sur la machine où on a fait le shutdown out, on pourra envoyer des données mais la réception restera en attente (car l'envoi de données est fermé de l'autre côté).
+		\item Lorsqu'on shutdown in sur une machine, si on essaie d'envoyer des données depuis cette machine, on ne pourra pas.
+		
+Si on essaie de recevoir des données, on pourra encore.\\
+
+Sur l'autre machine, si on essaie d'écrire on pourra mais on ne recevra rien (reste en attente de lecture).
+	\item La commande shutdown both ferme les lecture et écriture des deux côtés mais ne ferme pas la connexion.
+	\end{itemize}
+	
+	\item La commande close permet de détruire la connexion (la socket).
+	
+
+\end{enumerate}
 A COMPLETER (Q24 - Q30 + 2.3)
 
 
