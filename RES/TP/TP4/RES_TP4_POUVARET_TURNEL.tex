@@ -298,7 +298,7 @@ La machine recevant la demande de fin de connexion répond avec un paquet TCP av
 
 Le flag FIN sert donc à spécifier que la machine émettrice demande une fermeture de connexion (quand il est égal à 1).
 	
-	\item La machine demandant la fin de la connexion envoie un paquet TCP avec un ACK_number A et FIN égal à 1.\\
+	\item La machine demandant la fin de la connexion envoie un paquet TCP avec un ACK\_number A et FIN égal à 1.\\
 	
 La machine qui reçoit la demande de fin de connexion, envoie donc un paquet TCP avec ACK de valeur A.
 
@@ -323,11 +323,20 @@ Sur l'autre machine, si on essaie d'écrire on pourra mais on ne recevra rien (r
 	\item La commande shutdown both ferme les lecture et écriture des deux côtés mais ne ferme pas la connexion.
 	\end{itemize}
 	
-	\item La commande close permet de détruire la connexion (la socket).
+	\item La commande close permet de détruire la connexion (la socket).\\
 	
+Le shutdown ferme partiellement la connexion car elle ne détruit pas la socket. Les tampons en émission et en réception sont flush. 
+
+Le shutdown peut être intéressant si on veut par exemple fermer qu'une direction de la connexion.\\
+
+Le problème du shutdown c'est qu'on ne met pas fin à la connexion totalement, si on veut faire ça il vaut mieux utiliser close.
+	
+	\item Automate : nous n'avons pas eu le temps de le faire (la fermeture étant plutôt complexe à représenter car beaucoup de cas sont possibles : shutdown in, out, both, close d'un côté ou de l'autre, envoyer RST si on reçoit quelque chose lorsque la connexion était libérée de l'autre côté, etc...)
 
 \end{enumerate}
-A COMPLETER (Q24 - Q30 + 2.3)
 
+\section*{2.3 Exercice de synthèse}
+
+Non fait.
 
 \end{document}
