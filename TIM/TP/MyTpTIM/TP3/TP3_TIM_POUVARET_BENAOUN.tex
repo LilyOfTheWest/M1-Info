@@ -240,6 +240,9 @@ end
 Ker_imp = zeros(taille_kernel, taille_kernel);
 Ker_imp((taille_kernel+1)/2, (taille_kernel+1)/2) = 1;
 Ker_PH = Ker_imp - Ker_PB;
+
+%Convolution avec l'image
+ima_PH = conv2(ima, Ker_PH, 'same');
 \end{lstlisting}
 \begin{lstlisting}
 %Filtrage Passe Haut de rehaussement 
@@ -247,11 +250,95 @@ Ker_PH = Ker_imp - Ker_PB;
 %Former le noyau de convolution du filtre equivalent
 %alpha = ... ; 
 %Ker_RH = ..... ; 
-alpha = 1/9;
+alpha = 5;
 Ker_RH = Ker_imp + alpha*Ker_PH;
+
+%Convolution avec l'image
+ima_RH = conv2(ima, Ker_RH, 'same'); 
 \end{lstlisting}
 
-	\item Variations...
+	\item Variations
+\begin{center}
+\fbox{\includegraphics[width=8cm]{filletteOriginal.jpg}}
+\captionof{figure}{Image originale}
+\end{center}
+
+\subsection*{Réhaussements (filtre binomial)}
+\subsubsection*{$\alpha$ = 2}
+	\begin{minipage}[b]{0.40\linewidth}
+		\fbox{\includegraphics[width=8cm]{filletteA2RH.jpg}}
+		\captionof{figure}{Image réhaussée 1 fois, $\alpha$=2}
+	\end{minipage}\hfill
+	\begin{minipage}[b]{0.48\linewidth}
+		\fbox{\includegraphics[width=8cm]{filletteA2RH2.jpg}}
+		\captionof{figure}{Image réhaussée 2 fois, $\alpha$=2}
+	\end{minipage}\hfill
+	
+\subsubsection*{$\alpha$ = 5}
+	\begin{minipage}[b]{0.40\linewidth}
+		\fbox{\includegraphics[width=8cm]{filletteA5RH.jpg}}
+		\captionof{figure}{Image réhaussée 1 fois, $\alpha$=5}
+	\end{minipage}\hfill
+	\begin{minipage}[b]{0.48\linewidth}
+		\fbox{\includegraphics[width=8cm]{filletteA5RH2.jpg}}
+		\captionof{figure}{Image réhaussée 2 fois, $\alpha$=5}
+	\end{minipage}\hfill
+	
+On remarque que plus on va augmenter $\alpha$ et plus on va réhausser le contraste mais avoir tendance à perdre de l'information sur l'image.
+\subsection*{Réhaussements (filtre LaPlacien)}
+On remplace notre noyau binomial par un noyau LaPlacien :
+\begin{lstlisting}
+alpha = 0.5;
+Ker_L = [-1 -1 -1;-1 8 -1;-1 -1 -1]; 
+Ker_RHL = Ker_imp + alpha*Ker_L;
+%Convolution avec l'image
+ima_RH = conv2(ima, Ker_RHL, 'same'); 
+\end{lstlisting}
+
+\begin{minipage}[b]{0.40\linewidth}
+		\fbox{\includegraphics[width=8cm]{filletteLPRH.jpg}}
+		\captionof{figure}{Réhaussée 1 fois, $\alpha$=0.5}
+	\end{minipage}\hfill
+	\begin{minipage}[b]{0.48\linewidth}
+		\fbox{\includegraphics[width=8cm]{filletteLPRH2.jpg}}
+		\captionof{figure}{Réhaussée 2 fois, $\alpha$=0.5}
+	\end{minipage}\hfill
+
+Pour des valeurs $\alpha$ plus grandes, le filtre LaPlacien nous fait perdre beaucoup plus d'information sur l'image.\\
+
+On peut imaginer d'autres types de noyau :\\
+	\begin{itemize}
+	\item en horizontal, au milieu :
+
+\[	
+\begin{bmatrix}
+0 & 0 & 0\\
+-1 & 2 & -1\\
+0 & 0 & 0\\
+\end{bmatrix}
+\]
+	\item en vertical, au milieu :
+\[
+\begin{bmatrix}
+0 & -1 & 0\\
+0 & 2 & 0\\
+0 & -1 & 0\\
+\end{bmatrix}
+\]
+
+	\item en diagonal :
+\[
+\begin{bmatrix}
+0 & 0 & -1\\
+0 & 2 & 0\\
+-1 & 0 & 0\\
+\end{bmatrix}
+\]
+	\item etc...
+	
+Le rendu sera différent selon le filtre qu'on choisit.
+
+\end{itemize}
 \end{enumerate}
 
 \end{document}
