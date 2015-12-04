@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.8)  4 DEC 2015 19:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.8)  4 DEC 2015 22:10
 entering extended mode
 **CSE_TP7_POUVARET_TURNEL.tex
 (CSE_TP7_POUVARET_TURNEL.tex
@@ -662,6 +662,11 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 44.
 
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 51--52
 
  []
@@ -671,73 +676,95 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--54
 
  []
 
-<ls_firstfit.jpg, id=1, 663.98062pt x 368.87813pt>
-File: ls_firstfit.jpg Graphic file (type jpg)
- <use ls_firstfit.jpg>
-Package pdftex.def Info: ls_firstfit.jpg used on input line 63.
-(pdftex.def)             Requested size: 426.79134pt x 237.10559pt.
-
 [1
 
 {C:/Users/Line/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-<gcc_firstfit.jpg, id=14, 700.6175pt x 430.60875pt>
+<ls_firstfit.jpg, id=12, 663.98062pt x 368.87813pt>
+File: ls_firstfit.jpg Graphic file (type jpg)
+ <use ls_firstfit.jpg>
+Package pdftex.def Info: ls_firstfit.jpg used on input line 64.
+(pdftex.def)             Requested size: 398.33858pt x 221.30043pt.
+
+<gcc_firstfit.jpg, id=13, 700.6175pt x 430.60875pt>
 File: gcc_firstfit.jpg Graphic file (type jpg)
  <use gcc_firstfit.jpg>
-Package pdftex.def Info: gcc_firstfit.jpg used on input line 68.
+Package pdftex.def Info: gcc_firstfit.jpg used on input line 70.
 (pdftex.def)             Requested size: 341.43306pt x 209.85028pt.
-
-<ls_bestfit.jpg, id=15, 667.74469pt x 380.17032pt>
-File: ls_bestfit.jpg Graphic file (type jpg)
- <use ls_bestfit.jpg>
-Package pdftex.def Info: ls_bestfit.jpg used on input line 77.
-(pdftex.def)             Requested size: 426.79134pt x 242.99492pt.
 
 [2 <./ls_firstfit.jpg> <./gcc_firstfit.jpg>]
-<gcc_bestfit.jpg, id=19, 700.6175pt x 430.60875pt>
+<ls_bestfit.jpg, id=19, 667.74469pt x 380.17032pt>
+File: ls_bestfit.jpg Graphic file (type jpg)
+ <use ls_bestfit.jpg>
+Package pdftex.def Info: ls_bestfit.jpg used on input line 78.
+(pdftex.def)             Requested size: 398.33858pt x 226.79294pt.
+
+<gcc_bestfit.jpg, id=20, 700.6175pt x 430.60875pt>
 File: gcc_bestfit.jpg Graphic file (type jpg)
  <use gcc_bestfit.jpg>
-Package pdftex.def Info: gcc_bestfit.jpg used on input line 82.
+Package pdftex.def Info: gcc_bestfit.jpg used on input line 84.
 (pdftex.def)             Requested size: 341.43306pt x 209.85028pt.
-
-<ls_worstfit.jpg, id=20, 669.2503pt x 381.67593pt>
-File: ls_worstfit.jpg Graphic file (type jpg)
- <use ls_worstfit.jpg>
-Package pdftex.def Info: ls_worstfit.jpg used on input line 91.
-(pdftex.def)             Requested size: 426.79134pt x 243.40982pt.
 
 [3 <./ls_bestfit.jpg> <./gcc_bestfit.jpg>]
-<gcc_worstfit.jpg, id=24, 700.6175pt x 430.60875pt>
+<ls_worstfit.jpg, id=24, 669.2503pt x 381.67593pt>
+File: ls_worstfit.jpg Graphic file (type jpg)
+ <use ls_worstfit.jpg>
+Package pdftex.def Info: ls_worstfit.jpg used on input line 92.
+(pdftex.def)             Requested size: 398.33858pt x 227.17862pt.
+
+<gcc_worstfit.jpg, id=25, 700.6175pt x 430.60875pt>
 File: gcc_worstfit.jpg Graphic file (type jpg)
  <use gcc_worstfit.jpg>
-Package pdftex.def Info: gcc_worstfit.jpg used on input line 96.
+Package pdftex.def Info: gcc_worstfit.jpg used on input line 98.
 (pdftex.def)             Requested size: 341.43306pt x 209.85028pt.
 
+[4 <./ls_worstfit.jpg> <./gcc_worstfit.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 107--109
 
-Package caption Warning: Unused \captionsetup[figure] on input line 17.
-See the caption package documentation for explanation.
+ []
 
-[4 <./ls_worstfit.jpg> <./gcc_worstfit.jpg>] (CSE_TP7_POUVARET_TURNEL.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--116
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--119
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--126
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+
+ []
+
+[5] (CSE_TP7_POUVARET_TURNEL.aux) ) 
 Here is how much of TeX's memory you used:
- 8524 strings out of 493636
- 121211 string characters out of 3142570
- 242299 words of memory out of 3000000
- 11784 multiletter control sequences out of 15000+200000
- 14350 words of font info for 40 fonts, out of 3000000 for 9000
+ 8539 strings out of 493636
+ 121384 string characters out of 3142570
+ 243299 words of memory out of 3000000
+ 11795 multiletter control sequences out of 15000+200000
+ 17408 words of font info for 50 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 36i,6n,40p,308b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:
-/Users/Line/Documents/MikTex/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Users
-/Line/Documents/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Line
-/Documents/MikTex/fonts/type1/public/cm-super/sfbx1000.pfb><C:/Users/Line/Docum
-ents/MikTex/fonts/type1/public/cm-super/sfbx1200.pfb><C:/Users/Line/Documents/M
-ikTex/fonts/type1/public/cm-super/sfbx1440.pfb><C:/Users/Line/Documents/MikTex/
-fonts/type1/public/cm-super/sfcc1200.pfb><C:/Users/Line/Documents/MikTex/fonts/
-type1/public/cm-super/sfrm1000.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/
-public/cm-super/sfrm1200.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public
-/cm-super/sfrm1728.pfb>
-Output written on CSE_TP7_POUVARET_TURNEL.pdf (4 pages, 441821 bytes).
+ 36i,6n,40p,586b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/Line/Documents/MikTex/fonts/enc/dv
+ips/cm-super/cm-super-t1.enc}<C:/Users/Line/Documents/MikTex/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-s
+uper/sfbx1000.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/s
+fbx1200.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sfbx144
+0.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sfcc1000.pfb>
+<C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sfcc1200.pfb><C:/Us
+ers/Line/Documents/MikTex/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Users/Li
+ne/Documents/MikTex/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Users/Line/Doc
+uments/MikTex/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Users/Line/Documents
+/MikTex/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on CSE_TP7_POUVARET_TURNEL.pdf (5 pages, 463853 bytes).
 PDF statistics:
- 54 PDF objects out of 1000 (max. 8388607)
+ 65 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
