@@ -36,7 +36,20 @@
 \begin{document}
 \maketitle
 \section{Présentation du plan d'expérience}
-Dans un premier temps, nous avons choisi d'effectuer des mesures sur le total de mémoire demandé par l'utilisateur (donc jusqu'à la dernière zone libre de la mémoire) et le total de mémoire utilisé (cumul des tailles des blocs occupés de mémoire).
+Dans un premier temps, nous avons choisi d'effectuer des mesures sur l'étalement du programme dans la mémoire (donc jusqu'à la dernière zone libre de la mémoire) et le montant de mémoire utilisé par le programme (cumul des tailles des blocs occupés de mémoire).\\
+
+Pour ce faire :
+\begin{itemize}
+\item A chaque allocation, on récupère la taille totale demandée et on l'ajoute à un cumul de toutes les tailles demandées.
+
+On récupère également ici les mesures précisées plus haut.
+
+\item A chaque libération, on récupère uniquement les mesures précisées plus haut.
+\end{itemize}
+
+Nous nous sommes servis du Makefile du TP2 qui permet d'utiliser notre allocateur lors de l'exécution d'un programme.\\
+
+
 \section{Résultats obtenus}
  
 \section{Analyse des résultats}

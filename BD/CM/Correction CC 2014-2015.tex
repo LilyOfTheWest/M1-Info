@@ -1,0 +1,72 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{url}
+\usepackage{color}
+\usepackage{lmodern}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[french]{algorithm2e}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage{qtree}
+\frenchbsetup{StandardLists=true}
+\lstset{language=Java}
+\lstset{
+	breaklines=true, 
+	showspaces=false, 
+	keepspaces=true, 
+	numbers=left, 
+	frame=shadowbox, 
+	keywordstyle=\color{blue},
+	basicstyle=\ttfamily\small,
+	commentstyle=\color{green}
+}
+\geometry{hmargin=2.5cm, vmargin=2.5cm}
+
+\title{Base de Données\\Correction CC 2014-2015}
+\author{Line \bsc{POUVARET}}
+\date{2015-2016}
+
+\begin{document}
+\maketitle
+
+
+\section*{III – Transaction}
+\subsection*{Q3)} 
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item 1 $\rightarrow$ 0
+	\item 2 $\rightarrow$ 2
+	\item 3 $\rightarrow$ 0
+	\item 4 $\rightarrow$ 5
+	\item 5 $\rightarrow$ mis en attente (verrou par S2) puis 0 row modified (puisque il ne trouve pas de d5)
+	\item 6 $\rightarrow$ 0
+\end{itemize}
+
+\subsection*{Q4)}
+	Sérialisable car on a exécuté tout S2 puis tout S1.
+
+\section*{IV- Optimisation de requêtes}
+\subsection*{Q5)}
+10 valeurs possibles pour un attribut (donné par défaut).
+
+$ Card(\sigma_{prix<2000}(LesStations) = Card(LesStations) x SF(\sigma_{prix<2000}) $\\
+
+$ SF(\sigma_{prix<2000}) = \frac{200-ValMin_{LesStations}(prix)}{ValMax_{LesStations}(prix)-ValMin_{LesStations}(Prix)} $\\
+
+Valeur arbitraire : $ \frac{1}{10} $\\
+
+$ Card(\sigma_{p<2000}(LS)) = 50 $\\
+
+$ Card(\sigma_{nbPlaces=2}(LesSejours)) = 100 000 * \frac{1}{30} = Card(LesSejours * SF(\sigma_{nbPlaces=2})) $\\
+
+\Tree [.{$\bowtie$} [.{$\bowtie$} [.{$\sigma_{prix<2000}$} LesStations ] [.{$\sigma_{nbPlaces=2}$} LesSejours ] ] [.{$\sigma_{Solde >= 10000}$} LesClients ] ]
+
+\end{document}
