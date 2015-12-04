@@ -27,5 +27,11 @@ D = [1,-1];
 %</to do>
 pic_x = conv2(pic, D, 'same');
 pic_y = conv2(pic, D', 'same');
+min_x = min(min(pic_x))
+min_y = min(min(pic_y))
+max_x = max(max(pic_x))
+max_y = max(max(pic_y))
 
 pic_norm = sqrt(power(pic_x, 2)+power(pic_y, 2));
+min_norm = min(min(pic_norm))
+max_norm = max(max(pic_norm))

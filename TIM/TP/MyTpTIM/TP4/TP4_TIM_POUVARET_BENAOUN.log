@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.3)  27 NOV 2015 14:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.8)  4 DEC 2015 15:14
 entering extended mode
 **TP4_TIM_POUVARET_BENAOUN.tex
 (TP4_TIM_POUVARET_BENAOUN.tex
-LaTeX2e <2014/05/01>
-Babel <3.9l> and hyphenation patterns for 68 languages loaded.
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+LaTeX2e <2015/10/01> patch level 1
+Babel <3.9m> and hyphenation patterns for 69 languages loaded.
+(C:\Users\Line\Documents\MikTex\tex\latex\base\article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -21,23 +21,25 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
-Package: inputenc 2014/04/30 v1.2b Input encoding file
+(C:\Users\Line\Documents\MikTex\tex\latex\base\inputenc.sty
+Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
-File: utf8.def 2014/09/29 v1.1m UTF-8 support for inputenc
+(C:\Users\Line\Documents\MikTex\tex\latex\base\utf8.def
+File: utf8.def 2015/09/07 v1.1p UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.dfu"
-File: t1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
+(C:\Users\Line\Documents\MikTex\tex\latex\base\t1enc.dfu
+File: t1enc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
+   defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00AD (decimal 173)
    defining Unicode char U+00BB (decimal 187)
    defining Unicode char U+00BF (decimal 191)
    defining Unicode char U+00C0 (decimal 192)
@@ -158,6 +160,10 @@ File: t1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
    defining Unicode char U+016F (decimal 367)
    defining Unicode char U+0170 (decimal 368)
    defining Unicode char U+0171 (decimal 369)
+   defining Unicode char U+0174 (decimal 372)
+   defining Unicode char U+0175 (decimal 373)
+   defining Unicode char U+0176 (decimal 374)
+   defining Unicode char U+0177 (decimal 375)
    defining Unicode char U+0178 (decimal 376)
    defining Unicode char U+0179 (decimal 377)
    defining Unicode char U+017A (decimal 378)
@@ -165,6 +171,10 @@ File: t1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
    defining Unicode char U+017C (decimal 380)
    defining Unicode char U+017D (decimal 381)
    defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+0218 (decimal 536)
+   defining Unicode char U+0219 (decimal 537)
+   defining Unicode char U+021A (decimal 538)
+   defining Unicode char U+021B (decimal 539)
    defining Unicode char U+200C (decimal 8204)
    defining Unicode char U+2013 (decimal 8211)
    defining Unicode char U+2014 (decimal 8212)
@@ -183,10 +193,12 @@ File: t1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\ot1enc.dfu"
-File: ot1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
+(C:\Users\Line\Documents\MikTex\tex\latex\base\ot1enc.dfu
+File: ot1enc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
+   defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AD (decimal 173)
    defining Unicode char U+00B8 (decimal 184)
    defining Unicode char U+00BF (decimal 191)
    defining Unicode char U+00C5 (decimal 197)
@@ -204,6 +216,14 @@ File: ot1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
    defining Unicode char U+0142 (decimal 322)
    defining Unicode char U+0152 (decimal 338)
    defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0174 (decimal 372)
+   defining Unicode char U+0175 (decimal 373)
+   defining Unicode char U+0176 (decimal 374)
+   defining Unicode char U+0177 (decimal 375)
+   defining Unicode char U+0218 (decimal 536)
+   defining Unicode char U+0219 (decimal 537)
+   defining Unicode char U+021A (decimal 538)
+   defining Unicode char U+021B (decimal 539)
    defining Unicode char U+2013 (decimal 8211)
    defining Unicode char U+2014 (decimal 8212)
    defining Unicode char U+2018 (decimal 8216)
@@ -214,8 +234,8 @@ File: ot1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omsenc.dfu"
-File: omsenc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
+(C:\Users\Line\Documents\MikTex\tex\latex\base\omsenc.dfu
+File: omsenc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
    defining Unicode char U+00B7 (decimal 183)
@@ -238,27 +258,27 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\t1enc.def
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\babel\babel.sty"
-Package: babel 2014/09/25 3.9l The Babel package
+(C:\Users\Line\Documents\MikTex\tex\generic\babel\babel.sty
+Package: babel 2015/08/03 3.9m The Babel package
 
 *************************************
 * Local config file bblopts.cfg used
 *
-("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+(C:\Users\Line\Documents\MikTex\tex\latex\00miktex\bblopts.cfg
 File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\babel-french\frenchb.ldf"
-Language: frenchb 2014/10/25 v3.1c French support from the babel system
+(C:\Users\Line\Documents\MikTex\tex\latex\babel-french\frenchb.ldf
+Language: frenchb 2015/08/19 v3.1h French support from the babel system
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\babel\babel.def"
-File: babel.def 2014/09/25 3.9l Babel common definitions
+(C:\Users\Line\Documents\MikTex\tex\generic\babel\babel.def
+File: babel.def 2015/08/03 3.9m Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
@@ -267,10 +287,10 @@ File: babel.def 2014/09/25 3.9l Babel common definitions
 \FBcolonskip=\skip43
 \FBthinskip=\skip44
 \FB@interchartokenstateORI=\count88
-Package babel Info: Making : an active character on input line 371.
-Package babel Info: Making ; an active character on input line 372.
-Package babel Info: Making ! an active character on input line 373.
-Package babel Info: Making ? an active character on input line 374.
+Package babel Info: Making : an active character on input line 353.
+Package babel Info: Making ; an active character on input line 354.
+Package babel Info: Making ! an active character on input line 355.
+Package babel Info: Making ? an active character on input line 356.
 \FBguillskip=\skip45
 \FBguill@level=\count89
 \FB@Mht=\dimen104
@@ -280,63 +300,59 @@ Package babel Info: Making ? an active character on input line 374.
 \labelwidthFB=\skip47
 \leftmarginFB=\skip48
 \parindentFFN=\dimen105
-
-*************************************
-* Local config file french.cfg used
-*
-("C:\Program Files\MiKTeX 2.9\tex\generic\e-french\french.cfg")))
-("C:\Program Files\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty")
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+))
+(C:\Users\Line\Documents\MikTex\tex\latex\carlisle\scalefnt.sty)
+(C:\Users\Line\Documents\MikTex\tex\latex\graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\url\url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\graphics\color.sty
 Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+(C:\Users\Line\Documents\MikTex\tex\latex\00miktex\color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package color Info: Driver file: pdftex.def on input line 137.
+Package color Info: Driver file: pdftex.def on input line 142.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+(C:\Users\Line\Documents\MikTex\tex\latex\pdftex-def\pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count92
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\tools\verbatim.sty
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks17
 \verbatim@line=\toks18
 \verbatim@in@stream=\read1
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks19
 \ex@=\dimen106
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen107
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count93
@@ -377,44 +393,44 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\graphics\graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\graphics\graphics.sty
 Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\graphics\trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+(C:\Users\Line\Documents\MikTex\tex\latex\00miktex\graphics.cfg
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 94.
 )
 \Gin@req@height=\dimen115
 \Gin@req@width=\dimen116
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\algorithm2e\algorithm2e.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\algorithm2e\algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
 \c@AlgoLine=\count105
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\tools\xspace.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\tools\xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\relsize.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\ltxmisc\relsize.sty
 Package: relsize 2003/07/04 ver 3.1
 )
 ********************************************************
@@ -457,18 +473,18 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \c@algocf=\count108
 \algocf@algoframe=\box34
 \algocf@algobox=\box35
-) ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+) (C:\Users\Line\Documents\MikTex\tex\latex\geometry\geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\ifxetex\ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count109
@@ -484,12 +500,12 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen130
 \Gm@dimlist=\toks24
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
-("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption.sty"
-Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+(C:\Users\Line\Documents\MikTex\tex\latex\geometry\geometry.cfg))
+(C:\Users\Line\Documents\MikTex\tex\latex\caption\caption.sty
+Package: caption 2015/09/17 v3.3-111 Customizing captions (AR)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"
-Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+(C:\Users\Line\Documents\MikTex\tex\latex\caption\caption3.sty
+Package: caption3 2015/09/20 v1.7-115 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen131
 \captionmargin@=\dimen132
@@ -501,7 +517,7 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 )
 \c@ContinuedFloat=\count112
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\enumitem\enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip68
 \enit@outerparindent=\dimen138
@@ -509,7 +525,7 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \enit@inbox=\box36
 \enitdp@description=\count113
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\listings\listings.sty
 \lst@mode=\count114
 \lst@gtempboxa=\box37
 \lst@token=\toks26
@@ -523,25 +539,25 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \lst@lineno=\count119
 \lst@maxwidth=\dimen142
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
-File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+(C:\Users\Line\Documents\MikTex\tex\latex\listings\lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 \c@lstnumber=\count120
 \lst@skipnumbers=\count121
 \lst@framebox=\box38
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.cfg"
-File: listings.cfg 2014/09/06 1.5e listings configuration
+(C:\Users\Line\Documents\MikTex\tex\latex\listings\listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
-Package: listings 2014/09/06 1.5e (Carsten Heinz)
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\listingsutf8.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\oberdiek\listingsutf8.sty
 Package: listingsutf8 2011/11/10 v1.2 Allow UTF-8 in listings input (HO)
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -550,18 +566,18 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\stringenc.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\stringenc.sty
 Package: stringenc 2011/12/02 v1.10 Convert strings between diff. encodings (HO
 )
 
-("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdfescape.sty"
+(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\pdfescape.sty
 Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
 )))
-("C:\Program Files\MiKTeX 2.9\tex\latex\mcode\mcode.sty"
--- Package: `mcode' 2.5 <2014/03/06> --
-Package: mcode 2014/03/06 2.5
+(C:\Users\Line\Documents\MikTex\tex\latex\mcode\mcode.sty
+-- Package: `mcode' 2.7 <2015/11/11> --
+Package: mcode 2015/11/11 2.7
  - settings optimized for display (colour formating)
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\textcomp.sty"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\textcomp.sty
 Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
@@ -574,15 +590,15 @@ Package textcomp Info: Sub-encoding information:
 (textcomp)             only a restricted character set as indicated.
 (textcomp)             Family '?' is the default used for unknown fonts.
 (textcomp)             See the documentation for details.
-Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1enc.def"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1enc.dfu"
-File: ts1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
+(C:\Users\Line\Documents\MikTex\tex\latex\base\ts1enc.dfu
+File: ts1enc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00A4 (decimal 164)
@@ -653,71 +669,72 @@ File: ts1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
    defining Unicode char U+25EF (decimal 9711)
    defining Unicode char U+266A (decimal 9834)
 ))
-LaTeX Info: Redefining \oldstylenums on input line 266.
-Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
-Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
-Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
-Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
-Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
-Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
-Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
-Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
-Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
-Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
-Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
-Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
-Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
-Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
-Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
-Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
-Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
-Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
-Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
-Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
-Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
-Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
-Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
-Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+LaTeX Info: Redefining \oldstylenums on input line 334.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 349.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 350.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 351.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 352.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 353.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 354.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 355.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 356.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 357.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 358.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 359.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 360.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 361.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 362.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 363.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 364.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 365.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 366.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 367.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 368.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
 
-Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
-Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
-Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
-Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
-Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
-Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
-Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 311.
-Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 312.
-Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 313.
-Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 314.
-Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 315.
-Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 316.
-Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 317.
-Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 318.
-Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 319.
-Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 320.
-Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 321.
-Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 322.
-Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 323.
-Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 324.
-Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 325.
-Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 326.
-Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 327.
-Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 328.
-Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 329.
-Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 330.
-Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 331.
-Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 332.
-Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 333.
-Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 334.
-Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 335.
-Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 336.
-Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 337.
-Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
-Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
-Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 376.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 377.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 378.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 379.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 380.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 381.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 382.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 383.
+Package textcomp Info: Setting lmtt sub-encoding to TS1/0 on input line 384.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 385.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 386.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 387.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 388.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 389.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 390.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 391.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 392.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 393.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 394.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 395.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 396.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 397.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 398.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 399.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 400.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 401.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 402.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 403.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 404.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 405.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
-File: lstlang1.sty 2014/09/06 1.5e listings language file
+(C:\Users\Line\Documents\MikTex\tex\latex\listings\lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (TP4_TIM_POUVARET_BENAOUN.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
@@ -735,7 +752,7 @@ LaTeX Font Info:    ... okay on input line 37.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 37.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 37.
@@ -743,7 +760,7 @@ LaTeX Info: Redefining \degres on input line 37.
 LaTeX Info: Redefining \dots on input line 37.
 LaTeX Info: Redefining \up on input line 37.
 
-("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(C:\Users\Line\Documents\MikTex\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count122
 \scratchdimen=\dimen143
@@ -796,114 +813,380 @@ Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count128
 LaTeX Font Info:    Try loading font information for U+msa on input line 38.
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 38.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 45.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 46.
 
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
+(C:\Users\Line\Documents\MikTex\tex\latex\base\ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-<gradients_norme_graines.jpg, id=1, 3513.125pt x 2640.86626pt>
+<gradients_norme_graines.jpg, id=1, 2840.6125pt x 2309.62875pt>
 File: gradients_norme_graines.jpg Graphic file (type jpg)
 
 <use gradients_norme_graines.jpg>
-Package pdftex.def Info: gradients_norme_graines.jpg used on input line 56.
-(pdftex.def)             Requested size: 426.79134pt x 320.79903pt.
- [1
+Package pdftex.def Info: gradients_norme_graines.jpg used on input line 57.
+(pdftex.def)             Requested size: 284.52756pt x 231.32883pt.
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./gradients_norme_graines
-.jpg>]
-<gradients_norme_sobel.jpg, id=16, 3513.125pt x 2634.84375pt>
-File: gradients_norme_sobel.jpg Graphic file (type jpg)
-
-<use gradients_norme_sobel.jpg>
-Package pdftex.def Info: gradients_norme_sobel.jpg used on input line 81.
-(pdftex.def)             Requested size: 426.79134pt x 320.06744pt.
-
-<bruit_gauss_roberts.jpg, id=17, 3513.125pt x 2640.86626pt>
-File: bruit_gauss_roberts.jpg Graphic file (type jpg)
-
-<use bruit_gauss_roberts.jpg>
-Package pdftex.def Info: bruit_gauss_roberts.jpg used on input line 91.
-(pdftex.def)             Requested size: 426.79134pt x 320.79903pt.
- [2 <./gradients_norme_sobel.jpg>]
-<bruit_gauss_sobel.jpg, id=21, 3513.125pt x 2640.86626pt>
-File: bruit_gauss_sobel.jpg Graphic file (type jpg)
-
-<use bruit_gauss_sobel.jpg>
-Package pdftex.def Info: bruit_gauss_sobel.jpg used on input line 94.
-(pdftex.def)             Requested size: 426.79134pt x 320.79903pt.
- [3 <./bruit_gauss_roberts.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
-<roberts_nearest.jpg, id=25, 4918.375pt x 4818.0pt>
+[1
+
+{C:/Users/Line/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./gradients_
+norme_graines.jpg>]
+<gradients_norme_sobel.jpg, id=16, 2873.73625pt x 2318.6625pt>
+File: gradients_norme_sobel.jpg Graphic file (type jpg)
+
+<use gradients_norme_sobel.jpg>
+Package pdftex.def Info: gradients_norme_sobel.jpg used on input line 90.
+(pdftex.def)             Requested size: 284.52756pt x 229.54475pt.
+
+<bruit_gauss_roberts.jpg, id=17, 2876.7475pt x 2318.6625pt>
+File: bruit_gauss_roberts.jpg Graphic file (type jpg)
+
+<use bruit_gauss_roberts.jpg>
+Package pdftex.def Info: bruit_gauss_roberts.jpg used on input line 102.
+(pdftex.def)             Requested size: 284.52756pt x 229.2971pt.
+ [2 <./gradients_norme_sobel.jpg>]
+<bruit_gauss_sobel.jpg, id=21, 2825.55624pt x 2312.64pt>
+File: bruit_gauss_sobel.jpg Graphic file (type jpg)
+
+<use bruit_gauss_sobel.jpg>
+Package pdftex.def Info: bruit_gauss_sobel.jpg used on input line 108.
+(pdftex.def)             Requested size: 284.52756pt x 232.86551pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+<roberts_nearest.jpg, id=22, 4071.21pt x 2951.025pt>
 File: roberts_nearest.jpg Graphic file (type jpg)
  <use roberts_nearest.jpg>
-Package pdftex.def Info: roberts_nearest.jpg used on input line 108.
-(pdftex.def)             Requested size: 426.79134pt x 418.01576pt.
+Package pdftex.def Info: roberts_nearest.jpg used on input line 125.
+(pdftex.def)             Requested size: 284.52756pt x 206.23262pt.
 
-[4 <./bruit_gauss_sobel.jpg>] <sobel_nearest.jpg, id=29, 786.94pt x 770.88pt>
+[3 <./bruit_gauss_roberts.jpg> <./bruit_gauss_sobel.jpg>]
+<sobel_nearest.jpg, id=26, 646.415pt x 485.815pt>
 File: sobel_nearest.jpg Graphic file (type jpg)
+ <use sobel_nearest.jpg>
+Package pdftex.def Info: sobel_nearest.jpg used on input line 127.
+(pdftex.def)             Requested size: 284.52756pt x 213.83339pt.
 
-<use sobel_nearest.jpg>
-Package pdftex.def Info: sobel_nearest.jpg used on input line 110.
-(pdftex.def)             Requested size: 426.79134pt x 418.08046pt.
- [5 <./roberts_nearest.jpg>]
-<roberts_bilinear.jpg, id=33, 4918.375pt x 4818.0pt>
+<roberts_bilinear.jpg, id=27, 4059.165pt x 2963.07pt>
 File: roberts_bilinear.jpg Graphic file (type jpg)
 
 <use roberts_bilinear.jpg>
-Package pdftex.def Info: roberts_bilinear.jpg used on input line 114.
-(pdftex.def)             Requested size: 426.79134pt x 418.01576pt.
- [6 <./sobel_nearest.jpg>]
-<sobel_bilinear.jpg, id=37, 786.94pt x 770.88pt>
+Package pdftex.def Info: roberts_bilinear.jpg used on input line 133.
+(pdftex.def)             Requested size: 284.52756pt x 207.66216pt.
+ [4 <./roberts_nearest.jpg> <./sobel_nearest.jpg>]
+<sobel_bilinear.jpg, id=31, 649.42625pt x 480.79625pt>
 File: sobel_bilinear.jpg Graphic file (type jpg)
- <use sobel_bilinear.jpg>
-Package pdftex.def Info: sobel_bilinear.jpg used on input line 116.
-(pdftex.def)             Requested size: 426.79134pt x 418.08046pt.
 
-[7 <./roberts_bilinear.jpg>]
+<use sobel_bilinear.jpg>
+Package pdftex.def Info: sobel_bilinear.jpg used on input line 135.
+(pdftex.def)             Requested size: 284.52756pt x 210.64862pt.
+ [5 <./roberts_bilinear.jpg> <./sobel_bilinear.jpg>]
+[6] <Roberts_link.png, id=38, 351.56343pt x 610.53094pt>
+File: Roberts_link.png Graphic file (type png)
 
-Package caption Warning: Unused \captionsetup[figure] on input line 14.
-See the caption package documentation for explanation.
+<use Roberts_link.png>
+Package pdftex.def Info: Roberts_link.png used on input line 275.
+(pdftex.def)             Requested size: 227.62204pt x 395.28465pt.
 
-[8 <./sobel_bilinear.jpg>] (TP4_TIM_POUVARET_BENAOUN.aux) ) 
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 275--276
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--276
+
+ []
+
+<Diff_Roberts_link.png, id=39, 354.57469pt x 611.28375pt>
+File: Diff_Roberts_link.png Graphic file (type png)
+
+<use Diff_Roberts_link.png>
+Package pdftex.def Info: Diff_Roberts_link.png used on input line 279.
+(pdftex.def)             Requested size: 227.62204pt x 392.42351pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 279--280
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--280
+
+ []
+
+[7] <Roberts_link_noise5.png, id=45, 362.85562pt x 612.78937pt>
+File: Roberts_link_noise5.png Graphic file (type png)
+
+<use Roberts_link_noise5.png>
+Package pdftex.def Info: Roberts_link_noise5.png used on input line 284.
+(pdftex.def)             Requested size: 227.62204pt x 384.41368pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 284--285
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 284--285
+
+ []
+
+<Diff_Roberts_link_noise5.png, id=46, 353.82187pt x 608.2725pt>
+File: Diff_Roberts_link_noise5.png Graphic file (type png)
+
+<use Diff_Roberts_link_noise5.png>
+Package pdftex.def Info: Diff_Roberts_link_noise5.png used on input line 288.
+(pdftex.def)             Requested size: 227.62204pt x 391.31644pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 288--289
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--289
+
+ []
+
+[8 <./Roberts_link.png> <./Diff_Roberts_link.png>]
+<Roberts_link_noise10.png, id=51, 354.57469pt x 610.53094pt>
+File: Roberts_link_noise10.png Graphic file (type png)
+
+<use Roberts_link_noise10.png>
+Package pdftex.def Info: Roberts_link_noise10.png used on input line 293.
+(pdftex.def)             Requested size: 227.62204pt x 391.94022pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 293--294
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 293--294
+
+ []
+
+<Diff_Roberts_link_noise10.png, id=52, 349.305pt x 612.78937pt>
+File: Diff_Roberts_link_noise10.png Graphic file (type png)
+
+<use Diff_Roberts_link_noise10.png>
+Package pdftex.def Info: Diff_Roberts_link_noise10.png used on input line 297.
+(pdftex.def)             Requested size: 227.62204pt x 399.32756pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 297--298
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 297--298
+
+ []
+
+[9 <./Roberts_link_noise5.png> <./Diff_Roberts_link_noise5.png>]
+<Roberts_link_noise20.png, id=56, 356.0803pt x 606.01407pt>
+File: Roberts_link_noise20.png Graphic file (type png)
+
+<use Roberts_link_noise20.png>
+Package pdftex.def Info: Roberts_link_noise20.png used on input line 302.
+(pdftex.def)             Requested size: 227.62204pt x 387.38533pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 302--303
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 302--303
+
+ []
+
+<Diff_Roberts_link_noise20.png, id=57, 359.84438pt x 612.03656pt>
+File: Diff_Roberts_link_noise20.png Graphic file (type png)
+
+<use Diff_Roberts_link_noise20.png>
+Package pdftex.def Info: Diff_Roberts_link_noise20.png used on input line 306.
+(pdftex.def)             Requested size: 227.62204pt x 387.16335pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 306--307
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--307
+
+ []
+
+[10 <./Roberts_link_noise10.png> <./Diff_Roberts_link_noise10.png>]
+<Sobel_link.png, id=61, 359.09157pt x 613.54219pt>
+File: Sobel_link.png Graphic file (type png)
+ <use Sobel_link.png>
+Package pdftex.def Info: Sobel_link.png used on input line 313.
+(pdftex.def)             Requested size: 227.62204pt x 388.92091pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 313--314
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 313--314
+
+ []
+
+<Diff_Sobel_link.png, id=62, 355.3275pt x 610.53094pt>
+File: Diff_Sobel_link.png Graphic file (type png)
+
+<use Diff_Sobel_link.png>
+Package pdftex.def Info: Diff_Sobel_link.png used on input line 317.
+(pdftex.def)             Requested size: 227.62204pt x 391.1111pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 317--318
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 317--318
+
+ []
+
+[11 <./Roberts_link_noise20.png> <./Diff_Roberts_link_noise20.png>]
+<Sobel_link_noise5.png, id=66, 363.60844pt x 616.55344pt>
+File: Sobel_link_noise5.png Graphic file (type png)
+
+<use Sobel_link_noise5.png>
+Package pdftex.def Info: Sobel_link_noise5.png used on input line 322.
+(pdftex.def)             Requested size: 227.62204pt x 385.97527pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 322--323
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 322--323
+
+ []
+
+<Diff_Sobel_link_noise5.png, id=67, 348.55219pt x 609.02531pt>
+File: Diff_Sobel_link_noise5.png Graphic file (type png)
+
+<use Diff_Sobel_link_noise5.png>
+Package pdftex.def Info: Diff_Sobel_link_noise5.png used on input line 326.
+(pdftex.def)             Requested size: 227.62204pt x 397.72035pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 326--327
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
+
+ []
+
+[12 <./Sobel_link.png> <./Diff_Sobel_link.png>]
+<Sobel_link_noise10.png, id=71, 362.10281pt x 612.78937pt>
+File: Sobel_link_noise10.png Graphic file (type png)
+
+<use Sobel_link_noise10.png>
+Package pdftex.def Info: Sobel_link_noise10.png used on input line 331.
+(pdftex.def)             Requested size: 227.62204pt x 385.20845pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 331--332
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 331--332
+
+ []
+
+<Diff_Sobel_link_noise10.png, id=72, 354.57469pt x 610.53094pt>
+File: Diff_Sobel_link_noise10.png Graphic file (type png)
+
+<use Diff_Sobel_link_noise10.png>
+Package pdftex.def Info: Diff_Sobel_link_noise10.png used on input line 335.
+(pdftex.def)             Requested size: 227.62204pt x 391.94022pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 335--336
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+
+ []
+
+[13 <./Sobel_link_noise5.png> <./Diff_Sobel_link_noise5.png>]
+<Sobel_link_noise20.png, id=77, 367.3725pt x 620.3175pt>
+File: Sobel_link_noise20.png Graphic file (type png)
+
+<use Sobel_link_noise20.png>
+Package pdftex.def Info: Sobel_link_noise20.png used on input line 340.
+(pdftex.def)             Requested size: 227.62204pt x 384.35625pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 340--341
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 340--341
+
+ []
+
+<Diff_Sobel_link_noise20.png, id=78, 362.85562pt x 611.28375pt>
+File: Diff_Sobel_link_noise20.png Graphic file (type png)
+
+<use Diff_Sobel_link_noise20.png>
+Package pdftex.def Info: Diff_Sobel_link_noise20.png used on input line 344.
+(pdftex.def)             Requested size: 227.62204pt x 383.46918pt.
+
+Overfull \hbox (20.02844pt too wide) in paragraph at lines 344--345
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 344--345
+
+ []
+
+[14 <./Sobel_link_noise10.png> <./Diff_Sobel_link_noise10.png>] [15 <./Sobel_li
+nk_noise20.png> <./Diff_Sobel_link_noise20.png>] (TP4_TIM_POUVARET_BENAOUN.aux)
+ ) 
 Here is how much of TeX's memory you used:
- 9931 strings out of 493698
- 138457 string characters out of 3144416
- 281749 words of memory out of 3000000
- 13102 multiletter control sequences out of 15000+200000
- 17738 words of font info for 52 fonts, out of 3000000 for 9000
+ 10062 strings out of 493636
+ 141612 string characters out of 3142570
+ 601922 words of memory out of 3000000
+ 13276 multiletter control sequences out of 15000+200000
+ 19522 words of font info for 55 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  36i,6n,42p,268b,2022s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/Mi
-KTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{C:/Program Files/MiKTeX 2.9
-/fonts/enc/dvips/cm-super/cm-super-t1.enc}<C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/cm-super/sfbx1200.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-sup
-er/sfbx1440.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfbx17
-28.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfcc1200.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm0900.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/cm-super/sftt0900.pfb>
-Output written on TP4_TIM_POUVARET_BENAOUN.pdf (8 pages, 5083766 bytes).
+{C:/Users/Line/Documents/MikTex/fonts/enc/dvips/cm-super/cm-super-t1.enc}{C:/
+Users/Line/Documents/MikTex/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<C:/Users
+/Line/Documents/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Line
+/Documents/MikTex/fonts/type1/public/cm-super/sfbx1000.pfb><C:/Users/Line/Docum
+ents/MikTex/fonts/type1/public/cm-super/sfbx1200.pfb><C:/Users/Line/Documents/M
+ikTex/fonts/type1/public/cm-super/sfbx1440.pfb><C:/Users/Line/Documents/MikTex/
+fonts/type1/public/cm-super/sfbx1728.pfb><C:/Users/Line/Documents/MikTex/fonts/
+type1/public/cm-super/sfcc1000.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/
+public/cm-super/sfcc1200.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public
+/cm-super/sfrm0900.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-su
+per/sfrm1000.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sf
+rm1200.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sftt0900
+.pfb>
+Output written on TP4_TIM_POUVARET_BENAOUN.pdf (15 pages, 6725401 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

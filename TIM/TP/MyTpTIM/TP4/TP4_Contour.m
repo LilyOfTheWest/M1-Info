@@ -66,7 +66,7 @@ pause;
 fprintf('\n[1.3]. Add gaussian noise ... \n');
 
 %signal to noise ratio in dB
-rsb = 20;
+rsb = 10;
 
 %build noisy picture
 pic_noisy = add_gaussian_noise(pic,rsb);
@@ -95,7 +95,7 @@ pause;
 fprintf('\n[2.1]. Keep only local maximum ...\n');
 
 
-d=2;%distance of neighboors
+d=1;%distance of neighboors
 pic_maxima_roberts = keep_local_maxima(pic_x_roberts,pic_y_roberts,d, 'bilinear');
 pic_maxima_sobel = keep_local_maxima(pic_x_sobel,pic_y_sobel,d, 'bilinear');
 
