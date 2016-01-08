@@ -1,0 +1,119 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{url}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage[french]{algorithm2e}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\frenchbsetup{StandardLists=true}
+\lstset{language=Java}
+\lstset{
+	breaklines=true, 
+	showspaces=false, 
+	keepspaces=true, 
+	numbers=left, 
+	frame=shadowbox, 
+	keywordstyle=\color{blue},
+	basicstyle=\ttfamily\small,
+	commentstyle=\color{green}
+}
+\geometry{hmargin=2.5cm, vmargin=2.5cm}
+
+\title{Base de Données : Compte-rendu du TP2\\Application "Zoo"}
+\author{Line \bsc{POUVARET}, Mickaël \bsc{TURNEL}}
+\date{2015-2016}
+
+\begin{document}
+\maketitle
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}
+	\item Le calcul du nombre de maladies pour chaque animal doit être automatisé en fonction de l’ajout
+ou de la suppression des maladies.
+
+\lstset{language=SQL}
+\begin{lstlisting}
+CREATE or REPLACE TRIGGER MaladiesTrig
+AFTER INSERT or DELETE on LesMaladies
+FOR EACH ROW
+BEGIN
+	IF INSERTING THEN UPDATE LesAnimaux SET nb_maladies = nb_maladies+1 WHERE nomA=:new.nomA;
+	ELSIF DELETING THEN UPDATE LesAnimaux SET nb_maladies = nb_maladies-1 WHERE nomA=:old.nomA;
+	END IF;
+END;
+/
+\end{lstlisting}
+
+	\item Des animaux ne peuvent pas être placés dans une cage dont la fonction est incompatible avec
+ces animaux. On prendra en compte le fait que des animaux peuvent être ajoutés, mais aussi
+déplacés d’une cage.\\
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER DeplacerCageTrig
+BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
+FOR EACH ROW
+DECLARE
+	fct VARCHAR2(20);
+BEGIN
+	SELECT fonction into fct FROM LesCages WHERE noCage = :new.noCage;
+	IF (fct != :new.fonction_cage) THEN
+		raise_application_error(-20001, 'cage incompatible');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'cage inexistante');
+END;
+/
+\end{lstlisting}
+	\item Des animaux ne peuvent pas être placés dans une cage non gardée. On prendra en compte le
+fait que des animaux peuvent être ajoutés, mais aussi déplacés d’une cage.
+
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER CageGardeeTrig
+BEFORE INSERT OR UPDATE OF noCage on LesAnimaux
+FOR EACH ROW
+DECLARE
+	nb INTEGER;
+BEGIN
+	SELECT count(*) into nb FROM LesGardiens WHERE noCage = :new.noCage;
+	IF (nb = 0) THEN
+		raise_application_error(-20003, 'Cage non gardee');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'cage inexistante');
+END;
+/
+\end{lstlisting}
+	\item Des animaux de type différent ne peuvent pas cohabiter dans une même cage. On prendra en
+compte le fait que des animaux peuvent être ajoutés, mais aussi déplacés d’une cage.
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER CohabiterCageTrig
+AFTER INSERT OR UPDATE OF noCage on LesAnimaux
+DECLARE
+	nb INTEGER;
+BEGIN
+	SELECT count(*) into nb FROM(
+		SELECT noCage, count(DISTINCT type_an)
+		FROM LesAnimaux
+		GROUP BY noCage
+		HAVING COUNT (distinct type_an) > 1
+	);
+	IF (nb > 0) THEN
+		raise_application_error(-20003, 'Des animaux de type differents ne peuvent cohabiter');
+	END IF;
+EXCEPTION 
+	WHEN NO_DATA_FOUND THEN
+		raise_application_error(-20002, 'Cage inexistante');
+END;
+/
+\end{lstlisting}
+\end{itemize}
+\end{document}

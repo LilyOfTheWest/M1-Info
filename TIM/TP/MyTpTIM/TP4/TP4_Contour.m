@@ -1,4 +1,4 @@
-% TP 4 Détection de contours
+l% TP 4 Détection de contours
 % Approche par convolution directe
 % 
 % M1 info
