@@ -17,3 +17,5 @@ SOURCES += main.cpp \
 
 HEADERS  += \
     mafenetre.h
+
+CONFIG += qwt

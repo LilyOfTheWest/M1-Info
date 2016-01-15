@@ -1,4 +1,5 @@
 #include "mafenetre.h"
+#include <qwt_plot.h>
 
 MaFenetre::MaFenetre(int l, int h) : QWidget()
 {
@@ -28,6 +29,7 @@ MaFenetre::MaFenetre(int l, int h) : QWidget()
 
 //    connect(m_slider, SIGNAL(valueChanged(int)), this, SLOT(changerLargeur(int)));
 //    connect(m_vertical, SIGNAL(valueChanged(int)), this, SLOT(changerHauteur(int)));
+
 
     m_bouton = new QPushButton("Ouvrir", this);
     m_bouton->move(40,50);
