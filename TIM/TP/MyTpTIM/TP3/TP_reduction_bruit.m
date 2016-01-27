@@ -66,7 +66,7 @@ disp('Pause : Réduction de bruit par filtrage')
 pause
 
 %On considèrera 3 tailles de noyaux de filtrage : 3x3, 5x5, 7x7
-taille_kernel=[3 5 7];
+taille_kernel=[9 11 13];
 
 %Initialisation de variable si nécessaire pour la génération du filtre
 %binomial

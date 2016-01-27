@@ -99,11 +99,11 @@ pause
 %alpha = ... ; 
 %Ker_RH = ..... ; 
 alpha = 0.5;
-Ker_L = [-1 -1 -1;-1 8 -1;-1 -1 -1]; 
-Ker_RHL = Ker_imp + alpha*Ker_L;
-%Ker_RH = Ker_imp + alpha*Ker_PH;
+%Ker_L = [-1 -1 -1;-1 8 -1;-1 -1 -1]; 
+%Ker_RHL = Ker_imp + alpha*Ker_L;
+Ker_RH = Ker_imp + alpha*Ker_PH;
 %Convolution avec l'image
-ima_RH = conv2(ima, Ker_RHL, 'same'); 
+ima_RH = conv2(ima, Ker_RH, 'same'); 
 
 %dynamique de l'image 
 ima_RH_max = max(ima_RH(:));
@@ -136,7 +136,7 @@ draw_fig_hist_black_and_white(ima_RH_tronc,['image réhaussée tronc, alpha = ' nu
 disp('Pause : Nouvelle itération du filtre rehausseur ')
 pause
 %On réitère le filtre rehausseur 
-ima_RH2 = conv2(ima_RH, Ker_RHL, 'same'); 
+ima_RH2 = conv2(ima_RH, Ker_RH, 'same'); 
 
 %dynamique de l'image 
 ima_RH2_max = max(ima_RH2(:));

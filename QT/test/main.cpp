@@ -16,6 +16,7 @@
 #include "qwt_interval.h"
 #include "qwt_series_data.h"
 #include "qwt_series_store.h"
+#include "qwt_plot_curve.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,12 +37,22 @@ int main(int argc, char *argv[])
 
     QwtPlot *myPlot = new QwtPlot();
     myPlot->setCanvasBackground(Qt::gray);
-    myPlot->setTitle("");
+    myPlot->setTitle("Répartition des pixels en rouge");
     myPlot->setFixedHeight(600);
     myPlot->setFixedWidth(800);
     myPlot->setAxisScale( QwtPlot::yLeft, 0, 10000 ); //Scale the y-axis
     myPlot->setAxisScale(QwtPlot::xBottom,0,255); //Scale the x-axis
-    QwtPlotHistogram *myHisto = new QwtPlotHistogram("Répartition des pixels");
     myPlot->show();
+    QPolygonF points;
+
+    QwtPlotCurve *courbe = new QwtPlotCurve("Rouge");
+    courbe->setPen(Qt::red, 2);
+    points.append(QPointF(0.0,0.0));
+    points.append(QPointF(0.0,5000.0));
+    points.append(QPointF(50.0,5000.0));
+    points.append(QPointF(50.0,0.0));
+    courbe->setSamples(points);
+    courbe->attach(myPlot);
+
     return app.exec();
 }
