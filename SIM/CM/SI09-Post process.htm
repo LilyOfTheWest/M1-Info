@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>SI09-Post process</title>
+  
+
+  
+  
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
+  </script></head><body>
+<div style="text-align: right;">Author: Romain Vergne (<a href="http://romain.vergne.free.fr/blog/">website</a>)<br>
+Please cite my name and add a link to my web page if you use this course<br>
+</div>
+
+<h1 style="text-align: center;">Image synthesis and OpenGL:
+post-processing<br>
+</h1>
+
+Quick links to:<br>
+
+<ol>
+
+  <li><a href="#Principle">Principle</a></li>
+  <li><a href="#Gamma_correction">Gamma correction</a></li>
+  <li><a href="#Color_correction_and_clamping">Color correction and clamping</a></li>
+  <li><a href="#Blending_colors__Fog">Blending colors / Fog</a></li>
+  <li><a href="#Depth_of_field_">Depth of field</a></li>
+  <li><a href="#Motion_blur">Motion blur</a></li>
+  <li><a href="#Lens_flare_">Lens flare</a></li>
+  <li><a href="#Glowing_">Glowing</a></li>
+  <li><a href="#Tone_mapping">Tone mapping</a></li>
+  <li><a href="#Screen_Space_Ambient_Occlusion">Screen Space Ambient Occlusion</a></li>
+  <li><a href="#Antialiasing">Antialiasing</a></li>
+  <li><a href="#Sources">Sources</a><br>
+  </li>
+
+  
+</ol>
+
+<h2><a name="Principle"></a>Principle</h2>
+<ol>
+  <li>Draw the 3D scene inside a texture using FBOs</li>
+  <li>Map the texture on a quad that covers the entire screen <br>
+  </li>
+  <li>Apply the post-process in a fragment shader&nbsp;</li>
+</ol>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 244px;" alt="" src="imgs09/effects01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 244px;" alt="" src="imgs09/effects02.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 325px; height: 244px;" alt="" src="imgs09/effects03.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<ul>
+  <li>OpenGL / GLSL can basically be used to perform all kind of image processing!</li>
+  <li>Usually much faster than applying the filter on the CPU<br>
+  </li>
+  <ul>
+    <li>Everything works in parallel!<br>
+    </li>
+  </ul>
+</ul>
+<h2><a name="Gamma_correction"></a>Gamma correction</h2>
+<ul>
+  <li>The screen does not render colors linearly</li>
+  <li>We need the "inverse function" to correct colors <br>
+  </li>
+  <ul>
+    <li>The function "looks like" a power function of 2.2</li>
+    <li>But: more complex solutions exist to precisely reproduce colors (necessitate mesuring screen responses)<br>
+    </li>
+  </ul>
+</ul>
+<br>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr align="center">
+      <td style="vertical-align: top;"><a href="http://en.wikipedia.org/wiki/Gamma_correction"><img style="border: 0px solid ; width: 220px; height: 220px;" alt="" src="imgs09/gammafunc.png"></a></td>
+    </tr>
+    <tr align="center">
+      <td style="vertical-align: top;"><a href="http://www.theprojectorpros.com/learn-s-learn-p-gamma_correction.htm"><img style="border: 0px solid ; width: 560px; height: 373px;" alt="" src="imgs09/gammaimages.jpg"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><a name="Color_correction_and_clamping"></a>Color correction and clamping</h2>
+<ul>
+  <li>Modify Hue, saturation and brightness to obtain the desired effect <br>
+  </li>
+</ul>
+<div style="text-align: center;"><a href="http://mycryengine.com/index.php?conid=8"><img style="border: 0px solid ; width: 429px; height: 299px;" alt="" src="imgs09/colorcorrect.jpg"></a><br>
+</div>
+<div style="text-align: center;">Image taken from <a href="http://mycryengine.com/index.php?conid=8">CryEngine3</a><br>
+</div>
+<br>
+<br>
+<h2><a name="Blending_colors__Fog"></a>Blending colors / Fog</h2>
+<ul>
+  <li>Blend between the scene color and the background color according to geometric information (depth)</li>
+  <li>The blending factor may be computed using multiple ways:</li>
+  <ul>
+    <li>linear: \( f = (end-z)/(end-start) \)</li>
+    <li>exp: \( f = e^{-(density*z)} \)</li>
+    <li>exp2: \( f = e^{-(density*z)^2} \)</li>
+  </ul>
+</ul>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://www.ozone3d.net/tutorials/glsl_fog/p02.php"><img style="border: 0px solid ; width: 300px; height: 239px;" alt="" src="imgs09/fogimg.jpg"></a><br>
+      </td>
+      <td style="vertical-align: top;"><a href="http://www.ozone3d.net/tutorials/glsl_fog/p02.php"><img style="border: 0px solid ; width: 397px; height: 238px;" alt="" src="imgs09/fogfactor.jpg"></a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li>Blending can used between colors but also textures using any kind of function to obtain the desired result <br>
+  </li>
+</ul>
+<h2><a name="Depth_of_field_"></a>Depth of field </h2>
+<ul>
+  <li>Blur the rendering</li>
+  <ul>
+    <li>using any kind of filter (mean, gaussian, etc)</li>
+    <li>based on a geometrical preperty (depth)</li>
+  </ul>
+</ul>
+<div style="text-align: center;"><a href="http://blogs.amd.com/play/2012/11/20/hitman-absolution-in-depth/"><img style="border: 0px solid ; width: 486px; height: 273px;" alt="" src="imgs09/DofBokeh.png"></a><br>
+</div>
+<div style="text-align: center;"><a href="http://blogs.amd.com/play/2012/11/20/hitman-absolution-in-depth/">Hitman</a><br>
+</div>
+<br>
+<h2><a name="Motion_blur"></a>Motion blur</h2>
+<ul>
+  <li>Blur in a specific direction</li>
+  <li>Can be given by the camera motion<br>
+  </li>
+</ul>
+<br>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 624px; height: 351px;" alt="" src="imgs09/motionblur01.jpg"><br>
+      <div style="text-align: center;"><a href="http://www.digitaltrends.com/gaming/tomorrow-is-here-today-crytek-discusses-the-future-of-video-games/">Crytek interview</a><br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 468px; height: 351px;" alt="" src="imgs09/motionblur02.jpg"><br>
+      <div style="text-align: center;"><a href="http://playlegit.net/2011/08/03/3-visual-trends-in-gaming-that-must-continue/">Crysis 2</a><br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><a name="Lens_flare_"></a>Lens flare </h2>
+<ul>
+  <li>Blend with light textures <br>
+  </li>
+  <li>Need specific operations to check wether the light/sun is visible</li>
+</ul>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://www.dawghousedesignstudio.com/archives/2010/free-texture-pack-sky-and-lens-flare/"><img style="border: 0px solid ; width: 395px; height: 300px;" alt="" src="imgs09/lens-flare-textures.jpg"></a><br>
+      </td>
+      <td style="vertical-align: top;"><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch29.html"><img style="border: 0px solid ; width: 400px; height: 300px;" alt="" src="imgs09/lensflare.jpg"></a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><a name="Glowing_"></a>Glowing </h2>
+<ul>
+  <li>From the rendering (a)</li>
+  <li>Render the glowing parts in a separate buffer (b)</li>
+  <li>Apply a blur on this buffer (for instance using separate gaussian convolution) (c)<br>
+  </li>
+  <li>Add this buffer to the original one (d)<br>
+  </li>
+</ul>
+<br>
+<div style="text-align: center;"><a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch21.html"><img style="border: 0px solid ; width: 500px; height: 216px;" alt="" src="imgs09/glowing.jpg"></a><br>
+</div>
+<div style="text-align: center;"><br>
+More information <a href="http://http.developer.nvidia.com/GPUGems/gpugems_ch21.html">here</a><br>
+</div>
+<br>
+<h2><a name="Tone_mapping"></a>Tone mapping</h2>
+<ul>
+  <li>Goal: remap values of a HDR image (compised in the range [0,inf]) to the range [0,1]</li>
+  <li><a href="http://en.wikipedia.org/wiki/Tone_mapping">Many methods: global and local</a></li>
+  <li>Usually need some global information like min/mean/max luminance of the image</li>
+  <ul>
+    <li>How can we efficiently compute these values on the GPU?&nbsp;</li>
+    <li>Solution: manually create mipmaps of the given image</li>
+    <ul>
+      <li>At each image resolution</li>
+      <li>Look at the four corresponding pixels in the highest resolution</li>
+      <li>keep only the min/max/addition of values</li>
+      <li>The last level contains the needed values<br>
+      </li>
+    </ul>
+  </ul>
+</ul>
+<div style="text-align: center;"><br>
+</div>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 267px;" alt="" src="imgs09/tmimg0.jpg"><br>
+      <div style="text-align: center;">Original HDR Image (cannot be displayed properly)<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 267px;" alt="" src="imgs09/tmimg1.jpg"><br>
+      <div style="text-align: center;">Tone mapped (LDR) Image<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h2><a name="Screen_Space_Ambient_Occlusion"></a>Screen Space Ambient Occlusion</h2>
+<ul>
+  <li>Goal: approximate Ambient Occlusion in screen space</li>
+  <li>Based on the depth map (but many methods that can also use normals/noise/etc)</li>
+  <li>Basic idea: if a neighbor of a pixel is farther than the pixel itself, it has big chances to be in the shadow</li>
+  <li>More information <a href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter14.html">here</a> / <a href="http://en.wikipedia.org/wiki/Screen_space_ambient_occlusion">here</a> / <a href="http://john-chapman-graphics.blogspot.fr/2013/01/ssao-tutorial.html">here</a> / <a href="http://www.gamerendering.com/2009/01/14/ssao/">here</a> / etc<br>
+  </li>
+</ul>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://electronicmeteor.wordpress.com/2011/12/26/applying-ssao-to-scenes/"><img style="border: 0px solid ; width: 483px; height: 272px;" alt="" src="imgs09/ssao-raw.jpg"></a><br>
+      <div style="text-align: center;">SSAO<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><a href="http://electronicmeteor.wordpress.com/2011/12/26/applying-ssao-to-scenes/"><img style="border: 0px solid ; width: 378px; height: 272px;" alt="" src="imgs09/ssao-compare.jpg"></a><br>
+      <div style="text-align: center;">Comparison with/wihout SSAO<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Many advantages: <br>
+<ul>
+  <li>Independent from geometry</li>
+  <li>Dynamic</li>
+  <li>No pre-processing<br>
+  </li>
+</ul>
+<br>
+<h2><a name="Antialiasing"></a>Antialiasing</h2>
+<ul>
+  <li>MLAA (Morphological Anti-Aliasing)</li>
+  <ul>
+    <li>blend colors around silhouettes infered from pixel discontinuities</li>
+  </ul>
+  <li>SMAA (Subpixel Morphological Anti-Aliasing)</li>
+  <ul>
+    <li>GPU friendly</li>
+  </ul>
+  <li>Again: many appearing methods&nbsp;</li>
+  <ul>
+    <li>More information in this <a href="http://www.iryoku.com/aacourse/">very good Siggraph Course</a><br>
+    </li>
+  </ul>
+</ul>
+
+
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 658px; height: 300px;" alt="" src="imgs09/mlaa.png"><br>
+      <div style="text-align: center;">MLAA<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 552px; height: 300px;" alt="" src="imgs09/smaa-defense-grid.jpg"><br>
+      <div style="text-align: center;">SMAA<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2><a name="Sources"></a>Sources</h2>
+
+<ul>
+
+  <li><a href="http://developer.download.nvidia.com/shaderlibrary/docs/shadow_PCSS.pdf">J.
+Baril, F. Berthaut, N. Mellado</a><em></em></li>
+</ul>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="TP08.html">PREVIOUS:
+EXERCICE08</a><br>
+      </td>
+      <td style="vertical-align: top; text-align: right;"><a href="TP09.html">NEXT: EXERCICE09</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<br>
+
+</body></html>

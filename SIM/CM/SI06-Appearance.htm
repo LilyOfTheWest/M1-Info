@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>SI06-Appearance</title>
+  
+
+  
+  
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
+  </script></head><body>
+<div style="text-align: right;">Author: Romain Vergne (<a href="http://romain.vergne.free.fr/blog/">website</a>)<br>
+Please cite my name and add a link to my web page if you use this course<br>
+</div>
+
+<h1 style="text-align: center;">Image synthesis and OpenGL: appearance / details<br>
+</h1>
+
+Quick links to:<br>
+
+<ol>
+
+  <li><a href="#Reminder:_the_lighting_equation">The lighting equation</a></li>
+  <li><a href="#Storing_color_and_material_information_">Storing color and material information</a></li>
+  <li><a href="#Storing_geometry_details">Storing geometry details</a></li>
+  <li><a href="#Storing_material_properties_">Storing material properties</a></li>
+  <li><a href="#Storing_visibility_information">Storing visibility information</a></li>
+  <li><a href="#Storing_environments">Storing environments</a></li>
+  <li><a href="#Sources">Sources</a><br>
+  </li>
+
+</ol>
+
+<h2><a name="Reminder:_the_lighting_equation"></a>Reminder: the lighting equation</h2>
+<h3>
+
+Rendering equation</h3>
+
+\[ <br>
+
+L(\mathbf{p} \rightarrow \mathbf{e}) =<br>
+
+&nbsp;L_e(\mathbf{p} \rightarrow \mathbf{e}) +<br>
+
+&nbsp;\int_{\Omega_\mathbf{n}} <br>
+
+&nbsp; \rho(\mathbf{p}, \mathbf{e}, \pmb{\ell})<br>
+
+&nbsp; (\mathbf{n}\cdot\pmb{\ell}) \<br>
+
+&nbsp;&nbsp; L(\mathbf{p} \leftarrow \pmb{\ell}) \ <br>
+
+&nbsp; d\pmb{\ell} <br>
+
+\]<br>
+
+<ul>
+<li>\( \mathbf{p} \) is a point on the surface</li><li>\( \mathbf{e} \) is the view direction</li><li>\( \mathbf{n} \) is the normal of the surface at point \( \mathbf{p} \)</li><li>\( \pmb{\ell} \) is the direction of a light in the hemisphere \( \Omega_\mathbf{n} \)<br>
+  </li>
+</ul>
+
+<ul>
+<li>\( L(\mathbf{p} \rightarrow \mathbf{e}) \):</li><ul><li>outgoing radiance (in \( Wm^{-2}sr^{-1}) \)</li><li>how much energy is arriving to the eye / camera</li></ul><li>\( L_e(\mathbf{p} \rightarrow \mathbf{e}) \):</li><ul><li>emitted radiance&nbsp;</li><li>usually equal to 0 for object surfaces (they do not create energy)</li></ul><li>\( L(\mathbf{p} \leftarrow \pmb{\ell}) \):</li><ul><li>incoming radiance</li><li>incident illumination leaving the light \( \pmb{\ell} \) and arriving at the point \( \mathbf{p} \) of the surface</li></ul><li>\( (\mathbf{n}\cdot\pmb{\ell}) \):</li><ul><li>the orientation of the surface <br>
+    </li><li>dot product between \( \mathbf{n} \) and \( \pmb{\ell} \)</li></ul><li>\( \rho(\mathbf{p}, \mathbf{e}, \pmb{\ell}) \):</li><ul><li>material properties / BRDF (Bidirectional Reflectance Distribution Function)</li><li>how much energy the surface reflects in the viewing direction \( \mathbf{e} \) given the incident light \( \pmb{\ell} \)</li></ul>
+</ul>
+<h3>
+Approximation</h3>
+
+
+\[ <br>
+
+
+L(\mathbf{p} \rightarrow \mathbf{e}) =<br>
+
+\rho_a L_a + <br>
+
+
+&nbsp;\sum_{k} <br>
+
+
+&nbsp; \rho(\mathbf{p}, \mathbf{e}, \pmb{\ell}_k) \<br>
+
+
+&nbsp; (\mathbf{n}\cdot\pmb{\ell}_k) \<br>
+
+
+&nbsp;&nbsp; L(\mathbf{p} \leftarrow \pmb{\ell}_k) <br>
+
+
+\]<br>
+
+<br>
+
+<ul>
+<li>\( L(\mathbf{p} \rightarrow \mathbf{e}) \): outgoing radiance / light energy / color</li><li>\( \rho_a L_a \): ambient lighting (approximate indirect lighting)</li><li>\( \sum_{k} \cdots \): contribution of each light \( \pmb{\ell}_k \)</li><li>\(
+\rho(\mathbf{p}, \mathbf{e}, \pmb{\ell}_k) \): BRDF - how the light
+\(&nbsp; \pmb{\ell}_k \) is reflected on top of the surface</li><li>\( (\mathbf{n}\cdot\pmb{\ell}_k) \): surface orientation (according to light \( \pmb{\ell}_k \) )</li><li>\( L(\mathbf{p} \leftarrow \pmb{\ell}_k) \): incoming radiance for light \( \pmb{\ell}_k \)</li>
+</ul>
+<br>
+<div style="text-align: center;">
+<big style="font-weight: bold;">Which elements could be described by some textures? </big><br>
+</div>
+<br>
+<br>
+<h2><a name="Storing_color_and_material_information_"></a>
+Storing color and material information<br>
+</h2>
+<h3>Color mapping</h3>
+<br>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/chesterfield-color.jpg">&nbsp;&nbsp;&nbsp; <img style="width: 256px; height: 256px;" alt="" src="imgs06/chesterfield-specular.jpg"><br>
+      <div style="text-align: center;">Color (albedo) map &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; specular map<br>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 500px; height: 375px;" alt="" src="imgs06/res-tex.jpeg"><br>
+rendering on a sphere<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>Example of <a href="http://www.valvesoftware.com/publications.html">Team Fortress 2<br>
+</a></h3>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 194px;" alt="" src="imgs06/teamfortress01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 194px;" alt="" src="imgs06/teamfortress02.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 194px;" alt="" src="imgs06/teamfortress04.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 194px;" alt="" src="imgs06/teamfortress05.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">(A) Albedo<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">(B) Ambient + Diffuse lighting<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">(C) Rim + Specular lighting<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">(D) Final image<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div style="text-align: center;"><big>Final Image \( D = A \times B + C \)</big><br>
+</div>
+<br>
+<div style="text-align: center;">
+More details in <a href="http://www.valvesoftware.com/publications/2007/NPAR07_IllustrativeRenderingInTeamFortress2.pdf">this paper</a><br>
+</div>
+<h2><a name="Storing_geometry_details"></a>
+Storing geometry details</h2>
+
+<h3>normal mapping</h3>
+The texture stores the normal of the surface at every point. <br>
+<ul>
+  <li>Low mesh tesselation</li>
+  <li>High detailed rendering</li>
+  <li>Normal = 3 scalar values, stored in the RGB channels of the image</li>
+  <ul>
+    <li>Normal coordinates are comprised in the range \( \left[-1,1\right] \)</li>
+    <li>they are mapped in the range \( \left[0,1\right] \) before being stored in the texture</li>
+    <li>They are remapped back in \( \left[-1,1\right] \) when used in the shader</li>
+  </ul>
+</ul><br>
+
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr align="center">
+      <td colspan="2" rowspan="1" style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/chesterfield-normal.jpg"><br>
+Normal map<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 300px;" alt="" src="imgs06/res-tex.jpeg"><br>
+      <div style="text-align: center;">Result without normal mapping<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 300px;" alt="" src="imgs06/res-normal-mapping.jpeg"><br>
+      <div style="text-align: center;">Result with normal mapping<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>The problem</h3>
+Normals are stored in the tangent space: if a normal inside the texture
+has the coordinates \( (0,0,1) \), it basically means that we do not
+want to change the original surface normal. <br>
+We thus need a transformation matrix that converts coodinates from the
+tangent space to world or camera space (depending on where we apply the
+lighting computations). <br>
+This matrix is directly given by the normal, the tangent and the binormal coordinates called TBN matrix. <br>
+<br>
+<div style="text-align: center;"><img style="width: 300px; height: 168px;" alt="" src="imgs06/tangent-space.png"><br>
+</div>
+
+<br>
+At each vertex, we thus need the normal and the tangent to be able to convert normals and perform the lighting computation<br>
+<br>
+<big><span style="font-weight: bold;">On the CPU side:</span></big><br>
+<ul>
+  <li>The tangent is computed according to the derivative of the uv-coordinates <br>
+  </li>
+  <ul>
+    <li>More information and code on how to compute the tangent can be found <a href="http://www.terathon.com/code/tangent.html">here</a> and <a href="http://www.blacksmith-studios.dk/projects/downloads/bumpmapping_using_cg.php">here</a>&nbsp;</li>
+  </ul>
+  <li>The tangent is given as an attribute of the mesh</li>
+</ul>
+<big><span style="font-weight: bold;">On the GPU side:</span></big><br>
+<ul>
+  <li>The binormal vector is perpendicular to the plane defined by the normal and the tangent: <br>
+  </li>
+  <ul>
+<li>\( \mathbf{B} = \mathbf{N} \times \mathbf{T} \)</li>
+  </ul>
+  <li>The TBN matrix can then be computed:</li>
+</ul>
+\[ \begin{pmatrix} <br>
+T_x &amp; B_x &amp; N_x\\<br>
+T_y &amp; B_y &amp; N_y\\<br>
+T_z &amp; B_z &amp; N_z <br>
+\end{pmatrix} \]<br>
+<br>
+<ul>
+  <li>A vector \( \mathbf{V}_t \) defined in the tangent space can
+be converted in the world (or camera) space \( \mathbf{V}_w \) using
+the following:</li>
+  <ul>
+    <li>\( \mathbf{V}_w = TBN \ \ \mathbf{V}_t\)</li>
+  </ul>
+  <li>As the matrix is orthogonal, the inverse transformation is straightforward:</li>
+  <ul>
+    <li>\( \mathbf{V}_t = TBN^{-1} \ \ \mathbf{V}_w = TBN^{T} \ \ \mathbf{V}_w\)</li>
+  </ul>
+</ul><br>
+
+<h3>
+Bump mapping</h3>
+The same kind of effect may be obtained using a heightfield as input instead of a normal map. <br>
+<div style="text-align: center;"><a href="http://en.wikipedia.org/wiki/Bump_mapping"><img style="border: 0px solid ; width: 792px; height: 266px;" alt="" src="imgs06/Bump-map-demo-full.png"></a><br>
+</div>
+<br>
+In this case, the normal (defined in tangent space) needs to be computed inside the GPU:<br>
+<ul>
+  <li>Let consider a point \( h(x,y) \) of the heightfield</li>
+  <li>The
+gradient of the heightfield at this point can be computed as follow: \[
+\nabla h(x,y) = \begin{pmatrix} g_x \\ g_y \end{pmatrix} =
+\begin{pmatrix} h(x+1,y)- h(x,y)\\ h(x,y+1)- h(x,y) \end{pmatrix} \]</li>
+  <li>The normal can then be computed with: \[ \mathbf{N}=\frac{(g_x,g_y,1)}{\sqrt{g_x^2+g_y^2+1}} \]</li>
+  <li>The gradient may also be controled by a user defined parameter to increase/decrease the bump effect</li>
+  <ul>
+    <li>See <a href="http://http.developer.nvidia.com/CgTutorial/cg_tutorial_chapter08.html">here</a> for more details on bump mapping effects<br>
+    </li>
+  </ul>
+</ul>
+Advantages / drawbacks of bump/normal mapping:<br>
+<ul>
+  <li>+ allows to add a lot of details <br>
+  </li>
+  <li>+ efficient (one texture access and one matrix multiplication)</li>
+  <li><a href="http://quixel.se/ndo/">+ easier and easier to create</a></li>
+  <li>- problems at grazing angles (silhouettes)<br>
+  </li>
+</ul>
+<br>
+<h3>
+parralax / relief mapping</h3>
+<div style="text-align: center;"><img style="width: 500px; height: 259px;" alt="" src="imgs06/parallax.png"><br>
+</div>
+<br>
+Basic idea:<br>
+<ul>
+  <li>Compute an offset value based on the heightfield and the view vector</li>
+  <ul>
+    <li>Look inside the heightmap in the direction of the view</li>
+    <li>Compute self shadowing (if wanted)<br>
+    </li>
+    <li>Find the intersection point</li>
+    <li>Use the normal at this position</li>
+  </ul>
+  <li>Used in most video-games</li>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 620px; height: 349px;" alt="" src="imgs06/parallax_off.jpg"><br>
+      <div style="text-align: center;">Without parallax mapping<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 622px; height: 350px;" alt="" src="imgs06/parallax_on.jpg"><br>
+      <div style="text-align: center;">With parallax mapping<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>
+displacement mapping</h3>Idea: displace vertices towards their normals using a heightmap<br>
+
+<br>
+
+
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr align="center">
+      <td colspan="2" rowspan="1" style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/chesterfield-height.jpg"><br>
+Height map<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 300px;" alt="" src="imgs06/res-normal-mapping.jpeg"><br>
+      <div style="text-align: center;">Normal mapping<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 300px;" alt="" src="imgs06/res-displacement02.jpeg"><br>
+      <div style="text-align: center;">Displacement mapping<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<ul>
+  <li>Needs a high tesselated mesh</li>
+  <li>Solution: use tesselation shader</li>
+  <ul>
+    <li>watch videos <a href="http://www.legitreviews.com/article/1117/1/">here</a> and <a href="http://www.shopto.net/news/39835/Crytek-release-new-CryEngine3-tech-trailer-showcasing-Toad-Tessellation">here</a><br>
+    </li>
+  </ul>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 550px; height: 309px;" alt="" src="imgs06/unigine_dx9a.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 550px; height: 309px;" alt="" src="imgs06/unigine_dx11a.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 550px; height: 309px;" alt="" src="imgs06/directx9_wireframe.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 550px; height: 309px;" alt="" src="imgs06/directx11_wireframe.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><a name="Storing_material_properties_"></a>Storing material properties<br>
+</h2>
+<h3>Bidirectionnal Texture Functions</h3>
+Remind that material properties are computed according to a view direction and a light direction. <br>
+The idea is simple: <br>
+<ul>
+  <li>for each point of view</li>
+  <ul>
+    <li>for each direction of light <br>
+    </li>
+    <ul>
+      <li>compute the color map that correspond to each point of the surface</li>
+    </ul>
+  </ul>
+</ul>
+<ul>
+  <li>a few Gbyte of data <br>
+  </li>
+  <ul>
+    <li>81 point of views</li>
+    <li>81 lighting directions</li>
+  </ul>
+  <li>Main problem: memory</li>
+  <ul>
+    <li>needs compression<br>
+    </li>
+  </ul>
+</ul>
+<div style="text-align: center;">&nbsp;&nbsp;&nbsp; <a href="http://staff.utia.cz/filip/projects/pertex/index.html"><img style="border: 0px solid ; width: 550px; height: 328px;" alt="" src="imgs06/btf.png"></a><br>
+</div>
+<div style="text-align: center;"><br>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://www.gero-mueller.de/"><img style="border: 0px solid ; width: 400px; height: 400px;" alt="" src="imgs06/btf01.png"></a><br>
+      </td>
+      <td style="vertical-align: top;"><a href="http://www.gero-mueller.de/"><img style="border: 0px solid ; width: 400px; height: 400px;" alt="" src="imgs06/btf02.png"></a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<ul>
+  <li>Acquisition</li>
+  <ul>
+    <li>Cameras at multiple viewpoint</li>
+    <li>Multiple light direction</li>
+    <li>One photo for each of them</li>
+  </ul>
+</ul>
+<div style="text-align: center;"><img style="width: 349px; height: 261px;" alt="" src="imgs06/acqui-btf01.jpg"><br>
+</div>
+<ul>
+  <li>A video of BTF edition <a href="http://www.youtube.com/watch?v=BwUrIqqjs_s">here</a></li>
+  <li>More information about BTF <a href="http://www.labri.fr/perso/baril/thesis.html">here</a> (in french)<br>
+  </li>
+</ul>
+<h2><a name="Storing_visibility_information"></a>Storing visibility information</h2>
+<h3>Ambient occlusion</h3>
+<div style="text-align: center;"><img style="width: 432px; height: 255px;" alt="" src="imgs06/ao.jpg" align="middle"><br>
+Coarse shadows approximation<br>
+</div>
+<br>
+\[ A=\frac{1}{\pi} \int V(\mathbf{\omega}) (\mathbf{n} \cdot \mathbf{\omega}) d \mathbf{\omega}\]<br>
+
+<br>
+<ul>
+  <li>Clearly improve perceived depth&nbsp;</li>
+  <li>related to shadows&nbsp; (soon in a next course)</li>
+</ul>
+<br>
+
+
+<br>
+
+
+
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+
+  <tbody>
+    <tr align="center">
+      <td colspan="2" rowspan="1" style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/chesterfield-ao.jpg"><br>
+Ambient occlusion map<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 300px;" alt="" src="imgs06/res-displacement01.jpeg"><br>
+      <div style="text-align: center;">Displacement without AO<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 300px;" alt="" src="imgs06/res-displacement02.jpeg"><br>
+      <div style="text-align: center;">Displacement with AO<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<br>
+<div style="text-align: center;"><a href="http://download.autodesk.com/us/mudbox/help2010/index.html?url=WS1a9193826455f5ff-e569a0121d1945c08-2150.htm,topicNumber=d0e17081"><img style="border: 0px solid ; width: 652px; height: 315px;" alt="" src="imgs06/comp_ao_map2.png"></a><br>
+</div>
+<br>
+<h2><a name="Storing_environments"></a>Storing environments</h2>
+<h3>Cube maps</h3>
+<ul>
+  <li>6 textures to represent the environment.</li>
+  <li>OpenGL:</li>
+  <ul>
+    <li>new destination parameter: GL_TEXTURE_CUBE_{POSITIVE,NEGATIVE}_{X,Y,Z}</li>
+  </ul>
+  <li>GLSL:</li>
+  <ul>
+    <li>access with samplerCube<br>
+    </li>
+  </ul>
+</ul>
+<br>
+<br>
+<div style="text-align: center;"><img style="width: 641px; height: 285px;" alt="" src="imgs06/cubemapping.jpg"><br>
+</div>
+<div style="text-align: left;"><br>
+<div style="text-align: center;"><span style="font-weight: bold;">But, many different possible representations</span><br>
+</div>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 224px; height: 298px;" alt="" src="imgs06/cube-env01.jpeg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 600px; height: 299px;" alt="" src="imgs06/latlong-env03.jpeg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 300px;" alt="" src="imgs06/stpeters_probe.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">Cube map<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">Latitude-longitude map<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">light probe<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h3>Usefull for real-time rendering</h3>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 381px;" alt="" src="imgs06/env-map01.jpeg"><br>
+      <div style="text-align: center;">Reflection vector <br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 381px;" alt="" src="imgs06/env-map02.jpeg"><br>
+      <div style="text-align: center;">Refraction vector<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3>Prefiltered environment maps</h3>
+Irradiance environment map<br>
+<ul>
+  <li>sum of all light energies received on a part of a surface</li>
+  <li>Hypothesis</li>
+  <ul>
+    <li>Diffuse surface</li>
+    <li>Distant illumination</li>
+    <li>No shadows</li>
+    <li>No inter-reflections<br>
+    </li>
+  </ul>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/irradiance01.jpg"><br>
+      <div style="text-align: center;">Radiance env map<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/irradiance02.jpg"><br>
+      <div style="text-align: center;">Irradiance env map<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li>Hemispherical integration on each pixel</li>
+  <ul>
+    <li>slow!</li>
+  </ul>
+  <li>Approximation using spherical low pass filtering<br>
+  </li>
+</ul>
+<br>
+<div style="text-align: center;"><br>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 401px;" alt="" src="imgs06/cube-env01.jpeg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 400px;" alt="" src="imgs06/cube-env02.jpeg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 381px;" alt="" src="imgs06/env-map01.jpeg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 381px;" alt="" src="imgs06/env-map03.jpeg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h2><a name="Sources"></a>Sources</h2>
+
+<ul>
+
+  <li><a href="http://www.labri.fr/perso/baril/teaching/TMSI/">J.
+Baril, F. Berthaut, N. Mellado</a></li>
+  <li><a href="http://kay-vriend.blogspot.fr/2012/11/well-preserved-chesterfield.html"><span style="text-decoration: underline;">Käy's blog</span></a></li>
+  
+</ul>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="TP05.html">PREVIOUS:
+EXERCICE05</a><br>
+      </td>
+      <td style="vertical-align: top; text-align: right;"><a href="TP06.html">NEXT: EXERCICE06</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<br>
+
+</body></html>

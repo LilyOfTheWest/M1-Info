@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>SI05-Textures</title>
+  
+
+  
+  
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
+  </script></head><body>
+<div style="text-align: right;">Author: Romain Vergne (<a href="http://romain.vergne.free.fr/blog/">website</a>)<br>
+Please cite my name and add a link to my web page if you use this course<br>
+</div>
+
+<h1 style="text-align: center;">Image synthesis and OpenGL: textures</h1>
+
+Quick links to:<br>
+
+<ol>
+
+  <li><a href="#Textures_for_what">Textures for what?</a></li>
+  <li><a href="#Parametrization">Parametrization</a></li>
+  <li><a href="#Mapping_functions">Mapping functions</a></li>
+  <li><a href="#Texture_modes">Texture modes</a></li>
+  <li><a href="#Filtering">Filtering</a><br>
+  </li>
+  <li><span style="text-decoration: underline;"><a href="#Sources">Sources</a><br>
+    </span></li>
+
+</ol>
+
+<h2><a name="Textures_for_what"></a>Textures for what?</h2><br>
+<div style="text-align: center;"><img style="width: 798px; height: 499px;" alt="" src="imgs05/textures.jpg"><br>
+
+
+</div>
+<h2><a name="Parametrization"></a>Parametrization</h2>
+<div style="text-align: center;">
+<span style="font-weight: bold;">Correspondance between 3D data and texture coordinates</span><br>
+
+</div>
+<div style="text-align: center;"><img style="width: 623px; height: 317px;" alt="" src="imgs05/UVintro.png"></div>
+<br>
+<ul>
+  <li>Correspondance between fragment and texture</li>
+  <li>Unfold the 3D surface in 2D</li>
+  <li>Parametrization</li>
+  <ul>
+    <li>compute a texture coordinates per vertex</li>
+    <li>the rasterization/interpolation is automatically done from vertex to fragment shader</li>
+    <li>fetch texture using uv coordinates in the fragment shader</li>
+  </ul>
+  <li>Texture space: \( \left[ 0,1 \right] \)<br>
+  </li>
+</ul>
+<h3>1D textures <br>
+</h3>
+<div style="text-align: center;">\( (x,y,z) \rightarrow (u) \)<br>
+</div>
+<br>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 389px; height: 389px;" alt="" src="imgs05/cell-shading.jpg"><br>
+      </td>
+    </tr>
+    <tr align="center">
+      <td style="vertical-align: top;"><img style="width: 365px; height: 32px;" alt="" src="imgs05/texture1d.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3><br>
+</h3>
+<h3>2D textures</h3>
+<div style="text-align: center;">\( (x,y,z) \rightarrow (u,v) \)<br>
+</div>
+<br>
+<div style="text-align: center;"><img style="width: 630px; height: 362px;" alt="" src="imgs05/texture2d.jpg"><br>
+</div>
+<h3>3D textures</h3>
+<div style="text-align: center;">\( (x,y,z) \rightarrow (u,v,w) \)<br>
+</div>
+<br>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://www.youtube.com/watch?v=PFr-cEEb8y0"><img style="border: 0px solid ; width: 285px; height: 285px;" alt="" src="imgs05/3dtexture.jpg"></a></td>
+      <td style="vertical-align: top;"><a href="http://en.wikipedia.org/wiki/Volume_rendering"><img style="border: 0px solid ; width: 225px; height: 285px;" alt="" src="imgs05/volume-tex.gif"></a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<h2><a name="Mapping_functions"></a>Mapping functions</h2>
+<h3>Flat mapping</h3>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 286px; height: 250px;" alt="" src="imgs05/mapping-planar01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img src="imgs05/mapping-planar02.jpg" alt="" style="width: 379px; height: 250px;"><br>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+<h3>
+Cylindrical mapping</h3>
+
+
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 303px; height: 250px;" alt="" src="imgs05/mapping-cylindrical01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 380px; height: 250px;" alt="" src="imgs05/mapping-cylindrical02.jpg"><br>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+<h3>
+
+Spherical mapping</h3>
+
+
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 250px;" alt="" src="imgs05/mapping-spherical01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 372px; height: 250px;" alt="" src="imgs05/mapping-spherical02.jpg"><br>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+<h3>
+
+Cube mapping</h3>
+
+<br>
+
+
+
+
+  
+    
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody><tr>
+      <td style="vertical-align: top;"><img style="width: 290px; height: 250px;" alt="" src="imgs05/mapping-cubical01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 369px; height: 250px;" alt="" src="imgs05/mapping-cubical02.jpg"><br>
+      </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<h3>Parametric mapping</h3><br>
+
+
+
+
+
+  
+    
+
+
+      
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+<tbody><tr><td style="vertical-align: top;"><img style="width: 300px; height: 201px;" alt="" src="imgs05/parametric01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 300px; height: 203px;" alt="" src="imgs05/parametric02.jpg"><br>
+</td></tr></tbody>
+</table>
+<br>
+<br>
+<h3>UV mapping</h3>
+
+<br>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr align="center">
+      <td colspan="3" rowspan="1" style="vertical-align: top;"><img style="width: 368px; height: 218px;" alt="" src="imgs05/mapping-uv.jpg"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 200px; height: 200px;" alt="" src="imgs05/bunny-atlas.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 281px; height: 200px;" alt="" src="imgs05/bunny-param.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 179px; height: 200px;" alt="" src="imgs05/bunny-textured.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<ul>
+  <li>Possibility to compute many kinds of uv-coordinates</li>
+  <ul>
+    <li>via automatic algorithms (difficult problem)</li>
+    <li>via designers <br>
+    </li>
+  </ul>
+  <li>Possibility to deform textures</li>
+  <ul>
+    <li>by non-linearly varying texture coordinates</li>
+  </ul>
+</ul>
+<h2><a name="Texture_modes"></a>Texture modes</h2>
+<ul>
+  <li>GL_CLAMP: use a user defined border value</li>
+  <li>GL_CLAMP_TO_EDGE: use the texture border value</li>
+  <li>GL_REPEAT: use fractionnal part of texture coordinates</li>
+  <li>GL_MIRRORED_REPEAT: use (possibly reversed) fractionnal part of texture coordinates</li>
+</ul>
+<ul>
+  <li>Also use transformation matrices for offsets, scales, rotation, etc.<br>
+  </li>
+</ul>
+<br>
+<div style="text-align: center;"><img style="width: 201px; height: 203px;" alt="" src="imgs05/texture-mode01.jpg"><br>
+</div>
+<br>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <div style="text-align: center;"><img style="width: 251px; height: 256px;" alt="" src="imgs05/texture-mode02.jpg"><br>
+      </div>
+      <div style="text-align: center;">GL_CLAMP (deprecated)<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;">
+      <div style="text-align: center;"><img style="width: 253px; height: 256px;" alt="" src="imgs05/texture-mode03.jpg"><br>
+      </div>
+      <div style="text-align: center;">&nbsp;GL_CLAMP_TO_EDGE</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">
+      <div style="text-align: center;"><img style="width: 252px; height: 256px;" alt="" src="imgs05/texture-mode04.jpg"><br>
+      </div>
+      <div style="text-align: center;">GL_REPEAT<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;">
+      <div style="text-align: center;"><img style="width: 251px; height: 256px;" alt="" src="imgs05/texture-mode05.jpg"><br>
+      </div>
+      <div style="text-align: center;">GL_MIRRORED_REPEAT<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><a name="Filtering"></a>Filtering</h2>
+<h3>Problem</h3>
+<ul>
+  <li>Which color do we apply if one texel is projected on several fragments (magnification - <span class="InfoPicture">GL_TEXTURE_MAG_FILTER</span>)?</li>
+  <li>Which color do we apply if several texels are projected on one fragments (minification - <span class="InfoPicture">GL_TEXTURE_MIN_FILTER</span>)?</li>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="https://scs.senecac.on.ca/%7Echris.szalwinski/archives/gam666.063/content/textu.html"><img style="border: 0px solid ; width: 598px; height: 258px;" alt="" src="imgs05/magnification.gif"></a><br>
+      </td>
+      <td style="vertical-align: top;"><a href="https://scs.senecac.on.ca/%7Echris.szalwinski/archives/gam666.063/content/textu.html"><img style="border: 0px solid ; width: 598px; height: 258px;" alt="" src="imgs05/minification.gif"></a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-weight: bold;"><br>
+</span>
+<h3><span style="font-weight: bold;">Options</span></h3>
+<ul>
+  <li>GL_NEAREST: nearest texel from the uv coordinate</li>
+  <li>GL_LINEAR: bilinear interpolation. Slower but better. <br>
+  </li>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 215px;" alt="" src="imgs05/Tutorial6-Filter1.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 252px; height: 215px;" alt="" src="imgs05/Tutorial6-Filter2.png"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 175px;" alt="" src="imgs05/Tutorial6-CloseUpView-Nearest.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 175px;" alt="" src="imgs05/Tutorial6-CloseUpView-BiLinear.png"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">GL_NEAREST / GL_NEAREST<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">GL_LINEAR / GL_LINEAR<br>
+      </td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" rowspan="1" style="vertical-align: top;">Images from <a href="http://jerome.jouvie.free.fr/opengl-tutorials/Tutorial6.php#Tutorial">Jerome Jouvie</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3><span style="font-weight: bold;"></span></h3>
+<ul>
+  <li>Bilinear interpolation</li>
+  <ul>
+    <li>weighted sum of 4 texels</li>
+    <li>\( R_1 = z(1,1)+(z(2,1)-z(1,1))\frac{x-x_1}{x_2-x_1} \)</li>
+    <li>\( R_2 = z(1,2)+(z(2,2)-z(1,2))\frac{x-x_1}{x_2-x_1} \)</li>
+    <li>\( z = R_1+(R_2-R_1)\frac{y-y_1}{y_2-y_1} \)</li>
+  </ul>
+</ul>
+<br>
+<ul>
+  <ul>
+    <li><img style="width: 220px; height: 210px;" alt="" src="imgs05/220px-Bilinear_interpolation.png"><br>
+    </li>
+  </ul>
+</ul>
+<h3>Mipmapping</h3>
+<ul>
+  <li>Pyramid of textures at different resolutions <br>
+  </li>
+  <ul>
+    <li>using glGenerateMipmap()</li>
+  </ul>
+  <li>Automatic choice by OpenGL depending on filtering options</li>
+</ul>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 512px; height: 512px;" alt="" src="imgs05/brick01-m1.jpg"><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 256px; height: 256px;" alt="" src="imgs05/brick01-m2.jpg"><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 128px; height: 128px;" alt="" src="imgs05/brick01-m3.jpg"><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 64px; height: 64px;" alt="" src="imgs05/brick01-m4.jpg"><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 32px; height: 32px;" alt="" src="imgs05/brick01-m5.jpg"><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 16px; height: 16px;" alt="" src="imgs05/brick01-m6.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">level 0<br>
+1:1<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">level 1<br>
+4:1<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">level 2<br>
+16:1<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">level 3<br>
+64:1<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">level 4<br>
+256:1<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">level 5<br>
+1024:1<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 128px; height: 128px;" alt="" src="imgs05/brick01-m1.jpg"></td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 128px; height: 128px;" alt="" src="imgs05/brick01-m2.jpg"></td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 128px; height: 128px;" alt="" src="imgs05/brick01-m3.jpg"></td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 128px; height: 128px;" alt="" src="imgs05/brick01-m4.jpg"></td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 128px; height: 128px;" alt="" src="imgs05/brick01-m5.jpg"></td>
+      <td style="vertical-align: top; text-align: center;"><img style="width: 128px; height: 128px;" alt="" src="imgs05/brick01-m6.jpg"></td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li>Options (only for minification - <span class="DarkGreyColor">GL_TEXTURE_MIN_FILTER</span>)<br>
+  </li>
+  <ul>
+    <li>GL_NEAREST_MIPMAP_NEAREST: nearest texel in the nearest mipmap level<br>
+    </li>
+  </ul>
+  <ul>
+    <li>GL_LINEAR_MIPMAP_NEAREST: bilinear interpolation in the nearest mipmap level</li>
+    <li>GL_NEAREST_MIPMAP_LINEAR: nearest texel linearly interpolated from the 2 closest mipmap levels</li>
+    <li>GL_LINEAR_MIPMAP_LINEAR: bilinear interpolation, interpolated from the 2 closest mipmap levels (trilinear interpolation)<br>
+    </li>
+  </ul>
+</ul>
+<br>
+
+  
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 215px;" alt="" src="imgs05/Tutorial6-Filter1.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 252px; height: 215px;" alt="" src="imgs05/Tutorial6-Filter2.png"><br>
+      </td><td style="vertical-align: top;"><img style="width: 256px; height: 215px;" alt="" src="imgs05/Tutorial6-Filter3.png"><br>
+      </td>
+
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 175px;" alt="" src="imgs05/Tutorial6-CloseUpView-Nearest.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 175px;" alt="" src="imgs05/Tutorial6-CloseUpView-BiLinear.png"></td><td style="vertical-align: top;"><img style="width: 250px; height: 175px;" alt="" src="imgs05/Tutorial6-CloseUpView-TriLinear.png"><br>
+      </td>
+
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">GL_NEAREST / GL_NEAREST<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">GL_LINEAR / GL_LINEAR<br>
+      </td><td style="vertical-align: top; text-align: center;">GL_LINEAR /<br>
+GL_LINEAR_MIPMAP_LINEAR<br>
+      </td>
+
+    </tr>
+    <tr align="center">
+      <td colspan="3" rowspan="1" style="vertical-align: top;">Images from <a href="http://jerome.jouvie.free.fr/opengl-tutorials/Tutorial6.php#Tutorial">Jerome Jouvie</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2><a name="Sources"></a>Sources</h2>
+
+
+
+<ul>
+
+  <li><a href="http://www.labri.fr/perso/baril/teaching/TMSI/">J.
+Baril, F. Berthaut, N. Mellado</a></li>
+  <li><a href="http://www.labri.fr/perso/granier/">Xavier Granier</a></li>
+  <li><a href="http://www.irit.fr/%7EMathias.Paulin/">Mathias Paulin</a><br>
+  </li>
+
+</ul>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="TP04.html">PREVIOUS:
+EXERCICE04</a><br>
+      </td>
+      <td style="vertical-align: top; text-align: right;"><a href="TP05.html">NEXT: EXERCICE05</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<br>
+
+</body></html>

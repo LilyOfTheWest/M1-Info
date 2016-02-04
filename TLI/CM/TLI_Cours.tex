@@ -1,0 +1,84 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{url}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage[french]{algorithm2e}
+\usepackage{geometry}
+\usepackage{caption}
+\captionsetup[figure]{slc=on}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\frenchbsetup{StandardLists=true}
+\lstset{
+	breaklines=true, 
+	showspaces=false, 
+	keepspaces=true, 
+	numbers=left,
+	frame=shadowbox, 
+	keywordstyle=\color{blue},
+	basicstyle=\ttfamily\small,
+	commentstyle=\color{green}
+}
+\geometry{hmargin=2.5cm, vmargin=2.5cm}
+
+\title{\textbf{Techniques pour les Logiciels Interactifs}}
+\author{Line \bsc{POUVARET}}
+\date{2015-2016}
+
+\begin{document}
+\maketitle
+
+\chapter{Introduction à l'Interaction Homme-Machine}
+
+cours disponible sur http://iihm.imag.fr/blanch/M1
+
+\section{L'interaction}
+
+Interface d'un logiciel = interface utilisateur.
+
+IHM = interaction homme-machine
+
+\subsection{Définitions}
+
+
+\begin{itemize}\renewcommand{\labelitemi}{$\bullet$}	
+	\item Interface : Frontière entre le monde physique et le monde numérique
+	\item Interaction : Échange continu (boucle). Agit par le biais d'interface sur le monde numérique.
+	\item Interaction Homme-Machine : Évaluation et Conception vont de paire.
+	
+	La mise en œuvre (= réalisation) correspond au sujet du cours.
+\end{itemize}
+
+\subsection{Styles d'interaction}
+\subsubsection{La ligne de commande}
+
+read-eval-print-loop : l'interpréteur se met en attente du texte (sur l'entrée standard)\\
+
+read : récupère l'entrée.
+
+eval : interprète et analyse le résultat.
+
+print : affiche le résultat.\\
+
+Syntaxe + Sémantique doit être connue de l'utilisateur.
+
+\subsubsection{Les menus/formulaires}
+Arrivée des outils informatiques pour des non informaticiens.
+
+Choix parmi des fonctions programmées.
+
+\subsubsection{La manipulation directe ("direct manipulation"}
+B. Schneiderman
+
+Premiers ordinateurs personnels : Xerox Star et Xerox Lisa (avec fonctions de drag&drop)
+
+
+
+\end{document}

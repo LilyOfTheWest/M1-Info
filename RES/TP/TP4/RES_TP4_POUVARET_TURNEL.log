@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.10.8)  24 NOV 2015 13:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.2.1)  1 FEB 2016 13:38
 entering extended mode
-**RES_TP4_POUVARET_TURNEL.tex
+**./RES_TP4_POUVARET_TURNEL.tex
 (RES_TP4_POUVARET_TURNEL.tex
-LaTeX2e <2015/10/01> patch level 1
-Babel <3.9m> and hyphenation patterns for 69 languages loaded.
-(C:\Users\Line\Documents\MikTex\tex\latex\base\article.cls
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9n> and hyphenation patterns for 69 languages loaded.
+(D:\Lily\Latex\tex\latex\base\article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(C:\Users\Line\Documents\MikTex\tex\latex\base\size10.clo
+(D:\Lily\Latex\tex\latex\base\size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -21,19 +21,18 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\base\inputenc.sty
+(D:\Lily\Latex\tex\latex\base\inputenc.sty
 Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-(C:\Users\Line\Documents\MikTex\tex\latex\base\utf8.def
+(D:\Lily\Latex\tex\latex\base\utf8.def
 File: utf8.def 2015/09/07 v1.1p UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
-
-(C:\Users\Line\Documents\MikTex\tex\latex\base\t1enc.dfu
+ (D:\Lily\Latex\tex\latex\base\t1enc.dfu
 File: t1enc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
@@ -192,8 +191,7 @@ File: t1enc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
 )
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
-
-(C:\Users\Line\Documents\MikTex\tex\latex\base\ot1enc.dfu
+(D:\Lily\Latex\tex\latex\base\ot1enc.dfu
 File: ot1enc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
@@ -234,7 +232,7 @@ File: ot1enc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(C:\Users\Line\Documents\MikTex\tex\latex\base\omsenc.dfu
+(D:\Lily\Latex\tex\latex\base\omsenc.dfu
 File: omsenc.dfu 2015/09/07 v1.1p UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -258,27 +256,27 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(C:\Users\Line\Documents\MikTex\tex\latex\base\fontenc.sty
+(D:\Lily\Latex\tex\latex\base\fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(C:\Users\Line\Documents\MikTex\tex\latex\base\t1enc.def
+(D:\Lily\Latex\tex\latex\base\t1enc.def
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
-(C:\Users\Line\Documents\MikTex\tex\generic\babel\babel.sty
-Package: babel 2015/08/03 3.9m The Babel package
+(D:\Lily\Latex\tex\generic\babel\babel.sty
+Package: babel 2016/01/08 3.9n The Babel package
 
 *************************************
 * Local config file bblopts.cfg used
 *
-(C:\Users\Line\Documents\MikTex\tex\latex\00miktex\bblopts.cfg
+(D:\Lily\Latex\tex\latex\00miktex\bblopts.cfg
 File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\babel-french\frenchb.ldf
-Language: frenchb 2015/08/19 v3.1h French support from the babel system
+(D:\Lily\Latex\tex\latex\babel-french\frenchb.ldf
+Language: frenchb 2016/01/01 v3.1k French support from the babel system
 
-(C:\Users\Line\Documents\MikTex\tex\generic\babel\babel.def
-File: babel.def 2015/08/03 3.9m Babel common definitions
+(D:\Lily\Latex\tex\generic\babel\babel.def
+File: babel.def 2016/01/08 3.9n Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
@@ -287,12 +285,13 @@ File: babel.def 2015/08/03 3.9m Babel common definitions
 \FBcolonskip=\skip43
 \FBthinskip=\skip44
 \FB@interchartokenstateORI=\count88
-Package babel Info: Making : an active character on input line 353.
-Package babel Info: Making ; an active character on input line 354.
-Package babel Info: Making ! an active character on input line 355.
-Package babel Info: Making ? an active character on input line 356.
+Package babel Info: Making : an active character on input line 372.
+Package babel Info: Making ; an active character on input line 373.
+Package babel Info: Making ! an active character on input line 374.
+Package babel Info: Making ? an active character on input line 375.
 \FBguillskip=\skip45
 \FBguill@level=\count89
+\FB@everypar=\toks16
 \FB@Mht=\dimen104
 \std@mcc=\count90
 \dec@mcc=\count91
@@ -301,58 +300,58 @@ Package babel Info: Making ? an active character on input line 356.
 \leftmarginFB=\skip48
 \parindentFFN=\dimen105
 ))
-(C:\Users\Line\Documents\MikTex\tex\latex\carlisle\scalefnt.sty)
-(C:\Users\Line\Documents\MikTex\tex\latex\graphics\keyval.sty
+(D:\Lily\Latex\tex\latex\carlisle\scalefnt.sty)
+(D:\Lily\Latex\tex\latex\graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\url\url.sty
+(D:\Lily\Latex\tex\latex\url\url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\graphics\color.sty
+(D:\Lily\Latex\tex\latex\graphics\color.sty
 Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 
-(C:\Users\Line\Documents\MikTex\tex\latex\00miktex\color.cfg
+(D:\Lily\Latex\tex\latex\00miktex\color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 142.
 
-(C:\Users\Line\Documents\MikTex\tex\latex\pdftex-def\pdftex.def
+(D:\Lily\Latex\tex\latex\pdftex-def\pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\infwarerr.sty
+(D:\Lily\Latex\tex\generic\oberdiek\infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\ltxcmds.sty
+(D:\Lily\Latex\tex\generic\oberdiek\ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count92
 ))
-(C:\Users\Line\Documents\MikTex\tex\latex\tools\verbatim.sty
+(D:\Lily\Latex\tex\latex\tools\verbatim.sty
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks17
-\verbatim@line=\toks18
+\every@verbatim=\toks18
+\verbatim@line=\toks19
 \verbatim@in@stream=\read1
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsmath.sty
+(D:\Lily\Latex\tex\latex\amsmath\amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amstext.sty
+(D:\Lily\Latex\tex\latex\amsmath\amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsgen.sty
+(D:\Lily\Latex\tex\latex\amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks19
+\@emptytoks=\toks20
 \ex@=\dimen106
 ))
-(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsbsy.sty
+(D:\Lily\Latex\tex\latex\amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen107
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\amsmath\amsopn.sty
+(D:\Lily\Latex\tex\latex\amsmath\amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count93
@@ -375,44 +374,44 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \dotsspace@=\muskip11
 \c@parentequation=\count100
 \dspbrk@lvl=\count101
-\tag@help=\toks20
+\tag@help=\toks21
 \row@=\count102
 \column@=\count103
 \maxfields@=\count104
-\andhelp@=\toks21
+\andhelp@=\toks22
 \eqnshift@=\dimen109
 \alignsep@=\dimen110
 \tagshift@=\dimen111
 \tagwidth@=\dimen112
 \totwidth@=\dimen113
 \lineht@=\dimen114
-\@envbody=\toks22
+\@envbody=\toks23
 \multlinegap=\skip50
 \multlinetaggap=\skip51
-\mathdisplay@stack=\toks23
+\mathdisplay@stack=\toks24
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\amssymb.sty
+(D:\Lily\Latex\tex\latex\amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\amsfonts.sty
+(D:\Lily\Latex\tex\latex\amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(C:\Users\Line\Documents\MikTex\tex\latex\graphics\graphicx.sty
+(D:\Lily\Latex\tex\latex\graphics\graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Line\Documents\MikTex\tex\latex\graphics\graphics.sty
+(D:\Lily\Latex\tex\latex\graphics\graphics.sty
 Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Line\Documents\MikTex\tex\latex\graphics\trig.sty
+(D:\Lily\Latex\tex\latex\graphics\trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\00miktex\graphics.cfg
+(D:\Lily\Latex\tex\latex\00miktex\graphics.cfg
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 94.
@@ -420,71 +419,74 @@ Package graphics Info: Driver file: pdftex.def on input line 94.
 \Gin@req@height=\dimen115
 \Gin@req@width=\dimen116
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\algorithm2e\algorithm2e.sty
+(D:\Lily\Latex\tex\latex\algorithm2e\algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
 \c@AlgoLine=\count105
 
-(C:\Users\Line\Documents\MikTex\tex\latex\base\ifthen.sty
+(D:\Lily\Latex\tex\latex\base\ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\tools\xspace.sty
+\algocf@hangindent=\skip52
+
+(D:\Lily\Latex\tex\latex\tools\xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\ltxmisc\relsize.sty
+(D:\Lily\Latex\tex\latex\ltxmisc\relsize.sty
 Package: relsize 2003/07/04 ver 3.1
 )
 ********************************************************
-Package `algorithm2e' Release 5.0 -- january 06 2013 --
+Package `algorithm2e' Release 5.1 -- october 19 2015 --
 - algorithm2e-announce@lirmm.fr mailing list for announcement about releases
 - algorithm2e-discussion@lirmm.fr mailing list for discussion about package
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
-- Author: Christophe Fiorio (cfiorio@um2.fr)
+- Author: Christophe Fiorio (christophe.fiorio@umontpellier.fr)
 ********************************************************
-\skiptotal=\skip52
-\skiplinenumber=\skip53
-\skiprule=\skip54
-\skiphlne=\skip55
-\skiptext=\skip56
-\skiplength=\skip57
-\algomargin=\skip58
-\skipalgocfslide=\skip59
+\skiptotal=\skip53
+\skiplinenumber=\skip54
+\skiprule=\skip55
+\skiphlne=\skip56
+\skiptext=\skip57
+\skiplength=\skip58
+\algomargin=\skip59
+\skipalgocfslide=\skip60
 \algowidth=\dimen117
 \inoutsize=\dimen118
 \inoutindent=\dimen119
 \interspacetitleruled=\dimen120
 \interspacealgoruled=\dimen121
 \interspacetitleboxruled=\dimen122
+\algocf@ruledwidth=\skip61
 \algocf@inoutbox=\box28
 \algocf@inputbox=\box29
-\AlCapSkip=\skip60
-\AlCapHSkip=\skip61
-\algoskipindent=\skip62
+\AlCapSkip=\skip62
+\AlCapHSkip=\skip63
+\algoskipindent=\skip64
 \algocf@nlbox=\box30
 \algocf@hangingbox=\box31
 \algocf@untilbox=\box32
-\algocf@skipuntil=\skip63
+\algocf@skipuntil=\skip65
 \algocf@capbox=\box33
-\algoheightruledefault=\skip64
-\algoheightrule=\skip65
-\algotitleheightruledefault=\skip66
-\algotitleheightrule=\skip67
+\algoheightruledefault=\skip66
+\algoheightrule=\skip67
+\algotitleheightruledefault=\skip68
+\algotitleheightrule=\skip69
 \c@algocfline=\count106
 \c@algocfproc=\count107
 \c@algocf=\count108
 \algocf@algoframe=\box34
 \algocf@algobox=\box35
-) (C:\Users\Line\Documents\MikTex\tex\latex\geometry\geometry.sty
+) (D:\Lily\Latex\tex\latex\geometry\geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\ifpdf.sty
+(D:\Lily\Latex\tex\generic\oberdiek\ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-(C:\Users\Line\Documents\MikTex\tex\generic\oberdiek\ifvtex.sty
+(D:\Lily\Latex\tex\generic\oberdiek\ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-(C:\Users\Line\Documents\MikTex\tex\generic\ifxetex\ifxetex.sty
+(D:\Lily\Latex\tex\generic\ifxetex\ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count109
@@ -498,21 +500,21 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutheight=\dimen128
 \Gm@layouthoffset=\dimen129
 \Gm@layoutvoffset=\dimen130
-\Gm@dimlist=\toks24
+\Gm@dimlist=\toks25
 
-(C:\Users\Line\Documents\MikTex\tex\latex\geometry\geometry.cfg))
-(C:\Users\Line\Documents\MikTex\tex\latex\enumitem\enumitem.sty
+(D:\Lily\Latex\tex\latex\geometry\geometry.cfg))
+(D:\Lily\Latex\tex\latex\enumitem\enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
-\labelindent=\skip68
+\labelindent=\skip70
 \enit@outerparindent=\dimen131
-\enit@toks=\toks25
+\enit@toks=\toks26
 \enit@inbox=\box36
 \enitdp@description=\count112
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\listings\listings.sty
+(D:\Lily\Latex\tex\latex\listings\listings.sty
 \lst@mode=\count113
 \lst@gtempboxa=\box37
-\lst@token=\toks26
+\lst@token=\toks27
 \lst@length=\count114
 \lst@currlwidth=\dimen132
 \lst@column=\count115
@@ -523,18 +525,19 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \lst@lineno=\count118
 \lst@maxwidth=\dimen135
 
-(C:\Users\Line\Documents\MikTex\tex\latex\listings\lstmisc.sty
+(D:\Lily\Latex\tex\latex\listings\lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 \c@lstnumber=\count119
 \lst@skipnumbers=\count120
 \lst@framebox=\box38
 )
-(C:\Users\Line\Documents\MikTex\tex\latex\listings\listings.cfg
+(D:\Lily\Latex\tex\latex\listings\listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
+ (RES_TP4_POUVARET_TURNEL.aux)
+\openout1 = `RES_TP4_POUVARET_TURNEL.aux'.
 
-(RES_TP4_POUVARET_TURNEL.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
@@ -551,19 +554,19 @@ LaTeX Info: Redefining \degres on input line 24.
 LaTeX Info: Redefining \dots on input line 24.
 LaTeX Info: Redefining \up on input line 24.
 
-(C:\Users\Line\Documents\MikTex\tex\context\base\supp-pdf.mkii
+(D:\Lily\Latex\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count121
 \scratchdimen=\dimen136
 \scratchbox=\box39
 \nofMPsegments=\count122
 \nofMParguments=\count123
-\everyMPshowfont=\toks27
+\everyMPshowfont=\toks28
 \MPscratchCnt=\count124
 \MPscratchDim=\dimen137
 \MPnumerator=\count125
 \makeMPintoPDFobject=\count126
-\everyMPtoPDFconversion=\toks28
+\everyMPtoPDFconversion=\toks29
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -601,12 +604,12 @@ LaTeX Info: Redefining \up on input line 24.
 
 \c@lstlisting=\count127
 LaTeX Font Info:    Try loading font information for U+msa on input line 26.
-(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\umsa.fd
+(D:\Lily\Latex\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 26.
 
-(C:\Users\Line\Documents\MikTex\tex\latex\amsfonts\umsb.fd
+(D:\Lily\Latex\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Underfull \hbox (badness 10000) in paragraph at lines 30--31
@@ -614,7 +617,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--31
  []
 
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 37.
-(C:\Users\Line\Documents\MikTex\tex\latex\base\omscmr.fd
+(D:\Lily\Latex\tex\latex\base\omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
@@ -626,7 +629,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--68
 
 [1
 
-{C:/Users/Line/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{C:/Users/Lily/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 Underfull \hbox (badness 10000) in paragraph at lines 77--78
 
  []
@@ -781,31 +784,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 330--331
 
  []
 
-[6] [7] (RES_TP4_POUVARET_TURNEL.aux) ) 
+[6] [7] (RES_TP4_POUVARET_TURNEL.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 1061 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 7194 strings out of 493636
- 97009 string characters out of 3142570
- 196392 words of memory out of 3000000
- 10483 multiletter control sequences out of 15000+200000
+ 6957 strings out of 493634
+ 94195 string characters out of 3149444
+ 191077 words of memory out of 3000000
+ 10246 multiletter control sequences out of 15000+200000
  16735 words of font info for 49 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 28i,12n,32p,358b,469s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/Line/Documents/MikTex/fonts/en
-c/dvips/cm-super/cm-super-t1.enc}<C:/Users/Line/Documents/MikTex/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/
-amsfonts/cm/cmmi5.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/amsfon
-ts/cm/cmmi7.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sfbx1000
-.pfb><C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sfbx1200.pfb><
-C:/Users/Line/Documents/MikTex/fonts/type1/public/cm-super/sfbx1440.pfb><C:/Use
-rs/Line/Documents/MikTex/fonts/type1/public/cm-super/sfcc1200.pfb><C:/Users/Lin
-e/Documents/MikTex/fonts/type1/public/cm-super/sfrm1000.pfb><C:/Users/Line/Docu
-ments/MikTex/fonts/type1/public/cm-super/sfrm1200.pfb><C:/Users/Line/Documents/
-MikTex/fonts/type1/public/cm-super/sfrm1728.pfb><C:/Users/Line/Documents/MikTex
-/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on RES_TP4_POUVARET_TURNEL.pdf (7 pages, 193608 bytes).
+ 28i,12n,32p,360b,3634s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Lily\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
+en\ec\dpi600\ecti1000.pk> <C:\Users\Lily\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
+ur\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Lily\AppData\Local\MiKTeX\2.9\font
+s\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\Lily\AppData\Local\MiKTeX
+\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Users\Lily\AppData\Loc
+al\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Lily\Ap
+pData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1200.pk> <C:\User
+s\Lily\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk>
+ <C:\Users\Lily\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecr
+m1728.pk><D:/Lily/Latex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Lily/Late
+x/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/Lily/Latex/fonts/type1/public/am
+sfonts/cm/cmmi7.pfb><D:/Lily/Latex/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on RES_TP4_POUVARET_TURNEL.pdf (7 pages, 149143 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
+ 348 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

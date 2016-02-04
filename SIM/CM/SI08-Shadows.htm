@@ -1,0 +1,505 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>SI08-Shadows</title>
+  
+
+  
+  
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
+  </script></head><body>
+<div style="text-align: right;">Author: Romain Vergne (<a href="http://romain.vergne.free.fr/blog/">website</a>)<br>
+Please cite my name and add a link to my web page if you use this course<br>
+</div>
+
+<h1 style="text-align: center;">Image synthesis and OpenGL: shadows<br>
+</h1>
+
+Quick links to:<br>
+
+<ol>
+
+  <li><a href="#Importance_of_shadows">Importance of shadows</a></li>
+  <li><a href="#Definition">Definition</a></li>
+  <li><a href="#Shadow_volumes_">Shadow volumes</a></li>
+  <li><a href="#Shadow_map">Shadow map</a></li>
+  <li><a href="#Perspective_Shadow_Map">Perspective Shadow Map</a></li>
+  <li><a href="#Cascaded_Shadow_map">Cascaded Shadow map</a></li>
+  <li><a href="#Fixed_soft_shadows_and_filtering">Fixed soft shadows and filtering</a></li>
+  <li><a href="#Extended_Soft_Shadows">Extended Soft Shadows</a><br>
+  </li>
+<li><a href="#Sources">Sources</a><br>
+  </li>
+</ol>
+
+<h2><a name="Importance_of_shadows"></a>Importance of shadows</h2>
+<div style="text-align: center;"><span style="font-weight: bold;">Shadows can surprinsigly affect perceived object positions</span><br>
+<br>
+</div>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 978px; height: 243px;" alt="" src="imgs08/importanceshadows01.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 981px; height: 180px;" alt="" src="imgs08/importanceshadows02.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align: center;">Images from <a href="http://mamassian.free.fr/papers/mamassian_tics98.pdf">[Mamassian et al. 1998]</a>. Watch the demo <a href="http://gandalf.psych.umn.edu/users/kersten/kersten-lab/demos/Shadows.mov">here</a>. <br>
+</div>
+<br>
+<br>
+<h2><a name="Definition"></a>
+Definition</h2>
+
+
+\[ <br>
+
+
+L(\mathbf{p} \rightarrow \mathbf{e}) =<br>
+
+\rho_a L_a + <br>
+
+
+&nbsp;\sum_{k} <br>
+
+
+&nbsp; \rho(\mathbf{p}, \mathbf{e}, \pmb{\ell}_k) \<br>
+
+
+&nbsp; (\mathbf{n}\cdot\pmb{\ell}_k) \<br>
+
+
+&nbsp;&nbsp; V(\mathbf{p},\pmb{\ell}) \ L(\mathbf{p} \leftarrow \pmb{\ell}_k) <br>
+
+
+\]<br>
+<br>
+Visibility term \( V \) at a point \( \mathbf{p} \)<br>
+<ul>
+  <li>0 if the light source is hidden at point \( \mathbf{p} \)</li>
+  <li>1 if the light source is visible at point \( \mathbf{p} \)</li>
+  <li>Shadows ~= surfaces for which light sources are not visible<br>
+  </li>
+</ul>
+
+<div style="text-align: center;"><img style="width: 559px; height: 366px;" alt="" src="imgs08/shadow-def.jpg"><br>
+</div>
+<br>
+<h2><a name="Shadow_volumes_"></a>Shadow volumes </h2>
+<ul>
+  <li>A ponctual source divides space in two: shadowed and lighted regions</li>
+  <li>shadow volume = boundary between these regions<br>
+  </li>
+</ul>
+<div style="text-align: center;"><img style="width: 423px; height: 267px;" alt="" src="imgs08/shadow-volume.png"><a href="http://msdn.microsoft.com/en-us/library/windows/desktop/bb757042.aspx"><img style="border: 0px solid ; width: 410px; height: 266px;" alt="" src="imgs08/shadow-vol04.gif"></a><br>
+</div>
+<br>
+<h3>Algorithm</h3>
+<ol>
+  <li>Render the scene with depth ambiant lighting attributes</li>
+  <li>From a light source, calculate silhouettes of all occluders <br>
+  </li>
+  <li>Extrude silhouettes away from the light <br>
+  </li>
+  <li>Render the shadow volume: from the camera, test front and back shadow volume faces and update the stencil buffer<br>
+  </li>
+  <li>Do a light pass using the stencil buffer <br>
+  </li>
+  <li>Repeat steps 2-5 for all lights <br>
+  </li>
+</ol>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 255px; height: 229px;" alt="" src="imgs08/shadow-vol02.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 916px; height: 229px;" alt="" src="imgs08/shadow-vol03.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>Deadling with soft shadows</h3>
+<ol>
+  <li>Compute shadow volumes for a few light positions</li>
+  <li>Compare shadow faces for the different positions<br>
+  </li>
+</ol>
+<br>
+<div style="text-align: center;"><img style="width: 442px; height: 253px;" alt="" src="imgs08/shadow-vol05.jpg"><br>
+</div>
+<div style="text-align: center;"><span style="font-weight: bold;"><br>
+<br>
+Shadow volumes in Doom 3</span><br>
+</div>
+<div style="text-align: center;"><img style="width: 348px; height: 285px;" alt="" src="imgs08/doom3.jpg"><br>
+</div>
+<ul>
+  <li>+ precise&nbsp;</li>
+  <li>+ directionnal / ponctual light sources <br>
+  </li>
+  <li>- highly dependent on the scene geometry</li>
+  <ul>
+    <li>necessitates manifold meshes</li>
+    <li>lots of triangles : lots of silhouette extrusions<br>
+    </li>
+  </ul>
+</ul>
+<ul>
+  <li><a href="http://www.irit.fr/%7EMathias.Paulin/AGGA/RTR/shadows/shadows.html">Further reading on shadow volumes&nbsp;</a></li>
+</ul>
+<br>
+<h2><a name="Shadow_map"></a>Shadow map</h2>
+<h3 style="text-align: center;"><a href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/"><img style="border: 0px solid ; width: 485px; height: 207px;" alt="" src="imgs08/shadow-mapping02.png"></a></h3>
+<h3>Algorithm</h3>
+
+<ol>
+<li>From the light point of view</li>
+  <ol>
+    <li>render the scene <br>
+    </li>
+    <li>store depth in a buffer (the shadow map) using render to texture (FBO)</li>
+    <ol>
+      <li>via an orthographic projection with a directionnal light</li>
+      <li>via a perspective projection with a spot light</li>
+      <li>via a perspective projection in a cube map for a point light <br>
+      </li>
+    </ol>
+  </ol>
+  <li>From the camera point of view</li>
+  <ol>
+    <li>render the scene</li>
+    <li>compute lighting <br>
+    </li>
+    <li>project/convert vertex position in the light coordinate system <br>
+    </li>
+    <li>compare vertex depth with the one stored in the shadow map</li>
+    <li>if the vertex is farther, then it is in the shadow<br>
+    </li>
+  </ol>
+</ol>
+<div style="text-align: center;"><a href="http://www.nealen.net/projects/ibr/shadows.pdf"><img style="border: 0px solid ; width: 722px; height: 229px;" alt="" src="imgs08/shadow-mapping01.jpg"></a><br>
+</div>
+<div style="text-align: center;">left: final rendering from the camera.
+Middle: rendering from the light source. Right: depth map obtained from
+the light source (shadow map)<br>
+</div>
+<br>
+<div style="text-align: center;"><br>
+</div>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/"><img style="border: 0px solid ; width: 274px; height: 274px;" alt="" src="imgs08/DepthTexture.png"></a><br>
+      <div style="text-align: center;">Shadow map (depth from light)<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><a href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/"><img style="border: 0px solid ; width: 357px; height: 275px;" alt="" src="imgs08/NoPeterPanning-1024x793.png"></a><br>
+      <div style="text-align: center;">Basic shadow mapping<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>Issues</h3>
+<div style="text-align: center;"><a href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/"><img style="border: 0px solid ; width: 380px; height: 294px;" alt="" src="imgs08/1rstTry-1024x793.png"></a><br>
+</div>
+<br>
+<ul>
+  <li>Shadow acne effect</li>
+  <ul>
+    <li>Solution 1: use a bias when comparing depths (but may produce other artifacts)</li>
+    <li>Solution 2: do not use thin geometry. Draw back faces first (generate shadow maps), and front faces next to render and compare<br>
+    </li>
+
+  </ul>
+</ul>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/"><img style="border: 0px solid ; width: 349px; height: 183px;" alt="" src="imgs08/ShadowAcne.png"></a><br>
+      </td>
+      <td style="vertical-align: top;"><a href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/"><img style="border: 0px solid ; width: 266px; height: 183px;" alt="" src="imgs08/shadow-acne.png"></a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li>Aliasing</li></ul>
+<div style="text-align: center;"><img style="width: 256px; height: 256px;" alt="" src="imgs08/perspective03.png"></div>
+<br>
+<h2><a name="Perspective_Shadow_Map"></a>
+Perspective Shadow Map</h2>
+A solution consists in increasing the resolution of the shadow map near
+the camera (where the problem is the most important and visible)<br>
+<div style="text-align: center;"><img style="width: 493px; height: 281px;" alt="" src="imgs08/perspective07.jpg"><br>
+</div>
+<div style="text-align: center;"><br>
+<br>
+Images taken <a href="http://www-sop.inria.fr/reves/Marc.Stamminger/psm/">here</a><br>
+</div>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs08/perspective01.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs08/perspective02.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs08/perspective03.png"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs08/perspective04.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs08/perspective05.png"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs08/perspective06.png"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><a name="Cascaded_Shadow_map"></a>Cascaded Shadow map</h2>
+<div style="text-align: center;">Use several shadow maps at different resolutions depending on camera frustum<br>
+<br>
+</div>
+<div style="text-align: center;"><img style="width: 158px; height: 150px;" alt="" src="imgs08/csm01.png"><img style="width: 640px; height: 140px;" alt="" src="imgs08/csm02.png"></div>
+<br>
+<div style="text-align: center;"><img style="width: 400px; height: 279px;" alt="" src="imgs08/csm03.jpg"><br>
+A simple example <a href="http://www.youtube.com/watch?v=yIoVk08Yz4Y">here</a><br>
+</div>
+<br>
+<h2><a name="Fixed_soft_shadows_and_filtering"></a>Fixed soft shadows and filtering<br>
+</h2>
+<h3>Percentage Closer Filtering (PCF)</h3>
+
+<ul>
+<li>Bilinear interpolation on the result of the comparison test</li><li>Warning: different from comparing the result of the bilinear interpolation on the depth map</li>
+</ul>
+
+
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 263px;" alt="" src="imgs08/bilateralvspcf01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 263px;" alt="" src="imgs08/bilateralvspcf02.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<div style="text-align: center;"><a href="http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/"><img style="border: 0px solid ; width: 258px; height: 183px;" alt="" src="imgs08/PCF.png"></a><br>
+</div>
+<div style="text-align: center;">
+Better but still a lot of aliasing<br>
+</div>
+<br>
+<ul>
+  <li>Does not generate soft shadows <br>
+  </li>
+  <li>May introduces artifacts</li>
+</ul>
+<br>
+<h3>Variance / Convolution / Exponential Shadow Maps <br>
+</h3>
+<ul>
+  <li>Solution: approximate shadow test by a linear function that can be prefiltered </li>
+  <li>Goal: blur the shadow map to generate realistic soft shadows</li>
+</ul>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 380px; height: 250px;" alt="" src="imgs08/vsmgraph.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 348px; height: 259px;" alt="" src="imgs08/csmgraph.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 306px; height: 253px;" alt="" src="imgs08/esmgraph.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">
+      <div style="text-align: center;">VSM: based on mean and variance depth values<br>
+      </div>
+      <ul>
+        <li>May produce light bleeding effects</li>
+        <li>But better solutions proposed [Lauritzen 07/08]<br>
+        </li>
+      </ul>
+      </td>
+      <td style="vertical-align: top;">
+      <div style="text-align: center;">CSM: based on 1D fourier expansion<br>
+      </div>
+      <ul>
+        <li>May produce bleeding and ringing</li>
+        <li>Quite slow<br>
+        </li>
+      </ul>
+      </td>
+      <td style="vertical-align: top;">ESM: based on an exponential approximation<br>
+      <ul>
+        <li>May produce small artifacts</li>
+        <li>But resolved by [Salvi08]</li>
+        <li>Fast<br>
+        </li>
+      </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align: center;"><img style="width: 760px; height: 329px;" alt="" src="imgs08/filteringsm2.jpg"><br>
+</div>
+<div style="text-align: center;"><img style="width: 774px; height: 341px;" alt="" src="imgs08/filteringsm.jpg"><br>
+</div>
+<br>
+<br>
+<h2><a name="Extended_Soft_Shadows"></a>Extended Soft Shadows</h2>
+<h3>Percentage Closer Soft Shadows</h3>
+Observation: increasing the PCF kernel size produces soft shadows<br>
+Solution: Percentage Closer Soft Shadows<br>
+<br>
+<ol>
+  <li>Blocker search <br>
+  </li>
+  <ol>
+    <li>sample the depth buffer <br>
+    </li>
+    <li>average depths that are closer to the light</li>
+  </ol>
+  <li>Estimate penumbra</li>
+  <ol>
+    <li>estimate penumbra width based on light size and blocker/receiver distances from the light</li>
+  </ol>
+  <li>Filter</li>
+  <ol>
+    <li>using PCF...</li>
+    <li>... or VSM, CSM, ESM<br>
+    </li>
+  </ol>
+</ol>
+<div style="text-align: center; font-weight: bold;">
+  Example using a simple gaussian filtering<br>
+</div>
+<ul>
+</ul>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://www.gamedev.net/page/resources/_/technical/graphics-programming-and-theory/soft-edged-shadows-r2193"><img style="border: 0px solid ; width: 400px; height: 300px;" alt="" src="imgs08/ScreenMap.jpg"></a></td>
+      <td style="vertical-align: top;"><a href="http://www.gamedev.net/page/resources/_/technical/graphics-programming-and-theory/soft-edged-shadows-r2193"><img style="border: 0px solid ; width: 400px; height: 300px;" alt="" src="imgs08/BlurMap1.jpg"></a></td>
+      <td style="vertical-align: top;"><a href="http://www.gamedev.net/page/resources/_/technical/graphics-programming-and-theory/soft-edged-shadows-r2193"><img style="border: 0px solid ; width: 400px; height: 300px;" alt="" src="imgs08/SoftShadows.jpg"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<div style="text-align: center;"><img style="width: 768px; height: 320px;" alt="" src="imgs08/softshadows-filterscreenspace.jpg"><br>
+</div>
+
+<br><br>
+<div style="text-align: center;"><span style="font-weight: bold;">Examples using PCF and bilateral filters</span><br>
+</div>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="http://developer.download.nvidia.com/shaderlibrary/docs/shadow_PCSS.pdf"><img style="border: 0px solid ; width: 336px; height: 223px;" alt="" src="imgs08/pcss1.jpg"></a><br>
+      <div style="text-align: center;">Original PCSS<br>
+(PCF filter)<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><a href="http://hal.inria.fr/inria-00536256/en"><img style="border: 0px solid ; width: 225px; height: 224px;" alt="" src="imgs08/pcss2.jpeg"></a><br>
+      <div style="text-align: center;">Screen Space PCSS<br>
+(bilateral filter)<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h3>Brute force sampling (not real-time but correct)</h3>
+<table style="text-align: left; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 188px;" alt="" src="imgs08/soft-sampling01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 188px;" alt="" src="imgs08/soft-sampling02.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 188px;" alt="" src="imgs08/soft-sampling03.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 188px;" alt="" src="imgs08/soft-sampling04.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 188px;" alt="" src="imgs08/soft-sampling05.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">1 source<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">2 sources<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">4 sources<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">16 sources<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">256 sources<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2><a name="Sources"></a>Sources</h2>
+
+<ul>
+
+  <li><a href="http://www.labri.fr/perso/baril/teaching/TMSI/">J.
+Baril, F. Berthaut, N. Mellado</a></li>
+  <li><a href="http://www.nealen.net/projects/ibr/shadows.pdf">Shadow Mapping and Shadow Volumes: Recent Developments in Real-Time Shadow Rendering [Nealen]</a></li>
+  <li><a href="http://www.gamedev.net/page/resources/_/technical/graphics-programming-and-theory/the-theory-of-stencil-shadow-volumes-r1873">The Theory of Stencil Shadow Volumes</a></li>
+  <li><a href="http://www.cs.berkeley.edu/%7Eravir/6160-fall04/papers/shadow_mapping.pdf">Hardware Shadow Mapping [Everitt et al.]</a></li>
+  <li><a href="http://www-sop.inria.fr/reves/Basilic/2003/SDD03/">Perspective Shadow Maps [Stamminger et al. 2003]</a></li>
+  <li><a href="http://developer.download.nvidia.com/SDK/10.5/opengl/src/cascaded_shadow_maps/doc/cascaded_shadow_maps.pdf">Cascaded Shadow Maps [Nvidia]</a></li>
+  <li><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.104.2569">Variance Shadow Maps [Donnelly and Lauritzen 2006]<br>
+    </a></li>
+  <li><a href="http://http.developer.nvidia.com/GPUGems3/gpugems3_ch08.html">Summed-area Variance Shadow Maps [Lauritzen] (GPU Gems 3)</a></li>
+  <li><a href="http://www.thomasannen.com/pub/egsr2007.pdf">Convolution Shadow Maps [Annen et al. 2007]<br>
+    </a></li>
+  <li><a href="http://research.edm.uhasselt.be/tmertens/papers/gi_08_esm.pdf">Exponential Shadow Maps [Annen et al. 2008]</a></li>
+  <li><a href="http://developer.download.nvidia.com/presentations/2008/GDC/GDC08_SoftShadowMapping.pdf">Game Developper Conference [Nvidia 2008]</a></li>
+  <li><a href="http://developer.download.nvidia.com/shaderlibrary/docs/shadow_PCSS.pdf">Percentage Closer Soft Shadows [Fernando 2005] </a><em></em></li>
+
+
+</ul>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="TP07.html">PREVIOUS:
+EXERCICE07</a><br>
+      </td>
+      <td style="vertical-align: top; text-align: right;"><a href="TP08.html">NEXT: EXERCICE08</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<br>
+
+</body></html>

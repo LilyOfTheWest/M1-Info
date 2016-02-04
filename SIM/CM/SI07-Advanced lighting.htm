@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>SI07-Advanced lighting</title>
+  
+
+  
+  
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> 
+  </script></head><body>
+<div style="text-align: right;">Author: Romain Vergne (<a href="http://romain.vergne.free.fr/blog/">website</a>)<br>
+Please cite my name and add a link to my web page if you use this course<br>
+</div>
+
+<h1 style="text-align: center;">Image synthesis and OpenGL: advanced lighting<br>
+</h1>
+
+Quick links to:<br>
+
+<ol>
+
+  <li><a href="#Importance_of_natural_lightings">Importance of natural lightings</a></li>
+  <li><a href="#Irradiance_environment_maps">Irradiance environment maps</a></li>
+  <li><a href="#Radiosity_mapping">Radiosity mapping</a></li>
+  <li><a href="#Radiosity_normal_mapping">Radiosity normal mapping</a></li>
+  <li><a href="#Irradiance_normal_mapping">Irradiance normal mapping</a></li>
+  <li><a href="#Environment_influence_on_dynamic_objects">Environment influence on dynamic objects</a></li>
+  <li><a href="#Dynamic_lights">Dynamic lights</a></li>
+  <li><a href="#Sources">Sources</a><br>
+  </li>
+</ol>
+
+<h2><a name="Importance_of_natural_lightings"></a>Importance of natural lightings</h2>
+<div style="text-align: center;"><span style="font-weight: bold;">Same material / different lighting conditions</span><br>
+
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs07/percept01.jpg"><br>
+      <div style="text-align: center;">Point light<br>
+
+      </div>
+</td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs07/percept02.jpg"><br>
+      <div style="text-align: center;">Environment<br>
+
+      </div>
+</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2><a name="Irradiance_environment_maps"></a>Irradiance environment maps</h2>
+
+<ul>
+<li>sum of all light energies received on a part of a surface</li><li>Hypothesis</li><ul><li>Diffuse surface</li><li>Distant illumination</li><li>No shadows</li><li>No inter-reflections<br>
+    </li></ul>
+</ul>
+
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/irradiance01.jpg"><br>
+      <div style="text-align: center;">Radiance env map<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs06/irradiance02.jpg"><br>
+      <div style="text-align: center;">Irradiance env map<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+
+<li>Hemispherical integration on each pixel</li><ul><li>slow!</li></ul><li>Approximation using frequential analysis</li>
+  <ul>
+    <li>Spherical harmonics<br>
+    </li>
+  </ul>
+</ul>
+<ul>
+
+</ul>
+<div style="text-align: center;"><span style="font-weight: bold;">Refinable Basis functions</span><br>
+</div>
+<div style="text-align: center;"><img style="width: 641px; height: 385px;" alt="" src="imgs07/sh.jpg"><br>
+</div>
+<div style="text-align: center;"><br>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs07/sh-orig.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs07/sh-approx0.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs07/sh-approx1.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 256px; height: 256px;" alt="" src="imgs07/sh-approx2.jpg"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">Original<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">Approx order 0 (1 coefs)<br>
+RMS = 25%<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">Approx order 1 (4 coefs)<br>
+RMS=8%<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">Approx order 2 (9 coefs)<br>
+RMS=1%<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<ul>
+<li>Spherical harmonics</li>
+  <ul>
+    <li>good approximation using only 9 coeficients</li>
+    <li>per vertex or per fragment<br>
+    </li>
+  </ul>
+<li>But<br>
+</li><ul><li>only diffuse surfaces <br>
+</li></ul>
+</ul>
+<div style="text-align: center;"><span style="font-weight: bold;">More information </span><a style="font-weight: bold;" href="http://www.cs.berkeley.edu/%7Eravir/papers/envmap/">here</a><br>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 338px; height: 450px;" alt="" src="imgs07/sh-ex02.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 450px;" alt="" src="imgs07/sh-ex01.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<h2><a name="Radiosity_mapping"></a>Radiosity mapping</h2>
+<ul>
+  <li>Indirect lighting</li>
+  <ul>
+    <li>secondary light sources</li>
+    <li>global lighting</li>
+    <li>slow!! not real-time</li>
+  </ul>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 397px; height: 352px;" alt="" src="imgs07/radiosity01.jpg"><br>
+      <div style="text-align: center;">computation: 3min<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 388px; height: 352px;" alt="" src="imgs07/radiosity02.jpg"><br>
+      <div style="text-align: center;">computation: 7h<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<ul>
+  <li>Solution:</li>
+  <ul>
+    <li>precompute solution<br>
+    </li>
+    <li>use it in real-time applications</li>
+  </ul>
+  <li>Only works with view-independent materials</li>
+  <ul>
+    <li>diffuse surfaces (only depends on surface normal)<br>
+    </li>
+    <li>\( \longrightarrow \)<a href="http://www.siggraph.org/education/materials/HyperGraph/radiosity/overview_1.htm">radiosity</a>: model the transfer of energy between surfaces</li>
+  </ul>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 279px;" alt="" src="imgs07/halflife-radoff.jpg"><br>
+      <div style="text-align: center;">Direct lighting only<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 280px;" alt="" src="imgs07/halflife-radon.jpg"><br>
+      <div style="text-align: center;">Direct lighting + radiosity<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<ul>
+  <li>Light maps</li>
+  <ul>
+    <li>efficient / fast</li>
+    <li>limited to diffuse materials</li>
+    <li>limited to static scenes</li>
+    <li>no high frequencies</li>
+  </ul>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 250px;" alt="" src="imgs07/rnm01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 251px;" alt="" src="imgs07/rnm02.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 250px;" alt="" src="imgs07/rnm03.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li>Problem: what if we do not know the orientation of the surface in advance (i.e. normal mapping)? <br>
+  </li>
+</ul>
+<br>
+<h2><a name="Radiosity_normal_mapping"></a>Radiosity normal mapping</h2>
+<ul>
+  <li>Combine light maps and normal maps</li>
+  <ul>
+    <li>light map = global illum effect per vertex (low freq)</li>
+    <li>normal maps = geometry details</li>
+  </ul>
+  <li>Surface normal not known in advance</li>
+  <ul>
+    <li>compute radiosity for a few space directions</li>
+    <li>interpolate in the shader according to the (detailed) normal <br>
+    </li>
+  </ul>
+</ul>
+<h3>Radiosity sampling</h3>
+<div style="text-align: center;"><img style="width: 502px; height: 195px;" alt="" src="imgs07/rnm04.jpg"><br>
+</div>
+<div style="text-align: left;">
+<div style="text-align: center; font-weight: bold;">Radiosity precomputed for 3 directions<br>
+</div>
+<br>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 250px;" alt="" src="imgs07/rnm07.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 249px;" alt="" src="imgs07/rnm08.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 251px;" alt="" src="imgs07/rnm09.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h3>Rendering</h3>
+<ul>
+  <li>3 radiosity values per vertex (1 for each direction)</li>
+  <li>project normal in the directional space</li>
+  <li>interpolate radiosity value from these 3 directions</li>
+</ul>
+<div style="text-align: center;"><br>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 251px;" alt="" src="imgs07/rnm10.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 400px; height: 251px;" alt="" src="imgs07/rnm14.jpg"><br>
+      </td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" rowspan="1" style="vertical-align: top;"><img style="width: 620px; height: 387px;" alt="" src="imgs07/rnm11.jpg"></td>
+    </tr>
+  </tbody>
+</table>
+<div style="text-align: left;"><br>
+<ul>
+  <li>Approximate global lighting</li>
+  <li>easy to evaluate</li>
+  <li>Not too much memory</li>
+  <li>Limitations:</li>
+  <ul>
+    <li>diffuse surfaces</li>
+    <li>static objects</li>
+    <li>big approximation<br>
+    </li>
+  </ul>
+</ul>
+<br>
+</div>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr align="center">
+      <td colspan="2" rowspan="1" style="vertical-align: top;"><span style="font-weight: bold;">Without radiosity normal mapping</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 281px;" alt="" src="imgs07/rnm13.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 281px;" alt="" src="imgs07/rnm16.jpg"><br>
+      </td>
+    </tr>
+    <tr align="center">
+      <td colspan="2" rowspan="1" style="vertical-align: top;"><span style="font-weight: bold;">With radiosity normal mapping</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 281px;" alt="" src="imgs07/rnm12.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 281px;" alt="" src="imgs07/rnm15.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h2><a name="Irradiance_normal_mapping"></a>Irradiance normal mapping</h2>
+<ul>
+  <li>Identical to Radiosity Normal Mapping execpt that <br>
+  </li>
+  <ul>
+    <li>hemispherical harmonics are used to store irradiance at each sample</li>
+    <li>defined in the tangent plane</li>
+    <li>refinable basis functions</li>
+  </ul>
+</ul>
+<div style="text-align: center;"><span style="font-weight: bold;">Spherical Harmonics (SH) and HemiSpherical Harmonics</span> <span style="font-weight: bold;">(HSH)</span><br>
+</div>
+<div style="text-align: center;"><img style="width: 666px; height: 236px;" alt="" src="imgs07/sh-hsh.jpg"><br>
+</div>
+<br>
+<ul>
+  <li>Efficient for indirect lighting</li>
+  <ul>
+    <li>hemispherical harmonics <br>
+    </li>
+  </ul>
+  <ul>
+    <li>stored per vertex (about 6 coefs)</li>
+    <li>fast to evaluate (polynomial expansion)</li>
+  </ul>
+  <li>Allows to deal with normal variations</li>
+  <ul>
+    <li>irradiance defined in the whole hemisphere in the tangent plane</li>
+    <li>allows big normal variations</li>
+  </ul>
+  <li>Limitations</li>
+  <ul>
+    <li>static objects</li>
+    <li>object-dependant (not reusable)</li>
+  </ul>
+  <li><a href="http://www.youtube.com/watch?v=87k2QbEEvwE&amp;noredirect=1">A video here</a><br>
+  </li>
+</ul>
+<div style="text-align: center;"><img style="width: 1210px; height: 244px;" alt="" src="imgs07/inm01.jpg"><br>
+</div>
+<div style="text-align: center; font-weight: bold;">Standard light map (left), Irrandiance Normal Mapping (middle), INM with albedo (right)<br>
+</div>
+<br>
+<br>
+<h2><a name="Environment_influence_on_dynamic_objects"></a>Environment influence on dynamic objects</h2>
+<h3>Irradiance volume<br>
+</h3>
+<ul>
+  <li>Ambient cube</li>
+  <ul>
+    <li>Irradiance sampled in 6 directions</li>
+  </ul>
+  <ul>
+    <li>Can be precomputed at every point of a scene<br>
+    </li>
+  </ul>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 547px; height: 315px;" alt="" src="imgs07/probescube.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 330px; height: 308px;" alt="" src="imgs07/ambientcube.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<ul>
+  <li>Scene sampling</li>
+  <ul>
+    <li>coarse grid (only needs a low resolution effect)</li>
+    <li>by designer (probes placed at different positions in the scene)<br>
+    </li>
+  </ul>
+</ul>
+<div style="text-align: center;"><img style="width: 465px; height: 305px;" alt="" src="imgs07/probes.jpg"><br>
+</div>
+<br>
+<ul>
+  <li>Object lighting</li>
+  <ul>
+    <li>from a given object</li>
+    <li>get the closest ambient cube</li>
+    <li>approx irradiance according to surface normal and cube faces</li>
+  </ul>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 348px;" alt="" src="imgs07/probescubeoff.jpg"><br>
+      <div style="text-align: center;">Without ambient cube<br>
+      </div>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 450px; height: 349px;" alt="" src="imgs07/probescubeon.jpg"><br>
+      <div style="text-align: center;">With ambient cube<br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>Light propagation volumes</h3>
+<ul>
+  <li>Sample secondary sources</li>
+  <li>Group samples in a coarse grid</li>
+  <li>Propagate samples in neighbor cells</li>
+  <li>Use this radiosity information according to object positions in the scene<br>
+  </li>
+</ul>
+<table style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 250px;" alt="" src="imgs07/lpv01.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 250px;" alt="" src="imgs07/lpv02.jpg"><br>
+      </td>
+      <td style="vertical-align: top;"><img style="width: 250px; height: 249px;" alt="" src="imgs07/lpv03.jpg"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div style="text-align: center;"><img style="width: 824px; height: 478px;" alt="" src="imgs07/cryengine3.jpg"><br>
+</div>
+<div style="text-align: center; font-weight: bold;">See a video <a href="http://www.youtube.com/watch?v=vPQ3BbuYVh8">here</a><br>
+</div>
+<br>
+<h2><a name="Dynamic_lights"></a>Dynamic lights</h2>
+How to deal with many lights and many objects, covering many pixels?<br>
+Three main solution:<br>
+<br>
+<h3>Single pass <br>
+</h3>
+<ul>
+  <li>For each object</li>
+  <ul>
+    <li>render object, apply all lighting in one shader</li>
+  </ul>
+</ul>
+<br>
+<ul>
+  <li>Limitations</li>
+  <ul>
+    <li>hidden surfaces: wasted shading</li>
+    <li>hard to manage multi-light situations</li>
+    <li>hard to integrate with shadows</li>
+  </ul>
+</ul>
+<h3>Multipass lighting</h3>
+<ul>
+<li>For each light</li><ul><li>For each object affected by light</li>
+    <ul>
+      <li>framebuffer += brdf(object,light)</li>
+    </ul>
+</ul>
+</ul>
+
+<br>
+
+<ul>
+<li>Limitations</li><ul><li>hidden surfaces: wasted shading</li><li>high batch count (1/object/light)<br>
+</li><li>lots of repeated work at each pass (objects may be rendering many times)<br>
+</li></ul>
+</ul>
+
+
+<h3>Deferred shading</h3>
+<ul>
+  <li>For each object</li>
+  <ul>
+    <li>render lighting properties to G-Buffers (positions/normal/color/...)</li>
+  </ul>
+  <li>For each light</li>
+  <ul>
+    <li>framebuffer += brdf(G-Buffers,light)</li>
+  </ul>
+</ul>
+<br>
+<ul>
+  <li>Integrated in most rendering engines (ex. CryEngine3)</li>
+  <ul>
+    <li>integrates well with global illum techniques, shadows, npr effects, screen space ambient occlusion, etc</li>
+    <li>lots of variations<br>
+    </li>
+  </ul>
+</ul>
+<br>
+
+<ul>
+  <li>Limitations</li>
+  <ul>
+    <li>aliasing (needs special post-process algorithms - screen space anti-aliasing methods)</li>
+    <li>transparency (draw transparent objects in a second step)</li>
+  </ul>
+</ul>
+<div style="text-align: center;"><a href="http://www.neuroproductions.be/opengl/making-a-3d-game-with-opengl-deferred-shading-and-stuff/"><img style="border: 0px solid ; width: 700px; height: 394px;" alt="" src="imgs07/DeferredShadingOpengl.jpg"></a><br>
+
+
+</div>
+<h2><a name="Sources"></a>Sources</h2>
+
+<ul>
+
+  <li><a href="http://www.labri.fr/perso/baril/teaching/TMSI/">J.
+Baril, F. Berthaut, N. Mellado</a></li>
+  <li><a href="http://www.cs.berkeley.edu/%7Eravir/papers/envmap/">An Efficient Representation for Irrandiance Environment Maps [Ramamoorthi and Hanrahan, 2001]</a></li>
+  <li><a href="http://www.valvesoftware.com/company/publications.html">Shading in Valve's Source Engine [Mitchell et al. 2006]</a><br>
+  </li>
+  <li><a href="http://www.valvesoftware.com/company/publications.html">Efficient Self-Shadowed Radiosity Normal Mapping [Green, 2007]</a><br>
+  </li>
+  <li><a href="http://www.cg.tuwien.ac.at/research/publications/2010/Habel-2010-EIN/">Efficient Irradiance Normal Mapping [Habel and Wimmer, 2010]</a></li>
+  <li><a href="http://www.crytek.com/download/Light_Propagation_Volumes.pdf">Light Propagation Volumes in CryEngine 3 [Kaplanyan 2009]</a></li>
+  <li><a href="https://developer.nvidia.com/content/deferred-shading">Deferred Shading [Nvidia 2004]</a><br>
+  </li>
+  <li><a href="http://bps10.idav.ucdavis.edu/">Siggraph 2010 course notes</a><br>
+  </li>
+
+  
+</ul>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><a href="TP06.html">PREVIOUS:
+EXERCICE06</a><br>
+      </td>
+      <td style="vertical-align: top; text-align: right;"><a href="TP07.html">NEXT: EXERCICE07</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<br>
+
+</body></html>
