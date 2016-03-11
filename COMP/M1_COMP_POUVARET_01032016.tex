@@ -1,0 +1,133 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{indentfirst}
+
+\geometry{hmargin=2.5cm,vmargin=2.5cm}
+
+\title{Complexité}
+\author{Line POUVARET\\Groupe 2}
+\date{01/03/2016}
+
+\begin{document}
+\maketitle
+
+\section*{\underline{Trouver une machine de Turing pour $\lambda$xy[x - y]}}
+
+\subsection*{\textbf{Entrée :}}
+2 entiers : x et y sur la bande représentés en unaire et séparés par un blanc : \\
+
+$\rightarrow$ $|^{x+1}B|^{y+1}$
+
+\subsection*{Sortie :}
+$\left\{
+	\begin{array}{ll}
+		|^{x-y} ~ si ~ x \geq y \\
+		\uparrow sinon
+	\end{array}
+\right.$
+
+\subsection*{Principe :}
+
+On parcourt chaque symbole des deux entiers alternativement et on remplace les $|$ trouvés par *.
+
+Si l'entier x, situé à gauche sur la bande, n'a plus de $|$ mais que y, situé à droite, en a toujours, alors on boucle.
+
+Sinon la machine affiche le résultat sur la bande.
+
+\subsection*{Spécifications :}
+\begin{itemize}
+\item Tant qu'on trouve des $|$ pour l'entier de droite:
+	\begin{itemize}
+		\item On se déplace jusqu'au dernier $|$ de l'entier de droite
+		\item On remplace $|$ par *
+		\item On se déplace à gauche
+		\item Si on lit un blanc alors il n'y a plus de $|$ pour l'entier de droite :
+			\begin{itemize}
+				\item S'il n'y a pas de $|$ dans l'entier de gauche alors on boucle (x = 0, x $<$ y)
+				\item Sinon, on se déplace jusqu'au premier $|$ de l'entier de gauche, on le remplace par * et on s'arrête
+			\end{itemize}
+		\item Sinon, on se déplace jusqu'au premier $|$ de l'entier de gauche
+		\item Si on trouve bien un $|$ dans l'entier de gauche, on le remplace par * et on recommence depuis le début
+		\item Sinon on boucle car x $<$ y
+	\end{itemize}
+\end{itemize}
+
+\subsection*{Machine de Turing (quadruplets) :}
+
+\# On se déplace jusqu'au dernier $|$ de l'entier y
+
+\begin{tabular}{llll}
+$q_0$ & $|$ & R & $q_0$ \\
+$q_0$ & B & R & $q_1$ \\
+$q_1$ & $|$ & R & $q_1$ \\
+\end{tabular}\\
+
+\# On se déplace à gauche si on lit un blanc ou *
+
+\begin{tabular}{llll}
+$q_1$ & * & L & $q_2$ \\
+$q_1$ & B & L & $q_2$
+\end{tabular}\\
+
+\# On remplace $|$ par *
+
+\begin{tabular}{llll}
+$q_2$ & $|$ & * & $q_2$
+\end{tabular}\\
+
+\# On se déplace à gauche (toujours dans l'entier y)
+
+\begin{tabular}{llll}
+$q_2$ & * & L & $q_3$
+\end{tabular}\\
+
+\# Si on lit un blanc alors il n'y a plus de $|$ sur l'entier de droite alors on passe dans un état spécial $q_{y0}$ 
+
+\begin{tabular}{llll}
+$q_3$ & B & L & $q_{y0}$
+\end{tabular}\\
+
+\# Sinon, on se déplace à gauche jusqu'à trouver un blanc (délimiteur)
+
+\begin{tabular}{llll}
+$q_3$ & $|$ & L & $q_4$ \\
+$q_4$ & $|$ & L & $q_4$ \\
+$q_4$ & B & L & $q_5$
+\end{tabular}\\
+
+\# Si on est dans l'état spécial et qu'on lit un * alors il n'y a pas de $|$ dans l'entier de gauche donc on boucle (x = 0, x $<$ y)
+
+\begin{tabular}{llll}
+$q_{y0}$ & * & * & $q_{y0}$
+\end{tabular}\\
+
+\# Sinon, si on lit un $|$ on le remplace par * et on s'arrête
+
+\begin{tabular}{llll}
+$q_{y0}$ & $|$ & * & $q_{fin}$
+\end{tabular}\\
+
+\# Sinon on se déplace tout à gauche jusqu'au premier blanc ou premier * rencontré et on se positionne à sa droite
+
+\begin{tabular}{llll}
+$q_5$ & $|$ & L & $q_5$ \\
+$q_5$ & B & R & $q_6$ \\
+$q_5$ & * & R & $q_6$
+\end{tabular}\\
+
+\# Si on trouve un $|$ on le remplace par * et on recommence depuis le début
+
+\begin{tabular}{llll}
+$q_6$ & $|$ & * & $q_6$ \\
+$q_6$ & * & R & $q_0$
+\end{tabular}\\
+
+\# Sinon, on ne trouve plus de $|$ dans l'entier de gauche donc on boucle (x $<$ y)
+
+\begin{tabular}{llll}
+$q_6$ & B & B & $q_6$
+\end{tabular}\\
+
+\end{document}

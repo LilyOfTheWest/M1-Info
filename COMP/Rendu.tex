@@ -1,0 +1,111 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{indentfirst}
+
+\geometry{hmargin=2.5cm,vmargin=2.5cm}
+
+\title{Complexité}
+\author{Mickaël Turnel\\Groupe 2}
+\date{01/03/2016}
+
+\begin{document}
+\maketitle
+
+\section*{Machine de Turing de $\lambda$x,y[x - y]}
+
+\subsection*{Entrée(s) :}
+
+x et y sur la bande de la forme $|^{x+1}B|^{y+1}$
+
+\subsection*{Sortie(s) :}
+
+$\left\{
+	\begin{array}{ll}
+		x-y ~ si ~ x >= y\\
+		\uparrow sinon
+	\end{array}
+\right.$
+
+\subsection*{Principe :}
+
+On parcourt les deux mots d'entrée un à un en remplaçant à chaque fois un symbole $|$ par un *.
+Si le premier mot n'a plus de $|$ alors que le second en a toujours, on boucle.
+
+\subsection*{Spécifications :}
+
+Tant qu'on a encore des $|$ sur le mot de droite:
+	\begin{itemize}
+		\item On se déplace sur le dernier $|$ du mot de droite
+		\item On le remplace par un *
+		\item On va à gauche
+		\item Si on lit un B alors on a plus de $|$ sur le mot de droite, on passe dans un état spécial
+		\item On se remet sur le premier $|$ du mot de gauche
+		\item Si il n'y a pas de $|$ sur le mot de gauche, on boucle
+		\item Sinon on remplace le $|$ par un *
+		\item Si on est dans l'état spécial, on s'arrête
+	\end{itemize}
+
+\subsection*{Machine de Turing :}
+
+On se déplace jusqu'au dernier $|$ du mot de droite
+
+\begin{tabular}{llll}
+$q_0$ & $|$ & R & $q_0$ \\
+$q_0$ & B & R & $q_1$ \\
+$q_1$ & $|$ & R & $q_1$ \\
+\end{tabular}\\
+
+On se remet à gauche qu'on lise un B ou un *
+
+\begin{tabular}{llll}
+$q_1$ & B & L & $q_2$ \\
+$q_1$ & * & L & $q_2$
+\end{tabular}\\
+
+On remplace $|$ par un *
+
+\begin{tabular}{llll}
+$q_2$ & $|$ & * & $q_2$
+\end{tabular}\\
+
+On va à gauche
+
+\begin{tabular}{llll}
+$q_2$ & * & L & $q_3$
+\end{tabular}\\
+
+Si on lit un B alors on a plus de $|$ sur le mot de droite donc on passe dans un état spécial $q_{y0}$ sinon on se déplace à gauche jusqu'à un B
+
+\begin{tabular}{llll}
+$q_3$ & B & L & $q_{y0}$ \\
+$q_3$ & $|$ & L & $q_4$ \\
+$q_4$ & $|$ & L & $q_4$ \\
+$q_4$ & B & L & $q_5$
+\end{tabular}\\
+
+Si on est dans l'état spécial et qu'on lit un * alors on a pas assez de $|$ à gauche donc on boucle, sinon si on lit un $|$ on le remplace par un * et on termine
+
+\begin{tabular}{llll}
+$q_{y0}$ & * & * & $q_{y0}$ \\
+$q_{y0}$ & $|$ & * & $q_{fin}$
+\end{tabular}\\
+
+Sinon on se remet tout à gauche
+
+\begin{tabular}{llll}
+$q_5$ & $|$ & L & $q_5$ \\
+$q_5$ & B & R & $q_6$ \\
+$q_5$ & * & R & $q_6$
+\end{tabular}\\
+
+On remplace le $|$ par * et on recommence
+
+\begin{tabular}{llll}
+$q_6$ & $|$ & * & $q_6$ \\
+$q_6$ & * & R & $q_0$ \\
+$q_6$ & B & B & $q_6$
+\end{tabular}
+
+\end{document}
